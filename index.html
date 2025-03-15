@@ -4,11 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philosophycomics</title>
+    <style>
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-gap: 1rem;
+        }
+        @supports (width: min(250px, 100%)) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            }
+        }
+        .grid div {
+            width: 250px;
+            width: 250px;
+        }
+
+        header  {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        main, header {
+            box-sizing: content-box;
+            margin-inline: auto;
+            max-inline-size: 1000px;
+        }
+    </style>
 </head>
 <body>
+<header>
+    <h1>Philosophycomics</h1>
+</header>
+<main>
+    <div class="grid">
+        <div>
+            <img src="/img/marx.jpg" alt="Marx">
+        </div>
+        <div>
+            <img src="/img/marx.jpg" alt="Marx">
+        </div>
+        <div>
+            <img src="/img/marx.jpg" alt="Marx">
+        </div>
+        <div>
+            <img src="/img/marx.jpg" alt="Marx">
+        </div>
+        <div>
+            <img src="/img/marx.jpg" alt="Marx">
+        </div>
 
-<h1>Philosophycomics</h1>
-by Daniel
+    </div>
+</main>
+
+
 
 </body>
 </html>
