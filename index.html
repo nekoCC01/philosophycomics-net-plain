@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philosophycomics</title>
+
+    <link rel="stylesheet" href="/css/modular.css">
+
+    <!-- **********************************  EVERY LAYOUT  ************************************** -->
+    <link rel="stylesheet" href="/Grid/Grid.css">
+    <script type="module">
+        import Grid from '/Grid/Grid.js';
+    </script>
+    <!-- <script src="/Grid/import.js" type="module"></script> -->
+
     <style>
         img {
             width: 100%;
             height: auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-gap: 1rem;
-        }
-        @supports (width: min(250px, 100%)) {
-            .grid {
-                grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            }
-        }
-        .grid div {
-            width: 250px;
-            width: 250px;
         }
 
         header  {
@@ -34,13 +30,15 @@
             max-inline-size: 1000px;
         }
     </style>
+
+
 </head>
 <body>
 <header>
     <h1>Philosophycomics</h1>
 </header>
 <main>
-    <div class="grid">
+    <grid-l>
         <div>
             <img src="/img/marx.jpg" alt="Marx">
         </div>
@@ -57,7 +55,7 @@
             <img src="/img/marx.jpg" alt="Marx">
         </div>
 
-    </div>
+    </grid-l>
 </main>
 
 
