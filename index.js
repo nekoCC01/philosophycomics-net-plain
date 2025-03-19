@@ -1,6 +1,7 @@
+import './components/EveryLayout/import_all.js';
+
 import { registerAvatarComponent } from './components/avatar/avatar.js';
-const app = async () => {
-    await import('./components/EveryLayout/import_all.js');
+const app = () => {
     registerAvatarComponent();
 }
 document.addEventListener('DOMContentLoaded', app);
