@@ -4,55 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philosophycomics</title>
-
     <link rel="stylesheet" href="index.css">
-
-    <style>
-        img {
-            width: 100%;
-            height: auto;
-        }
-
-        header  {
-            margin-top: 30px;
-            margin-bottom: 50px;
-        }
-        main, header {
-            box-sizing: content-box;
-            margin-inline: auto;
-            max-inline-size: 1000px;
-        }
-    </style>
-
-
 </head>
 <body>
-<header>
-    <h1>Philosophycomics</h1>
+
+<header style="margin-block: var(--s1);">
+    <center-l>
+        <box-l>
+            <h1>Philosophycomics</h1>
+        </box-l>
+    </center-l>
 </header>
 <main>
-    <x-avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d"></x-avatar>
-    <x-avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" size="lg"></x-avatar>
-    <grid-l>
-        <div>
-            <img src="/img/marx.jpg" alt="Marx">
-        </div>
-        <div>
-            <img src="/img/marx.jpg" alt="Marx">
-        </div>
-        <div>
-            <img src="/img/marx.jpg" alt="Marx">
-        </div>
-        <div>
-            <img src="/img/marx.jpg" alt="Marx">
-        </div>
-        <div>
-            <img src="/img/marx.jpg" alt="Marx">
-        </div>
+    <center-l>
+        <box-l style="margin-bottom: var(--s1);">
+            <cluster-l>
+                <x-avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" size="lg"></x-avatar>
+                <x-avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d"></x-avatar>
+            </cluster-l>
+        </box-l>
+        <grid-l>
+            <div>
+                <img src="/img/marx.jpg" alt="Marx">
+            </div>
+            <div>
+                <img src="/img/marx.jpg" alt="Marx">
+            </div>
+            <div>
+                <img src="/img/marx.jpg" alt="Marx">
+            </div>
+            <div>
+                <img src="/img/marx.jpg" alt="Marx">
+            </div>
+            <div>
+                <img src="/img/marx.jpg" alt="Marx">
+            </div>
 
-    </grid-l>
+        </grid-l>
+    </center-l>
+
 </main>
-
 
 <script type="module" src="index.js"></script>
 </body>
