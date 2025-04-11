@@ -97,7 +97,7 @@
 </svg>
         </div>
         <div id="list">
-            <toggle-section data-map-id="hamburg" style="background-color: #6DA8DD; color: white; padding: 10px;" open>
+            <toggle-section data-map-id="hamburg" style="background-color: #6DA8DD; color: white; padding: 10px;" >
                 <h2 id="section-1">Hamburgbuch. Altstadt Neustadt Hafencity</h2>
                 <ul>
                     <li>Tour1 - Altstadt Süd</li>
@@ -108,7 +108,7 @@
                     <li>Tour6 - Hafencity</li>
                 </ul>
             </toggle-section>
-            <toggle-section data-map-id="wilhelmsburg" style="background-color: #80C9C3; color: white; padding: 10px;" open>
+            <toggle-section data-map-id="wilhelmsburg" style="background-color: #80C9C3; color: white; padding: 10px;" >
                 <h2 id="section-2">Wilhemsburg & Elbinsel Buch</h2>
                 <ul>
                     <li>Tour1 - Finkenwerder</li>
@@ -119,7 +119,7 @@
                     <li>Tour6 - Wilhelmsburg MItte</li>
                 </ul>
             </toggle-section>
-            <toggle-section data-map-id="st-georg" style="background-color: #BD95C5; color: white; padding: 10px;" open>
+            <toggle-section data-map-id="st-georg" style="background-color: #BD95C5; color: white; padding: 10px;" >
                 <h2 id="section-3">Sankt Georg Buch</h2>
                 <ul>
                     <li>Tour1 - St Georg - Entlang der Alster</li>
@@ -130,7 +130,7 @@
                     <li>Tour6 - Hohenfelde, Borgfelde, Hamm</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-4">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -141,7 +141,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-5">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -152,7 +152,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-6">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -163,7 +163,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-7">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -174,7 +174,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-8">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -185,7 +185,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-9">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -196,7 +196,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-10">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -207,7 +207,7 @@
                     <li>Tour6</li>
                 </ul>
             </toggle-section>
-            <toggle-section open>
+            <toggle-section >
                 <h2 id="section-11">Guide</h2>
                 <ul>
                     <li>Tour1</li>
@@ -416,6 +416,9 @@
                         } else {
                             t.removeAttribute('open');
                         }
+
+                        // Map-Highlighting auch aktualisieren
+                        updateMapHighlight(t);
                     });
                 });
             }
