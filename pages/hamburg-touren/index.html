@@ -1421,6 +1421,9 @@
                         if (window.location.hash.substr(1) === this.heading.id) {
                             this.setAttribute('open', '');
                             this.btn.focus();
+
+                            // Karte synchronisieren
+                            updateMapHighlight(this);
                         }
                     }
 
