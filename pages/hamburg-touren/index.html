@@ -1287,6 +1287,25 @@
 <script type="module" src="../../index.js"></script>
 
 <script>
+    function updateMapHighlight(section) {
+        const regionId = section.getAttribute('data-map-id');
+        if (!regionId) return;
+
+        const region = document.querySelector(`#map svg [id="${regionId}"]`);
+        const details = document.querySelector(`#map svg [id="${regionId}-details"]`);
+
+        if (region) {
+            if (section.hasAttribute('open')) {
+                region.classList.add('highlighted');
+            } else {
+                region.classList.remove('highlighted');
+            }
+        }
+
+        if (details) {
+            details.style.display = section.hasAttribute('open') ? 'block' : 'none';
+        }
+    }
     (function () {
         // Check for <template> support
         if ('content' in document.createElement('template')) {
@@ -1481,27 +1500,6 @@
             }
         }
     })();
-</script>
-<script>
-    function updateMapHighlight(section) {
-        const regionId = section.getAttribute('data-map-id');
-        if (!regionId) return;
-
-        const region = document.querySelector(`#map svg [id="${regionId}"]`);
-        const details = document.querySelector(`#map svg [id="${regionId}-details"]`);
-
-        if (region) {
-            if (section.hasAttribute('open')) {
-                region.classList.add('highlighted');
-            } else {
-                region.classList.remove('highlighted');
-            }
-        }
-
-        if (details) {
-            details.style.display = section.hasAttribute('open') ? 'block' : 'none';
-        }
-    }
 </script>
 </body>
 </html>>
