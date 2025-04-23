@@ -72,17 +72,18 @@
 
 
 <script>
-    const timelineGroup = document.getElementById('timeline');
+
+    const svg = document.getElementById('timeline');
 
     const startYear = 1200;
     const endYear = 2000;
     const centuryWidth = 1000;
     const decadeWidth = centuryWidth / 10;
-    const startX = 248;
+    const startX = 200;
 
-    const largeHeight = 80;
-    const smallHeight = 60;
-    const barWidth = 30;
+    const largeHeight = 175;
+    const smallHeight = 135;
+    const barWidth = 14;
 
     const colorDark = '#B69131';
     const colorLight = '#DDC37E';
@@ -92,52 +93,56 @@
         const isCentury = year % 100 === 0;
         const isHalfCentury = year % 100 === 50;
 
-        const height = (isCentury || isHalfCentury) ? largeHeight : smallHeight;
+        const height = isCentury ? largeHeight : smallHeight;
         const fill = (isCentury || isHalfCentury) ? colorDark : colorLight;
+        const yPos = isCentury ? 100 : 120;
 
+        // Balken zeichnen
         const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         rect.setAttribute('x', position - barWidth / 2);
-        rect.setAttribute('y', 270 - height - 10); // etwas Abstand nach oben
+        rect.setAttribute('y', yPos);
         rect.setAttribute('width', barWidth);
         rect.setAttribute('height', height);
         rect.setAttribute('fill', fill);
-        timelineGroup.appendChild(rect);
+        svg.appendChild(rect);
 
+        // Text nur bei vollen Jahrhunderten
         if (isCentury) {
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             text.setAttribute('x', position);
-            text.setAttribute('y', 30);
+            text.setAttribute('y', 80);
             text.setAttribute('text-anchor', 'middle');
             text.setAttribute('fill', '#5E564B');
-            text.setAttribute('font-size', '24');
-            text.setAttribute('font-family', 'sans-serif');
+            text.setAttribute('font-size', '70');
+            text.setAttribute('font-family', 'Montserrat Thin');
             text.textContent = year;
-            timelineGroup.appendChild(text);
+            svg.appendChild(text);
         }
     }
 
     // Scroll / Drag-Funktion für die ganze Gruppe
     const movableGroup = document.getElementById('movableGroup');
     let isDragging = false;
-    let startX = 0;
+    let dragStartX = 0; // umbenannt
     let currentX = 0;
 
     document.addEventListener('mousedown', (e) => {
         isDragging = true;
-        startX = e.clientX;
+        dragStartX = e.clientX;
     });
 
     document.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
-        const dx = e.clientX - startX;
+        const dx = e.clientX - dragStartX;
         currentX += dx;
         movableGroup.setAttribute('transform', `translate(${currentX}, 0)`);
-        startX = e.clientX;
+        dragStartX = e.clientX;
     });
 
     document.addEventListener('mouseup', () => {
         isDragging = false;
     });
+
 </script>
 
 
