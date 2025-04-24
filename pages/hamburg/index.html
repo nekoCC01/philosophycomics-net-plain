@@ -23,7 +23,7 @@
 
     <div id="container">
 
-        <svg id="mainSvg" width="1496" height="812">
+        <svg id="mainSvg" width="100%" height="100%" viewbox="0 0 1496 812">
             <!-- Hintergrundbereiche -->
             <rect x="0" y="0" width="1496" height="270" fill="#ADE0D1" />
             <rect x="0" y="270" width="1496" height="542" fill="#F9DB90" />
@@ -33,10 +33,13 @@
                 <clipPath id="timelineClip">
                     <rect x="0" y="0" width="1496" height="270"/>
                 </clipPath>
+                <clipPath id="mapClip">
+                    <rect x="0" y="270" width="1496" height="542"/>
+                </clipPath>
             </defs>
 
             <!-- Gruppe mit Timeline und Bildern (bewegbar) -->
-            <g id="movableGroup">
+            <g>
 
                 <!-- Timeline-Gruppe -->
                 <g id="timeline" clip-path="url(#timelineClip)">
@@ -44,19 +47,19 @@
                 </g>
 
                 <!-- Bildbereich -->
-                <g id="images" transform="translate(0, 270)">
+                <g id="images" clip-path="url(#mapClip)">
                     <!-- Platzhalterbilder -->
                     <!-- In deinem Projekt bitte durch tatsächliche URLs ersetzen -->
-                    <image href="maps/1070.jpg" x="0" y="0" width="750" />
-                    <image href="maps/1200.jpg" x="900" y="0" width="750" />
-                    <image href="maps/1300.jpg" x="1800" y="0" width="750" />
-                    <image href="maps/1400.jpg" x="2700" y="0" width="750" />
-                    <image href="maps/1550.jpg" x="3600" y="0" width="750" />
-                    <image href="maps/1630.jpg" x="4500" y="0" width="750" />
-                    <image href="maps/1722.jpg" x="5400" y="0" width="750" />
-                    <image href="maps/1830.jpg" x="6300" y="0" width="750" />
-                    <image href="maps/1880.jpg" x="7200" y="0" width="750" />
-                    <image href="maps/1911.jpg" x="8100" y="0" width="750" />
+                    <image href="maps/1070.jpg" x="0" y="300" width="600" />
+                    <image href="maps/1200.jpg" x="700" y="300" width="600" />
+                    <image href="maps/1300.jpg" x="1400" y="300" width="600" />
+                    <image href="maps/1400.jpg" x="2100" y="300" width="600" />
+                    <image href="maps/1550.jpg" x="2800" y="300" width="600" />
+                    <image href="maps/1630.jpg" x="3500" y="300" width="600" />
+                    <image href="maps/1722.jpg" x="4200" y="300" width="600" />
+                    <image href="maps/1830.jpg" x="4900" y="300" width="600" />
+                    <image href="maps/1880.jpg" x="5600" y="300" width="600" />
+                    <image href="maps/1911.jpg" x="6300" y="300" width="600" />
                 </g>
             </g>
         </svg>
@@ -69,10 +72,7 @@
 
 </footer>
 <script type="module" src="../../index.js"></script>
-
-
 <script>
-
     const svg = document.getElementById('timeline');
 
     const startYear = 1200;
@@ -81,9 +81,9 @@
     const decadeWidth = centuryWidth / 10;
     const startX = 200;
 
-    const largeHeight = 175;
-    const smallHeight = 135;
-    const barWidth = 14;
+    const largeHeight = 90;
+    const smallHeight = 70;
+    const barWidth = 7;
 
     const colorDark = '#B69131';
     const colorLight = '#DDC37E';
@@ -95,7 +95,7 @@
 
         const height = isCentury ? largeHeight : smallHeight;
         const fill = (isCentury || isHalfCentury) ? colorDark : colorLight;
-        const yPos = isCentury ? 100 : 120;
+        const yPos = isCentury ? 100 : 110;
 
         // Balken zeichnen
         const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -113,38 +113,13 @@
             text.setAttribute('y', 80);
             text.setAttribute('text-anchor', 'middle');
             text.setAttribute('fill', '#5E564B');
-            text.setAttribute('font-size', '70');
+            text.setAttribute('font-size', '40');
             text.setAttribute('font-family', 'Montserrat Thin');
             text.textContent = year;
             svg.appendChild(text);
         }
     }
-
-    // Scroll / Drag-Funktion für die ganze Gruppe
-    const movableGroup = document.getElementById('movableGroup');
-    let isDragging = false;
-    let dragStartX = 0; // umbenannt
-    let currentX = 0;
-
-    document.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        dragStartX = e.clientX;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const dx = e.clientX - dragStartX;
-        currentX += dx;
-        movableGroup.setAttribute('transform', `translate(${currentX}, 0)`);
-        dragStartX = e.clientX;
-    });
-
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
-
 </script>
-
 
 </body>
 </html>
