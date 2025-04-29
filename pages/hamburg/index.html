@@ -60,6 +60,7 @@
 
                     <def>
                         <path id="start2" d="M265.621,433.305L583.194,271L726.397,21.254L886.287,242.899L1153.1,474.535L807.254,433.305L622.119,409.408L265.621,433.305Z"/>
+                        <path id="target" d="M301.136,296.784L487.226,271L529.476,302.842L667.166,90.481L848.299,130.767L906.366,216.205L1090.1,271L940.809,380.942L936.633,515.569L687.312,518.372L674.817,471.662L437.036,433.305L301.136,296.784Z" style="stroke:black;stroke-width:1px;"/>
                     </def>
 
                     <g stroke-width="2" stroke="currentColor" stroke-linejoin="round" fill="none" fill-rule="evenodd">
@@ -70,8 +71,7 @@
                     <path id="start" d="M357.088,298.528L583.194,271L726.032,112.373L886.287,242.899L1017.54,271L807.254,433.305L622.119,409.408L357.088,298.528Z"/>
 
                     <!--
-                    <path id="target" d="M301.136,296.784L487.226,271L529.476,302.842L667.166,90.481L848.299,130.767L906.366,216.205L1090.1,271L940.809,380.942L936.633,515.569L687.312,518.372L674.817,471.662L437.036,433.305L301.136,296.784Z" style="stroke:black;stroke-width:1px;"/>
-                    -->
+                   -->
 
                     <!-- Platzhalterbilder -->
                     <!-- In deinem Projekt bitte durch tatsächliche URLs ersetzen -->
@@ -222,9 +222,9 @@
     const pathTarget = document.getElementById('target');
 
     animate(pathStart, {
-        d: svg.morphTo(pathStart2),
+        d: svg.morphTo(pathTarget),
         ease: 'inOutCirc',
-        duration: 500
+        duration: 1000
     });
 
     const [ $path1, $path2 ] = utils.$('polygon');
