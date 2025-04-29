@@ -58,11 +58,20 @@
                 <!-- Bildbereich -->
                 <svg id="mapSvg" x="0" y="270" width="1496" height="542" viewBox="0 0 1496 542">
 
+                    <def>
+                        <path id="start2" d="M265.621,433.305L583.194,271L726.397,21.254L886.287,242.899L1153.1,474.535L807.254,433.305L622.119,409.408L265.621,433.305Z"/>
+                    </def>
 
+                    <g stroke-width="2" stroke="currentColor" stroke-linejoin="round" fill="none" fill-rule="evenodd">
+                        <polygon id="path-1" points="152,4 170,38 204,56 170,74 152,108 134,74 100,56 134,38"></polygon>
+                        <polygon style="opacity: 0" id="path-2" points="152,4 170,38 204,56 170,74 152,108 134,74 100,56 134,38"></polygon>
+                    </g>
 
+                    <path id="start" d="M357.088,298.528L583.194,271L726.032,112.373L886.287,242.899L1017.54,271L807.254,433.305L622.119,409.408L357.088,298.528Z"/>
 
-
-
+                    <!--
+                    <path id="target" d="M301.136,296.784L487.226,271L529.476,302.842L667.166,90.481L848.299,130.767L906.366,216.205L1090.1,271L940.809,380.942L936.633,515.569L687.312,518.372L674.817,471.662L437.036,433.305L301.136,296.784Z" style="stroke:black;stroke-width:1px;"/>
+                    -->
 
                     <!-- Platzhalterbilder -->
                     <!-- In deinem Projekt bitte durch tatsächliche URLs ersetzen -->
@@ -202,6 +211,57 @@
             }
         });
     });
+</script>
+
+<script type="module">
+    import { animate, svg, utils } from '../../lib/anime.esm.min.js';
+
+
+    const pathStart = document.getElementById('start');
+    const pathStart2 = document.getElementById('start2');
+    const pathTarget = document.getElementById('target');
+
+    animate(pathStart, {
+        d: svg.morphTo(pathStart2),
+        ease: 'inOutCirc',
+        duration: 500
+    });
+
+    const [ $path1, $path2 ] = utils.$('polygon');
+
+    function animateRandomPoints() {
+        // Update the points attribute on #path-2
+        utils.set($path2, { points: generatePoints() });
+        // Morph the points of #path-1 into #path-2
+        animate($path1, {
+            points: svg.morphTo($path2),
+            ease: 'inOutCirc',
+            duration: 500,
+            onComplete: animateRandomPoints
+        });
+    }
+
+    // Start the animation
+    animateRandomPoints();
+
+    // A function to generate random points on #path-2 on each iteration
+    // For demo purpose only
+    function generatePoints() {
+        const total = utils.random(4, 64);
+        const r1 = utils.random(4, 56);
+        const r2 = 56;
+        const isOdd = n => n % 2;
+        let points = '';
+        for (let i = 0, l = isOdd(total) ? total + 1 : total; i < l; i++) {
+            const r = isOdd(i) ? r1 : r2;
+            const a = (2 * Math.PI * i / l) - Math.PI / 2;
+            const x = 152 + utils.round(r * Math.cos(a), 0);
+            const y = 56 + utils.round(r * Math.sin(a), 0);
+            points += `${x},${y} `;
+        }
+        return points;
+    }
+
 </script>
 
 
