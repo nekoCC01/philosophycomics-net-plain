@@ -11,7 +11,7 @@
     details details {
         margin-left: 2em;
     }
-    svg {
+    .svgInline {
       background-color: antiquewhite;
     }
   </style>
@@ -23,13 +23,14 @@
 </header>
 <main>
 
-    <div class="center stack">
+    <div class="center stack" id="container" style="position: relative;">
+      <button>Click</button>
       <details class="stack">
         <summary>Auf der Suche nach dem Sein</summary>
         <p>paragraph hier drin</p>
         <details>
           <summary>Die Idee des Phänomens</summary>
-          <svg width="500px" height="300px" viewBox="0 0 500 300">
+          <svg class="svgInline" width="500px" height="300px" viewBox="0 0 500 300">
             <text id="text1" x="20" y="20">ein wichtiges WORT</text>
           </svg>
         </details>
@@ -49,10 +50,17 @@
             <p>Die Frage</p>
           </details>
         </details>
-        <svg width="500px" height="300px" viewBox="0 0 500 300">
+        <svg class="svgInline" width="500px" height="300px" viewBox="0 0 500 300">
           <text id="text2" x="20" y="20">ein weiteres WORT</text>
         </svg>
       </details>
+
+      <!-- Overlay-SVG -->
+      <svg id="overlay" style="position: absolute; top: 0; left: 0; pointer-events: none;" width="100%" height="100%">
+        <line id="linkLine" stroke="red" stroke-width="2" />
+      </svg>
+
+
     </div>
 
 </main>
@@ -60,6 +68,35 @@
 
 </footer>
 <script type="module" src="../../index.js"></script>
+<script>
+  function connectTextElements() {
+    const text1 = document.getElementById('text1');
+    const text2 = document.getElementById('text2');
+    const line = document.getElementById('linkLine');
+    const svgOverlay = document.getElementById('overlay');
 
+    const bbox1 = text1.getBoundingClientRect();
+    const bbox2 = text2.getBoundingClientRect();
+
+    const container = document.getElementById('container').getBoundingClientRect();
+
+    // Mittelpunkt der Texte relativ zum Container
+    const x1 = bbox1.left + bbox1.width / 2 - container.left;
+    const y1 = bbox1.top + bbox1.height / 2 - container.top;
+    const x2 = bbox2.left + bbox2.width / 2 - container.left;
+    const y2 = bbox2.top + bbox2.height / 2 - container.top;
+
+    // Linie setzen
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+  }
+
+  let button = document.querySelector('button');
+  button.addEventListener('click', function() {
+    connectTextElements();
+  });
+</script>
 </body>
 </html>
