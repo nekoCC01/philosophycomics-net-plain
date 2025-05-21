@@ -6,53 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../index.css">
 
+
   <style>
-    .controls {
-      text-align: right;
-      margin-bottom: 1em;
-    }
-
-    .controls li {
-      display: inline;
-    }
-
-    .controls button {
-      background: #000;
-      color: #fff;
-      border: 0;
-      font-size: 0.85rem;
-      border-radius: 0.25rem;
-      padding: 0.25rem 0.75rem;
-    }
-
-    .controls button:focus {
-      outline: none;
-      box-shadow: 0 0 0 0.25rem skyBlue;
-    }
-
-    /*
-    Custom elements are inline by default
-    */
-
-    toggle-section {
-      display: block;
-    }
-
-    /*
-    Only applies if script runs and
-    `role="region"` is added
-    */
-
-    toggle-section[role="region"] {
-      border-width: 2px 0;
-      border-style: solid;
-    }
-
-    toggle-section[role="region"]+toggle-section {
-      border-top: 0;
+    details details {
+        margin-left: 2em;
     }
   </style>
-
 </head>
 <body>
 <noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
@@ -61,39 +20,27 @@
 </header>
 <main>
 
-    <div class="center">
-
-      <toggle-section open>
-        <h2 id="section-1">SECTION 1</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non lectus sit amet nunc facilisis molestie.
-          Praesent
-          quis libero et mauris facilisis dignissim at sed nisi.</p>
-        <toggle-section>
-          <h2 id="section-1-a">Section 1a</h2>
-          <p>Aliquam erat volutpat. Nulla facilisi. Nunc porttitor, elit non eleifend aliquam, est leo scelerisque nibh, nec
-            faucibus odio urna ac nulla.</p>
-          <p>Maecenas laoreet in metus eget convallis. Vivamus at eleifend felis. Proin non vehicula neque. Etiam eleifend
-            sapien
-            ut nulla malesuada, ac condimentum nisl efficitur.</p>
-        </toggle-section>
-        <toggle-section>
-          <h2 id="section-1-b">Section 1b</h2>
-          <p>Aliquam erat volutpat. Nulla facilisi. Nunc porttitor, elit non eleifend aliquam, est leo scelerisque nibh, nec
-            faucibus odio urna ac nulla.</p>
-          <p>Maecenas laoreet in metus eget convallis. Vivamus at eleifend felis. Proin non vehicula neque. Etiam eleifend
-            sapien
-            ut nulla malesuada, ac condimentum nisl efficitur.</p>
-        </toggle-section>
-      </toggle-section>
-      <toggle-section>
-        <h2 id="section-2">SECTION 2</h2>
-        <p>Aliquam erat volutpat. Nulla facilisi. Nunc porttitor, elit non eleifend aliquam, est leo scelerisque nibh, nec
-          faucibus odio urna ac nulla.</p>
-        <p>Maecenas laoreet in metus eget convallis. Vivamus at eleifend felis. Proin non vehicula neque. Etiam eleifend
-          sapien
-          ut nulla malesuada, ac condimentum nisl efficitur.</p>
-      </toggle-section>
-
+    <div class="center stack">
+      <details class="stack">
+        <summary>Auf der Suche nach dem Sein</summary>
+        <p>paragraph hier drin</p>
+        <details>
+          <summary>Die Idee des Phänomens</summary>
+          <div>
+            tiefere Weisheiten
+            <h2>heading2</h2>
+            <ul>
+              <li>liste</li>
+              <li>liste</li>
+            </ul>
+            <img src="https://picsum.photos/200/300" alt="">
+          </div>
+        </details>
+      </details>
+      <details class="stack">
+        <summary>Details</summary>
+        <p>Something small engouh to escape casual notice.</p>
+      </details>
     </div>
 
 </main>
@@ -101,194 +48,6 @@
 
 </footer>
 <script type="module" src="../../index.js"></script>
-
-<script>
-  (function () {
-    // Check for <template> support
-    if ('content' in document.createElement('template')) {
-      const tmpl = document.createElement('template');
-
-      // Create the web component's template
-      // featuring a <slot> for the Light DOM content
-      tmpl.innerHTML = `
-          <h2>
-            <button aria-expanded="false">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 10">
-                <rect class="vert" height="8" width="2" y="1" x="4"/>
-                <rect height="2" width="8" y="4" x="1"/>
-              </svg>
-            </button>
-          </h2>
-          <div class="content" hidden>
-            <slot></slot>
-          </div>
-          <style>
-            h2 {
-              margin: 0;
-            }
-
-            h2 + div {
-              padding-bottom: 1.5rem;
-            }
-
-            h2 button {
-              all: inherit;
-              box-sizing: border-box;
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              padding: 0.5em 0;
-            }
-
-            h2 button:focus svg {
-              outline: 2px solid;
-            }
-
-            button svg {
-              height: 1em;
-              margin-left: 0.5em;
-            }
-
-            [aria-expanded="true"] .vert {
-              display: none;
-            }
-
-            [aria-expanded] rect {
-              fill: currentColor;
-            }
-          </style>
-        `;
-
-      // Check for latest Shadow DOM syntax support
-      if (document.head.attachShadow) {
-        class ToggleSection extends HTMLElement {
-          constructor() {
-            super();
-
-            // Make the host element a region
-            this.setAttribute('role', 'region');
-
-            // Create a `shadowRoot` and populate from template
-            this.attachShadow({ mode: 'open' });
-            this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
-
-            // Assign the toggle button
-            this.btn = this.shadowRoot.querySelector('h2 button');
-
-            // Get the first element in Light DOM
-            const oldHeading = this.querySelector(':first-child');
-            // and cast its heading level (which should, but may not, exist)
-            let level = parseInt(oldHeading.tagName.substr(1));
-            // Then take its `id` (may be null)
-            let id = oldHeading.id;
-
-            // Get the Shadow DOM <h2>
-            this.heading = this.shadowRoot.querySelector('h2');
-
-            // If `id` exists, apply it
-            if (id) {
-              this.heading.id = id;
-            }
-
-            // If there is no level, there is no heading.
-            // Add a warning.
-            if (!level) {
-              console.warn('The first element inside each <toggle-section> should be a heading of an appropriate level.');
-            }
-
-            // If the level is a real integer but not 2
-            // set `aria-level` accordingly
-            if (level && level !== 2) {
-              this.heading.setAttribute('aria-level', level);
-            }
-
-            // Add the Light DOM heading label to the innerHTML of the toggle button
-            // and remove the now unwanted Light DOM heading
-            this.btn.innerHTML = oldHeading.textContent + this.btn.innerHTML;
-            oldHeading.parentNode.removeChild(oldHeading);
-
-            // The main state switching function
-            this.switchState = () => {
-              let expanded = this.hasAttribute('open');
-
-              // Toggle `aria-expanded`
-              this.btn.setAttribute('aria-expanded', expanded);
-              // Toggle the `.content` element's visibility
-              this.shadowRoot.querySelector('.content').hidden = !expanded;
-            }
-
-            this.btn.onclick = () => {
-              // Change the component's `open` attribute value on click
-              let open = this.hasAttribute('open');
-              this.toggleAttribute('open');
-
-              // Update the hash if the collapsible section's
-              // heading has an `id` and we are opening, not closing
-              if (this.heading.id && !open) {
-                history.pushState(null, null, '#' + this.heading.id);
-              }
-            }
-          }
-
-          connectedCallback() {
-            if (window.location.hash.substr(1) === this.heading.id) {
-              this.setAttribute('open', '');
-              this.btn.focus();
-            }
-          }
-
-          // Identify just the `open` attribute as an observed attribute
-          static get observedAttributes() {
-            return ['open'];
-          }
-
-          // When `open` changes value, execute switchState()
-          attributeChangedCallback(name) {
-            if (name === 'open') {
-              this.switchState();
-            }
-          }
-        }
-
-        // Add our new custom element to the window for use
-        window.customElements.define('toggle-section', ToggleSection);
-
-        // Define the expand/collapse all template
-        const buttons = document.createElement('div')
-        buttons.innerHTML = `
-            <ul class="controls">
-              <li><button id="expand">expand all</button></li>
-              <li><button id="collapse">collapse all</button></li>
-            </ul>
-          `;
-
-        // Get the first `toggle-section` on the page
-        // and all toggle sections as a node list
-        const first = document.querySelector('toggle-section');
-        const all = document.querySelectorAll('toggle-section');
-
-        // Insert the button controls before the first <toggle-section>
-        first.parentNode.insertBefore(buttons, first);
-
-        // Place the click on the parent <ul>...
-        buttons.addEventListener('click', e => {
-          // ...then determine which button was the target
-          let expand = e.target.id === 'expand';
-
-          // Iterate over the toggle sections to switch
-          // each one's state uniformly
-          Array.prototype.forEach.call(all, t => {
-            if (expand) {
-              t.setAttribute('open', '');
-            } else {
-              t.removeAttribute('open');
-            }
-          });
-        });
-      }
-    }
-  })();
-</script>
 
 </body>
 </html>
