@@ -115,41 +115,41 @@
         for (const category in jsonData) {
             const { yValue, entries } = jsonData[category];
 
-            entries.forEach(entry => {
+            entries.forEach((entry, i) => {
                 const xStart = (entry.start - startYear) * pixelsPerYear;
+                const offset = (i % 4) * 20;
+                const y = yValue + offset;
 
                 if (entry.end) {
                     const xEnd = (entry.end - startYear) * pixelsPerYear;
 
-                    // Linie zeichnen
                     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
                     line.setAttribute("x1", xStart);
-                    line.setAttribute("y1", yValue);
+                    line.setAttribute("y1", y);
                     line.setAttribute("x2", xEnd);
-                    line.setAttribute("y2", yValue);
+                    line.setAttribute("y2", y);
                     line.setAttribute("class", "entry-line");
                     svg.appendChild(line);
 
-                    // Text darüber
                     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                     text.setAttribute("x", (xStart + xEnd) / 2);
-                    text.setAttribute("y", yValue - 6);
+                    text.setAttribute("y", y - 6);
                     text.setAttribute("class", "label");
                     text.setAttribute("text-anchor", "middle");
                     text.textContent = entry.name;
                     svg.appendChild(text);
+
                 } else {
-                    // Einzelnes Ereignis: Kreis
                     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                     circle.setAttribute("cx", xStart);
-                    circle.setAttribute("cy", yValue);
+                    circle.setAttribute("cy", y);
                     circle.setAttribute("r", 4);
                     circle.setAttribute("class", "entry-circle");
                     svg.appendChild(circle);
 
                     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                     text.setAttribute("x", xStart + 5);
-                    text.setAttribute("y", yValue - 6);
+                    text.setAttribute("y", y - 6);
                     text.setAttribute("class", "label");
                     text.textContent = entry.name;
                     svg.appendChild(text);
