@@ -73,7 +73,17 @@
     // Daten aus JSON darstellen
     function renderTimelineData(jsonData) {
         for (const category in jsonData) {
-            const { yValue, entries } = jsonData[category];
+            const { yValue, entries, color = "#eeeeee" } = jsonData[category];
+
+            // Hintergrund-Rechteck (vor den Einträgen)
+            const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            bg.setAttribute("x", 0);
+            bg.setAttribute("y", yValue - 30);
+            bg.setAttribute("width", totalWidth);
+            bg.setAttribute("height", 80);
+            bg.setAttribute("fill", color);
+            bg.setAttribute("opacity", 0.4);
+            svg.insertBefore(bg, svg.firstChild); // Hintergrund ganz nach unten
 
             entries.forEach((entry, i) => {
                 const offset = (i % 4) * 20;
