@@ -1,21 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <title>Hamburg Geschichte</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../index.css">
-
     <style>
-        body {
-            margin: 0;
-            background: #999;
-        }
-        svg {
-            background: white;
-            display: block;
-            margin: auto;
-        }
+        body { margin: 0; background: #999; }
+        svg { background: white; display: block; margin: auto; }
         .year-label {
             font-family: sans-serif;
             font-weight: bold;
@@ -36,89 +28,57 @@
             font-size: 12px;
             fill: #333;
         }
-        .entry-line {
-            stroke: steelblue;
-            stroke-width: 4;
-        }
-        .entry-circle {
-            fill: darkred;
-        }
+        .entry-line { stroke: steelblue; stroke-width: 4; }
+        .entry-circle { fill: darkred; }
     </style>
 </head>
 <body>
 <main>
-
-    <svg id="timeline" height="750"></svg>
-
+<svg id="timeline" height="750"></svg>
 </main>
-
 <script type="module" src="../../index.js"></script>
-
-
 <script>
     const startYear = 500;
     const endYear = 2000;
-    const pixelsPerYear = 4;
+    const pixelsPerYear = 2;
     const svg = document.getElementById('timeline');
     const height = svg.getAttribute('height');
     const totalYears = endYear - startYear;
     const totalWidth = totalYears * pixelsPerYear;
     svg.setAttribute('width', totalWidth);
 
-    // Grund-Zeitleiste (Jahrhunderte + Jahrzehnte)
-    for (let year = startYear; year <= endYear; year += 10) {
-        const x = (year - startYear) * pixelsPerYear;
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", x);
-        line.setAttribute("y1", 0);
-        line.setAttribute("x2", x);
-        line.setAttribute("y2", height);
+    // Zeitachse vorbereiten
+    function drawBaseTimeline() {
+        for (let year = startYear; year <= endYear; year += 10) {
+            const x = (year - startYear) * pixelsPerYear;
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x);
+            line.setAttribute("y1", 0);
+            line.setAttribute("x2", x);
+            line.setAttribute("y2", height);
         line.setAttribute("class", year % 100 === 0 ? "mid-decade-line" : (year % 100 === 50 ? "mid-decade-line" : "decade-line"));
-        svg.appendChild(line);
+            svg.appendChild(line);
 
-        if (year % 100 === 0) {
-            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            text.setAttribute("x", x);
-            text.setAttribute("y", 40);
-            text.setAttribute("class", "year-label");
-            text.textContent = year;
-            svg.appendChild(text);
+            if (year % 100 === 0) {
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", 40);
+                text.setAttribute("class", "year-label");
+                text.textContent = year;
+                svg.appendChild(text);
+            }
         }
     }
 
-    // Deine Datenstruktur (in echt könnte das natürlich extern geladen werden)
-    const data = {
-        "Philosophen": {
-            "yValue": 100,
-            "entries": [
-                { "name": "Descartes", "start": 1596, "end": 1650 },
-                { "name": "Spinoza", "start": 1632, "end": 1677 }
-            ]
-        },
-        "Stadtgeschichte - Hamburg": {
-            "yValue": 200,
-            "entries": [
-                { "name": "Bau der Festunsanlage", "start": 1616, "end": 1626 },
-                { "name": "Letzter Hansetag", "start": 1696 }
-            ]
-        },
-        "Globale Geschichte": {
-            "yValue": 300,
-            "entries": [
-                { "name": "Schwedischer Krieg", "start": 1630, "end": 1635 },
-                { "name": "Revolution", "start": 1648 }
-            ]
-        }
-    };
-
+    // Daten aus JSON darstellen
     function renderTimelineData(jsonData) {
         for (const category in jsonData) {
             const { yValue, entries } = jsonData[category];
 
             entries.forEach((entry, i) => {
-                const xStart = (entry.start - startYear) * pixelsPerYear;
                 const offset = (i % 4) * 20;
                 const y = yValue + offset;
+                const xStart = (entry.start - startYear) * pixelsPerYear;
 
                 if (entry.end) {
                     const xEnd = (entry.end - startYear) * pixelsPerYear;
@@ -158,7 +118,15 @@
         }
     }
 
-    renderTimelineData(data);
+    // Lade externes JSON
+    fetch('daten.json')
+        .then(response => response.json())
+        .then(data => {
+            drawBaseTimeline();
+            renderTimelineData(data);
+        })
+        .catch(error => console.error('Fehler beim Laden der Daten:', error));
 </script>
+
 </body>
 </html>

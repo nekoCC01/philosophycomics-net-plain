@@ -1,0 +1,23 @@
+{
+  "Philosophen": {
+    "yValue": 100,
+    "entries": [
+      { "name": "Descartes", "start": 1596, "end": 1650 },
+      { "name": "Spinoza", "start": 1632, "end": 1677 }
+    ]
+  },
+  "Stadtgeschichte - Hamburg": {
+    "yValue": 200,
+    "entries": [
+      { "name": "Bau der Festunsanlage", "start": 1616, "end": 1626 },
+      { "name": "Letzter Hansetag", "start": 1696 }
+    ]
+  },
+  "Globale Geschichte": {
+    "yValue": 300,
+    "entries": [
+      { "name": "Schwedischer Krieg", "start": 1630, "end": 1635 },
+      { "name": "Revolution", "start": 1648 }
+    ]
+  }
+}
