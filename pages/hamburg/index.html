@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../index.css">
+
     <style>
         body {
             margin: 0;
@@ -30,6 +31,18 @@
             stroke: rgba(235, 214, 154, 0.8);
             stroke-width: 3;
         }
+        .label {
+            font-family: sans-serif;
+            font-size: 12px;
+            fill: #333;
+        }
+        .entry-line {
+            stroke: steelblue;
+            stroke-width: 4;
+        }
+        .entry-circle {
+            fill: darkred;
+        }
     </style>
 </head>
 <body>
@@ -42,52 +55,110 @@
 <script type="module" src="../../index.js"></script>
 
 
-
 <script>
-    const svg = document.getElementById('timeline');
-
     const startYear = 500;
-    const endYear = 2000;
-    const centuryInterval = 100;
-    const decadeInterval = 10;
-    const pixelsPerYear = 2; // Skalierung der Breite
+    const endYear = 2500;
+    const pixelsPerYear = 2;
+    const svg = document.getElementById('timeline');
     const height = svg.getAttribute('height');
-
     const totalYears = endYear - startYear;
     const totalWidth = totalYears * pixelsPerYear;
-
     svg.setAttribute('width', totalWidth);
 
-    for (let year = startYear; year <= endYear; year += decadeInterval) {
+    // Grund-Zeitleiste (Jahrhunderte + Jahrzehnte)
+    for (let year = startYear; year <= endYear; year += 10) {
         const x = (year - startYear) * pixelsPerYear;
-
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", x);
         line.setAttribute("y1", 0);
         line.setAttribute("x2", x);
         line.setAttribute("y2", height);
+        line.setAttribute("class", year % 100 === 0 ? "mid-decade-line" : (year % 100 === 50 ? "mid-decade-line" : "decade-line"));
+        svg.appendChild(line);
 
-        const isCentury = year % 100 === 0;
-        const isMidDecade = (year % 100 === 50);
-
-        if (isCentury) {
-            line.setAttribute("class", "mid-decade-line");
-
+        if (year % 100 === 0) {
             const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
             text.setAttribute("x", x);
             text.setAttribute("y", 40);
             text.setAttribute("class", "year-label");
             text.textContent = year;
             svg.appendChild(text);
-        } else if (isMidDecade) {
-            line.setAttribute("class", "mid-decade-line");
-        } else {
-            line.setAttribute("class", "decade-line");
         }
-
-        svg.appendChild(line);
     }
-</script>
 
+    // Deine Datenstruktur (in echt könnte das natürlich extern geladen werden)
+    const data = {
+        "Philosophen": {
+            "yValue": 100,
+            "entries": [
+                { "name": "Descartes", "start": 1596, "end": 1650 },
+                { "name": "Spinoza", "start": 1632, "end": 1677 }
+            ]
+        },
+        "Stadtgeschichte - Hamburg": {
+            "yValue": 200,
+            "entries": [
+                { "name": "Bau der Festunsanlage", "start": 1616, "end": 1626 },
+                { "name": "Letzter Hansetag", "start": 1696 }
+            ]
+        },
+        "Globale Geschichte": {
+            "yValue": 300,
+            "entries": [
+                { "name": "Schwedischer Krieg", "start": 1630, "end": 1635 },
+                { "name": "Revolution", "start": 1648 }
+            ]
+        }
+    };
+
+    function renderTimelineData(jsonData) {
+        for (const category in jsonData) {
+            const { yValue, entries } = jsonData[category];
+
+            entries.forEach(entry => {
+                const xStart = (entry.start - startYear) * pixelsPerYear;
+
+                if (entry.end) {
+                    const xEnd = (entry.end - startYear) * pixelsPerYear;
+
+                    // Linie zeichnen
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", xStart);
+                    line.setAttribute("y1", yValue);
+                    line.setAttribute("x2", xEnd);
+                    line.setAttribute("y2", yValue);
+                    line.setAttribute("class", "entry-line");
+                    svg.appendChild(line);
+
+                    // Text darüber
+                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    text.setAttribute("x", (xStart + xEnd) / 2);
+                    text.setAttribute("y", yValue - 6);
+                    text.setAttribute("class", "label");
+                    text.setAttribute("text-anchor", "middle");
+                    text.textContent = entry.name;
+                    svg.appendChild(text);
+                } else {
+                    // Einzelnes Ereignis: Kreis
+                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    circle.setAttribute("cx", xStart);
+                    circle.setAttribute("cy", yValue);
+                    circle.setAttribute("r", 4);
+                    circle.setAttribute("class", "entry-circle");
+                    svg.appendChild(circle);
+
+                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    text.setAttribute("x", xStart + 5);
+                    text.setAttribute("y", yValue - 6);
+                    text.setAttribute("class", "label");
+                    text.textContent = entry.name;
+                    svg.appendChild(text);
+                }
+            });
+        }
+    }
+
+    renderTimelineData(data);
+</script>
 </body>
 </html>
