@@ -6,106 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../index.css">
     <style>
-        #container {
-            width: 100vw;
-            height: 100vh;
-            padding: 20px;
+        body {
+            margin: 0;
+            background: #999;
+        }
+        svg {
+            background: white;
+            display: block;
+            margin: auto;
+        }
+        .year-label {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            fill: #4c4439;
+            text-anchor: middle;
+        }
+        .decade-line {
+            stroke: rgba(235, 214, 154, 0.3);
+            stroke-width: 2;
+        }
+        .mid-decade-line {
+            stroke: rgba(235, 214, 154, 0.8);
+            stroke-width: 3;
         }
     </style>
 </head>
 <body>
-<noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
-<header>
-
-</header>
 <main>
 
-    <div id="container">
-        <button style="margin: 30px;" id="tlanim">Move Timeline</button>
-        <svg id="mainSvg" width="100%" height="100%" viewbox="0 0 1496 812">
-            <!-- Hintergrundbereiche -->
-            <rect x="0" y="0" width="1496" height="270" fill="#ADE0D1" />
-            <rect x="0" y="270" width="1496" height="542" fill="#F9DB90" />
-
-            <!-- ClipPath für die Timeline -->
-            <defs>
-                <clipPath id="timelineClip">
-                    <rect x="0" y="0" width="1496" height="270"/>
-                </clipPath>
-                <clipPath id="mapClip">
-                    <rect x="0" y="270" width="1496" height="542"/>
-                </clipPath>
-            </defs>
-
-            <!-- Gruppe mit Timeline und Bildern (bewegbar) -->
-            <g>
-
-                <!-- Timeline-Gruppe -->
-                <svg id="timelineSvg" x="0" y="0" width="1496" height="270" viewBox="0 0 1496 270">
-                    <!-- Timeline wird per JavaScript eingefügt -->
-                </svg>
-
-                <!-- Bildbereich -->
-                <svg id="mapSvg" x="0" y="270" width="1496" height="542" viewBox="0 0 1496 542">
-
-                    <def>
-                        <path id="start2" d="M265.621,433.305L583.194,271L726.397,21.254L886.287,242.899L1153.1,474.535L807.254,433.305L622.119,409.408L265.621,433.305Z"/>
-                        <path id="target" d="M301.136,296.784L487.226,271L529.476,302.842L667.166,90.481L848.299,130.767L906.366,216.205L1090.1,271L940.809,380.942L936.633,515.569L687.312,518.372L674.817,471.662L437.036,433.305L301.136,296.784Z" style="stroke:black;stroke-width:1px;"/>
-                    </def>
-
-                    <path id="start" d="M357.088,298.528L583.194,271L726.032,112.373L886.287,242.899L1017.54,271L807.254,433.305L622.119,409.408L357.088,298.528Z"/>
-
-                    <!--
-                   -->
-
-                    <!-- Platzhalterbilder -->
-                    <!-- In deinem Projekt bitte durch tatsächliche URLs ersetzen -->
-                    <!--
-                    <image href="maps/1070.jpg" x="0" y="30" width="600" />
-                    <image href="maps/1200.jpg" x="700" y="30" width="600" />
-                    <image href="maps/1300.jpg" x="1400" y="30" width="600" />
-                    <image href="maps/1400.jpg" x="2100" y="30" width="600" />
-                    <image href="maps/1550.jpg" x="2800" y="30" width="600" />
-                    <image href="maps/1630.jpg" x="3500" y="30" width="600" />
-                    <image href="maps/1722.jpg" x="4200" y="30" width="600" />
-                    <image href="maps/1830.jpg" x="4900" y="30" width="600" />
-                    <image href="maps/1880.jpg" x="5600" y="30" width="600" />
-                    <image href="maps/1911.jpg" x="6300" y="30" width="600" />
-                    -->
-                </svg>
-            </g>
-        </svg>
-
-
-    </div>
+    <svg id="timeline" height="750"></svg>
 
 </main>
-<footer>
 
-</footer>
 <script type="module" src="../../index.js"></script>
 
-<script src="createSVGTimeline.js"></script>
-
-<script type="module" src="animateTimeline.js"></script>
-
-<script type="module">
-    import { animate, svg } from '../../lib/anime.esm.min.js';
 
 
-    const pathStart = document.getElementById('start');
-    const pathStart2 = document.getElementById('start2');
-    const pathTarget = document.getElementById('target');
+<script>
+    const svg = document.getElementById('timeline');
 
-    animate(pathStart, {
-        d: svg.morphTo(pathTarget),
-        ease: 'inOutCirc',
-        duration: 1000
-    });
+    const startYear = 500;
+    const endYear = 2000;
+    const centuryInterval = 100;
+    const decadeInterval = 10;
+    const pixelsPerYear = 2; // Skalierung der Breite
+    const height = svg.getAttribute('height');
 
+    const totalYears = endYear - startYear;
+    const totalWidth = totalYears * pixelsPerYear;
+
+    svg.setAttribute('width', totalWidth);
+
+    for (let year = startYear; year <= endYear; year += decadeInterval) {
+        const x = (year - startYear) * pixelsPerYear;
+
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", x);
+        line.setAttribute("y1", 0);
+        line.setAttribute("x2", x);
+        line.setAttribute("y2", height);
+
+        const isCentury = year % 100 === 0;
+        const isMidDecade = (year % 100 === 50);
+
+        if (isCentury) {
+            line.setAttribute("class", "mid-decade-line");
+
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", x);
+            text.setAttribute("y", 40);
+            text.setAttribute("class", "year-label");
+            text.textContent = year;
+            svg.appendChild(text);
+        } else if (isMidDecade) {
+            line.setAttribute("class", "mid-decade-line");
+        } else {
+            line.setAttribute("class", "decade-line");
+        }
+
+        svg.appendChild(line);
+    }
 </script>
-
-
 
 </body>
 </html>
