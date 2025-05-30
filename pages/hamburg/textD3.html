@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Hamburg Geschichte mit D3.js</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; background: #999; }
+        svg { background: white; display: block; margin: auto; }
+        .year-label { font-family: sans-serif; font-weight: bold; font-size: 24px; fill: #4c4439; text-anchor: middle; }
+        .decade-line { stroke: rgba(235, 214, 154, 0.3); stroke-width: 2; }
+        .mid-decade-line { stroke: rgba(235, 214, 154, 0.8); stroke-width: 3; }
+        .label { font-family: sans-serif; font-size: 12px; fill: #333; }
+        .entry-line { stroke: steelblue; stroke-width: 4; }
+        .entry-circle { fill: darkred; }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<main>
+    <svg id="timeline" height="750"></svg>
+</main>
+<script>
+    const startYear = 500;
+    const endYear = 2000;
+    const pixelsPerYear = 4;
+    const height = 750;
+    const totalYears = endYear - startYear;
+    const totalWidth = totalYears * pixelsPerYear;
+
+    const svg = d3.select("#timeline")
+        .attr("width", totalWidth)
+        .attr("height", height);
+
+    function drawBaseTimeline() {
+        for (let year = startYear; year <= endYear; year += 10) {
+            const x = (year - startYear) * pixelsPerYear;
+            svg.append("line")
+                .attr("x1", x)
+                .attr("y1", 0)
+                .attr("x2", x)
+                .attr("y2", height)
+                .attr("class", year % 100 === 0 || year % 100 === 50 ? "mid-decade-line" : "decade-line");
+
+            if (year % 100 === 0) {
+                svg.append("text")
+                    .attr("x", x)
+                    .attr("y", 40)
+                    .attr("class", "year-label")
+                    .text(year);
+            }
+        }
+    }
+
+    function renderTimelineData(jsonData) {
+        for (const category in jsonData) {
+            const { yValue, entries, color = "#eeeeee" } = jsonData[category];
+
+            svg.append("rect")
+                .attr("x", 0)
+                .attr("y", yValue - 30)
+                .attr("width", totalWidth)
+                .attr("height", 80)
+                .attr("fill", color)
+                .attr("opacity", 0.4)
+                .lower();
+
+            entries.forEach((entry, i) => {
+                const offset = (i % 4) * 20;
+                const y = yValue + offset;
+                const xStart = (entry.start - startYear) * pixelsPerYear;
+
+                if (entry.end) {
+                    const xEnd = (entry.end - startYear) * pixelsPerYear;
+
+                    svg.append("line")
+                        .attr("x1", xStart)
+                        .attr("y1", y)
+                        .attr("x2", xEnd)
+                        .attr("y2", y)
+                        .attr("class", "entry-line");
+
+                    svg.append("text")
+                        .attr("x", (xStart + xEnd) / 2)
+                        .attr("y", y - 6)
+                        .attr("class", "label")
+                        .attr("text-anchor", "middle")
+                        .text(entry.name);
+                } else {
+                    svg.append("circle")
+                        .attr("cx", xStart)
+                        .attr("cy", y)
+                        .attr("r", 4)
+                        .attr("class", "entry-circle");
+
+                    svg.append("text")
+                        .attr("x", xStart + 5)
+                        .attr("y", y - 6)
+                        .attr("class", "label")
+                        .text(entry.name);
+                }
+            });
+        }
+    }
+
+    d3.json("daten.json").then(data => {
+        drawBaseTimeline();
+        renderTimelineData(data);
+    }).catch(error => console.error("Fehler beim Laden der Daten:", error));
+</script>
+</body>
+</html>
