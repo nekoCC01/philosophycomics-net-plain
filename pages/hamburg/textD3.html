@@ -23,18 +23,19 @@
 <script>
     const startYear = 500;
     const endYear = 2000;
-    const pixelsPerYear = 4;
     const height = 750;
-    const totalYears = endYear - startYear;
-    const totalWidth = totalYears * pixelsPerYear;
+
+    const xScale = d3.scaleLinear()
+        .domain([startYear, endYear])
+        .range([0, (endYear - startYear) * 4]);
 
     const svg = d3.select("#timeline")
-        .attr("width", totalWidth)
+        .attr("width", xScale(endYear))
         .attr("height", height);
 
     function drawBaseTimeline() {
         for (let year = startYear; year <= endYear; year += 10) {
-            const x = (year - startYear) * pixelsPerYear;
+            const x = xScale(year);
             svg.append("line")
                 .attr("x1", x)
                 .attr("y1", 0)
@@ -59,7 +60,7 @@
             svg.append("rect")
                 .attr("x", 0)
                 .attr("y", yValue - 30)
-                .attr("width", totalWidth)
+                .attr("width", xScale(endYear))
                 .attr("height", 80)
                 .attr("fill", color)
                 .attr("opacity", 0.4)
@@ -68,10 +69,10 @@
             entries.forEach((entry, i) => {
                 const offset = (i % 4) * 20;
                 const y = yValue + offset;
-                const xStart = (entry.start - startYear) * pixelsPerYear;
+                const xStart = xScale(entry.start);
 
                 if (entry.end) {
-                    const xEnd = (entry.end - startYear) * pixelsPerYear;
+                    const xEnd = xScale(entry.end);
 
                     svg.append("line")
                         .attr("x1", xStart)
