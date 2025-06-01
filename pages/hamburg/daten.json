@@ -3,6 +3,36 @@
     "color": "#e0dbb8",
     "entries": [
       {
+        "name": "Anselm von Canterbury",
+        "start": 1033,
+        "end": 1109
+      },
+      {
+        "name": "Hildegard von Bingen",
+        "start": 1098,
+        "end": 1179
+      },
+      {
+        "name": "Roger Bacon",
+        "start": 1220,
+        "end": 1292
+      },
+      {
+        "name": "Thomas von Aquin",
+        "start": 1225,
+        "end": 1274
+      },
+      {
+        "name": "Meister Eckhart",
+        "start": 1260,
+        "end": 1328
+      },
+      {
+        "name": "Duns Scotus",
+        "start": 1265,
+        "end": 1308
+      },
+      {
         "name": "Erasmus v. Rotterdam",
         "start": 1466,
         "end": 1536
@@ -11,6 +41,11 @@
         "name": "Kopernikus",
         "start": 1473,
         "end": 1543
+      },
+      {
+        "name": "Bacon",
+        "start": 1561,
+        "end": 1626
       },
       {
         "name": "Hobbes",
@@ -28,6 +63,11 @@
         "end": 1677
       },
       {
+        "name": "Locke",
+        "start": 1632,
+        "end": 1704
+      },
+      {
         "name": "Newton",
         "start": 1643,
         "end": 1727
@@ -36,6 +76,11 @@
         "name": "Leibniz",
         "start": 1646,
         "end": 1716
+      },
+      {
+        "name": "Rousseau",
+        "start": 1712,
+        "end": 1778
       },
       {
         "name": "Kant",
@@ -53,9 +98,29 @@
     "color": "#e9c3eb",
     "entries": [
       {
+        "name": "Jan van Eyck",
+        "start": 1390,
+        "end": 1441
+      },
+      {
+        "name": "Boticelli",
+        "start": 1445,
+        "end": 1510
+      },
+      {
+        "name": "Heironymus Bosch",
+        "start": 1450,
+        "end": 1516
+      },
+      {
         "name": "Leonardo da Vinci",
         "start": 1452,
         "end": 1519
+      },
+      {
+        "name": "Michelangelo",
+        "start": 1475,
+        "end": 1564
       },
       {
         "name": "Rembrandt",
@@ -91,6 +156,11 @@
         "name": "Brahms",
         "start": 1833,
         "end": 1897
+      },
+      {
+        "name": "Mahler",
+        "start": 1860,
+        "end": 1911
       }
     ]
   },
@@ -317,6 +387,10 @@
         "start": 1869
       },
       {
+        "name": "Schumacher Baudirektor",
+        "start": 1909
+      },
+      {
         "name": "Zollanschluss",
         "start": 1881
       },
@@ -398,8 +472,17 @@
     "color": "#cfe398",
     "entries": [
       {
-        "name": "Mohammeds Erleuchtung",
-        "start": 610
+        "name": "Mohammeds",
+        "start": 570,
+        "end": 632
+      },
+      {
+        "name": "Tang Dynastie",
+        "start": 617
+      },
+      {
+        "name": "Karolinger",
+        "start": 732
       },
       {
         "name": "Gründung von Baghdad",
@@ -410,8 +493,20 @@
         "start": 800
       },
       {
+        "name": "Venedig / Rialto",
+        "start": 811
+      },
+      {
+        "name": "Venedig Markusdom",
+        "start": 1063
+      },
+      {
         "name": "Angkor Wat (Kambodscha)",
         "start": 1120
+      },
+      {
+        "name": "Universität Bologna",
+        "start": 1158
       },
       {
         "name": "Magna Carta",
@@ -528,20 +623,83 @@
     "color": "#e394a9",
     "entries": [
       {
-        "name": "Minamoto Yoritomo als Shogun",
+        "name": "Shotoku Taishi",
+        "start": 574,
+        "end": 622
+      },
+      {
+        "name": "Taika Reformen",
+        "start": 645
+      },
+      {
+        "name": "Nara Hauptstadt",
+        "start": 710
+      },
+      {
+        "name": "Heiankyo Hauptstadt",
+        "start": 794
+      },
+      {
+        "name": "Genji Monogatari",
+        "start": 1010
+      },
+      {
+        "name": "Minamoto Yoritomo als Shogun (Kamakura)",
         "start": 1192
+      },
+      {
+        "name": "Mongolen (Versuch)",
+        "start": 1274
+      },
+      {
+        "name": "Muromachi-Zeit",
+        "start": 1338
+      },
+      {
+        "name": "Sengoku-Jidai",
+        "start": 1467
       },
       {
         "name": "Xavier (Jesuit) in Japan",
         "start": 1549
       },
       {
+        "name": "Oda Nobunaga",
+        "start": 1534,
+        "end": 1582
+      },
+      {
+        "name": "Tokugawa Ieyasu",
+        "start": 1543,
+        "end": 1616
+      },
+      {
         "name": "Kampf um Sekigahara > Edo",
         "start": 1603
       },
       {
+        "name": "Perry",
+        "start": 1853
+      },
+      {
         "name": "Meiji Restauration",
         "start": 1868
+      },
+      {
+        "name": "Meiji Verfassung",
+        "start": 1889
+      },
+      {
+        "name": "Taisho",
+        "start": 1912
+      },
+      {
+        "name": "Showa",
+        "start": 1926
+      },
+      {
+        "name": "Heisei",
+        "start": 1989
       }
     ]
   }
