@@ -75,20 +75,20 @@
         const categoryNames = Object.keys(jsonData);
         categoryNames.forEach((category, index) => {
             const { entries, color = "#eeeeee" } = jsonData[category];
-            const yValue = 100 + index * 120; // Dynamisch berechnet
+            const yValue = 80 + index * 140; // Dynamisch berechnet
 
             // Hintergrund-Rechteck (vor den Einträgen)
             const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
             bg.setAttribute("x", 0);
             bg.setAttribute("y", yValue - 30);
             bg.setAttribute("width", totalWidth);
-            bg.setAttribute("height", 110);
+            bg.setAttribute("height", 130);
             bg.setAttribute("fill", color);
             bg.setAttribute("opacity", 0.4);
             svg.insertBefore(bg, svg.firstChild); // Hintergrund ganz nach unten
 
             entries.forEach((entry, i) => {
-                const offset = (i % 4) * 20;
+                const offset = (i % 5) * 20;
                 const y = yValue + offset;
                 const xStart = (entry.start - startYear) * pixelsPerYear;
 
@@ -134,6 +134,11 @@
     fetch('daten.json')
         .then(response => response.json())
         .then(data => {
+            // Sortiere alle entries nach "start"
+            Object.values(data).forEach(category => {
+                category.entries.sort((a, b) => a.start - b.start);
+            });
+
             drawBaseTimeline();
             renderTimelineData(data);
         })

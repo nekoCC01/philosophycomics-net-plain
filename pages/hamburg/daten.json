@@ -1,15 +1,29 @@
 {
-  "Philosophen": {
+  "Philosophen & Wissenschaftler": {
     "color": "#e0dbb8",
     "entries": [
+      { "name": "Erasmus v. Rotterdam", "start": 1466, "end": 1536 },
+      { "name": "Kopernikus", "start": 1473, "end": 1543 },
+      { "name": "Hobbes", "start": 1588, "end": 1679 },
       { "name": "Descartes", "start": 1596, "end": 1650 },
-      { "name": "Spinoza", "start": 1632, "end": 1677 }
+      { "name": "Spinoza", "start": 1632, "end": 1677 },
+      { "name": "Newton", "start": 1643, "end": 1727 },
+       { "name": "Leibniz", "start": 1646, "end": 1716 },
+       { "name": "Kant", "start": 1724, "end": 1804 }
     ]
   },
   "Künstler": {
     "color": "#e9c3eb",
     "entries": [
-      { "name": "J.S.Bach", "start": 1685, "end": 1750 }
+       { "name": "Leonardo da Vinci", "start": 1452, "end": 1519 },
+      { "name": "Rembrandt", "start": 1606, "end": 1669 },
+      { "name": "Telemann", "start": 1681, "end": 1767 },
+      { "name": "J.S.Bach", "start": 1685, "end": 1750 },
+      { "name": "Goya", "start": 1746, "end": 1828 },
+      { "name": "Mozart", "start": 1756, "end": 1791 },
+      { "name": "Beethoven", "start": 1770, "end": 1827 },
+      { "name": "Brahms", "start": 1833, "end": 1897 }
+       
     ]
   },
   "Stadtgeschichte - Hamburg": {
@@ -17,24 +31,39 @@
     "entries": [
       { "name": "Wikinger Angriff", "start": 845 },
       { "name": "Bau der Festunsanlage", "start": 1616, "end": 1626 },
-      { "name": "Letzter Hansetag", "start": 1696 }
+      { "name": "erste Zeitungen", "start": 1620, "end": 1630 },
+      { "name": "1.Kaffeehaus", "start": 1677 },
+      { "name": "Letzter Hansetag", "start": 1696 },
+       { "name": "Franz. Okkupation", "start": 1806, "end": 1814 },
+       { "name": "Großer Brand", "start": 1842 }
     ]
   },
   "Globale Geschichte": {
     "color": "#cfe398",
     "entries": [
       {"name": "Brunelleschi - Dom in Florenz", "start": 1420},
+       {"name": "Jeanne d´Arc befreit Orléans", "start": 1429},
+        {"name": "Druck der Bibel in Mainz", "start": 1455},
       {"name": "Entdeckung Amerikas", "start": 1492},
+       {"name": "Reconquista - Granada fällt", "start": 1492},
       {"name": "Reformation - Luthers Thesen", "start": 1517},
-      {"name": "30-jähriger Krieg", "start": 1618, "end": 1648},
+       {"name": "Bauernaufstände", "start": 1525},
+        {"name": "Bartholomäusnacht (Hugenotten-Mord)", "start": 1572},
+         {"name": "30-jähriger Krieg", "start": 1618, "end": 1648},
+        {"name": "Gründung New York (NL)", "start": 1626},
+        {"name": "Blutkreislauf (Harvey)", "start": 1628},
+        {"name": "Glorious Revolution (England)", "start": 1689},
+        {"name": "Engl erlaubt Handel mit Sklaven", "start": 1698},
+         {"name": "Friedrich d. Große", "start": 1712, "end": 1786},
+      {"name": "Ludwig XIV", "start": 1638, "end": 1715},
       {"name": "Französische Revolution", "start": 1789}
     ]
   },
   "Geschichte Japans": {
     "color": "#e394a9",
     "entries": [
-      { "name": "Heian-Zeit", "start": 794, "end": 1185 },
-      { "name": "Edo-Zeit", "start": 1603, "end": 1868 }
+      {"name": "Xavier (Jesuit) in Japan", "start": 1549},
+      {"name": "Kampf um Sekigahara > Edo", "start": 1603}
     ]
   }
 }
