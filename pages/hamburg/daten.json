@@ -43,7 +43,12 @@
         "end": 1198
       },
       {
-        "name": "Roger Bacon",
+        "name": "Marguerite Porete",
+        "start": 1250,
+        "end": 1310
+      },
+      {
+        "name": "Roger Bacon (1220-1292)",
         "start": 1220,
         "end": 1292
       },
@@ -63,7 +68,7 @@
         "end": 1308
       },
       {
-        "name": "von Ockham",
+        "name": "von Ockham (1288-1347)",
         "start": 1288,
         "end": 1347
       },
