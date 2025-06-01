@@ -7,20 +7,39 @@
       { "name": "Spinoza", "start": 1632, "end": 1677 }
     ]
   },
+  "Künstler": {
+    "yValue": 220,
+    "color": "#e9c3eb",
+    "entries": [
+      { "name": "J.S.Bach", "start": 1685, "end": 1750 }
+    ]
+  },
   "Stadtgeschichte - Hamburg": {
-    "yValue": 200,
+    "yValue": 400,
     "color": "#e3c998",
     "entries": [
+      { "name": "Wikinger Angriff", "start": 845 },
       { "name": "Bau der Festunsanlage", "start": 1616, "end": 1626 },
       { "name": "Letzter Hansetag", "start": 1696 }
     ]
   },
   "Globale Geschichte": {
-    "yValue": 300,
+    "yValue": 550,
     "color": "#cfe398",
     "entries": [
-      { "name": "Schwedischer Krieg", "start": 1630, "end": 1635 },
-      { "name": "Revolution", "start": 1648 }
+      {"name": "Brunelleschi - Dom in Florenz", "start": 1420},
+      {"name": "Entdeckung Amerikas", "start": 1492},
+      {"name": "Reformation - Luthers Thesen", "start": 1517},
+      {"name": "30-jähriger Krieg", "start": 1618, "end": 1648},
+      {"name": "Französische Revolution", "start": 1789}
+    ]
+  },
+  "Geschichte Japans": {
+    "yValue": 700,
+    "color": "#e394a9",
+    "entries": [
+      { "name": "Heian-Zeit", "start": 794, "end": 1185 },
+      { "name": "Edo-Zeit", "start": 1603, "end": 1868 }
     ]
   }
 }
