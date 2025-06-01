@@ -103,12 +103,12 @@
         "end": 1441
       },
       {
-        "name": "Boticelli",
+        "name": "Botticelli",
         "start": 1445,
         "end": 1510
       },
       {
-        "name": "Heironymus Bosch",
+        "name": "Hieronymus Bosch",
         "start": 1450,
         "end": 1516
       },
@@ -194,7 +194,7 @@
         "start": 1066
       },
       {
-        "name": "Gründung Lübecks / Hanse",
+        "name": "Gründung Lübecks",
         "start": 1143
       },
       {
@@ -415,7 +415,7 @@
         "start": 1906
       },
       {
-        "name": "Ballin-Stadt",
+        "name": "Ballin-Stadt (Veddel)",
         "start": 1907
       },
       {
@@ -472,7 +472,7 @@
     "color": "#cfe398",
     "entries": [
       {
-        "name": "Mohammeds",
+        "name": "Mohammed",
         "start": 570,
         "end": 632
       },
@@ -700,6 +700,10 @@
       {
         "name": "Heisei",
         "start": 1989
+      },
+      {
+        "name": "Reiwa",
+        "start": 2019
       }
     ]
   }
