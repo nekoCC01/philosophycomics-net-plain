@@ -1,6 +1,5 @@
 {
   "Philosophen": {
-    "yValue": 100,
     "color": "#e0dbb8",
     "entries": [
       { "name": "Descartes", "start": 1596, "end": 1650 },
@@ -8,14 +7,12 @@
     ]
   },
   "Künstler": {
-    "yValue": 220,
     "color": "#e9c3eb",
     "entries": [
       { "name": "J.S.Bach", "start": 1685, "end": 1750 }
     ]
   },
   "Stadtgeschichte - Hamburg": {
-    "yValue": 400,
     "color": "#e3c998",
     "entries": [
       { "name": "Wikinger Angriff", "start": 845 },
@@ -24,7 +21,6 @@
     ]
   },
   "Globale Geschichte": {
-    "yValue": 550,
     "color": "#cfe398",
     "entries": [
       {"name": "Brunelleschi - Dom in Florenz", "start": 1420},
@@ -35,7 +31,6 @@
     ]
   },
   "Geschichte Japans": {
-    "yValue": 700,
     "color": "#e394a9",
     "entries": [
       { "name": "Heian-Zeit", "start": 794, "end": 1185 },
