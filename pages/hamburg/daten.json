@@ -3,14 +3,44 @@
     "color": "#e0dbb8",
     "entries": [
       {
+        "name": "Boethius",
+        "start": 480,
+        "end": 524
+      },
+      {
+        "name": "Alkuin",
+        "start": 735,
+        "end": 804
+      },
+      {
+        "name": "al-Fārābī",
+        "start": 872,
+        "end": 950
+      },
+      {
+        "name": "Avicenna",
+        "start": 980,
+        "end": 1037
+      },
+      {
         "name": "Anselm von Canterbury",
         "start": 1033,
         "end": 1109
       },
       {
+        "name": "Abaelard",
+        "start": 1079,
+        "end": 1142
+      },
+      {
         "name": "Hildegard von Bingen",
         "start": 1098,
         "end": 1179
+      },
+      {
+        "name": "Ibn Ruschd (Averroes)",
+        "start": 1126,
+        "end": 1198
       },
       {
         "name": "Roger Bacon",
@@ -33,9 +63,24 @@
         "end": 1308
       },
       {
+        "name": "von Ockham",
+        "start": 1288,
+        "end": 1347
+      },
+      {
+        "name": "Jan Hus",
+        "start": 1370,
+        "end": 1415
+      },
+      {
         "name": "Erasmus v. Rotterdam",
         "start": 1466,
         "end": 1536
+      },
+      {
+        "name": "Machiavelli",
+        "start": 1469,
+        "end": 1527
       },
       {
         "name": "Kopernikus",
@@ -171,6 +216,10 @@
         "name": "Ansgar",
         "start": 801,
         "end": 865
+      },
+      {
+        "name": "Ludwig der Fromme gründet Bistum",
+        "start": 831
       },
       {
         "name": "Wikinger Angriff",
@@ -489,12 +538,25 @@
         "start": 762
       },
       {
+        "name": "Karl der Große",
+        "start": 747,
+        "end": 814
+      },
+      {
         "name": "Krönung Karls des Großen",
         "start": 800
       },
       {
         "name": "Venedig / Rialto",
         "start": 811
+      },
+      {
+        "name": "Abtei Cluny",
+        "start": 910
+      },
+      {
+        "name": "Kalifat von Cordoba",
+        "start": 929
       },
       {
         "name": "Venedig Markusdom",
@@ -628,12 +690,21 @@
         "end": 622
       },
       {
+        "name": "Hōryū-ji",
+        "start": 607
+      },
+      {
         "name": "Taika Reformen",
         "start": 645
       },
       {
         "name": "Nara Hauptstadt",
         "start": 710
+      },
+      {
+        "name": "Kūkai",
+        "start": 774,
+        "end": 835
       },
       {
         "name": "Heiankyo Hauptstadt",
@@ -646,6 +717,11 @@
       {
         "name": "Minamoto Yoritomo als Shogun (Kamakura)",
         "start": 1192
+      },
+      {
+          "name": "Dōgen Zenji",
+          "start": 1200,
+          "end": 1253
       },
       {
         "name": "Mongolen (Versuch)",
