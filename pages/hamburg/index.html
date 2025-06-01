@@ -25,7 +25,7 @@
         }
         .label {
             font-family: sans-serif;
-            font-size: 12px;
+            font-size: 10px;
             fill: #333;
         }
         .entry-line { stroke: steelblue; stroke-width: 4; }
@@ -120,9 +120,10 @@
                     svg.appendChild(circle);
 
                     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                    text.setAttribute("x", xStart + 5);
+                    text.setAttribute("x", xStart);
                     text.setAttribute("y", y - 6);
                     text.setAttribute("class", "label");
+                    text.setAttribute("text-anchor", "middle");
                     text.textContent = entry.name;
                     svg.appendChild(text);
                 }
