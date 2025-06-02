@@ -1,57 +1,118 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <title>Sartre Metaphysik</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../index.css">
-
+  <meta charset="UTF-8">
+  <title>Sartre SVG Inhaltsverzeichnis</title>
+  <style>
+    body {
+      background: #e8e2d0;
+      padding: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+  </style>
 </head>
 <body>
-<noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
-<header>
+  <svg id="toc" width="600" height="1800"></svg>
 
-</header>
-<main>
+  <script>
+    const data = [
+      {
+        "title": "Einleitung: Auf der Suche nach dem Sein",
+        "chapters": [
+          { "title": "I. Die Idee des Phänomens" },
+          { "title": "II. Das Seinsphänomen und das Sein des Phänomens" },
+          { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*" }
+        ]
+      },
+      {
+        "title": "Erster Teil: Das Problem des Nichts",
+        "chapters": [
+          {
+            "title": "Erstes Kapitel: Der Ursprung der Negation",
+            "sections": [
+              "I. Die Frage",
+              "II. Die Negationen",
+              "III. Das Nichts",
+              "IV. Das Sein des Menschen und das Nichts",
+              "V. Die Negation und die Freiheit"
+            ]
+          },
+          {
+            "title": "Zweites Kapitel: Die Unaufrichtigkeit",
+            "sections": [
+              "I. Unaufrichtigkeit und Lüge",
+              "II. Die Verhaltensweisen der Unaufrichtigkeit"
+            ]
+          }
+        ]
+      }
+    ];
 
-    <div class="center stack" id="container" style="position: relative;">
+    const svg = document.getElementById("toc");
+    const width = svg.clientWidth;
+    const padding = 24;
+    const blockHeight = 140;
+    const blockMargin = 40;
+    const indent = 28;
+    let currentY = svg.clientHeight - padding;
 
-      <svg id="mySvg" width="500" height="500" style="border:1px solid #ccc">
-        <!-- "Summary"-Button -->
-        <rect id="toggleRect" x="10" y="10" width="200" height="30" fill="#eee" stroke="#aaa" />
-        <text x="20" y="30" font-size="16" fill="#000" pointer-events="none">▶ Aufklappen</text>
+    const createText = (text, x, y, bold = false) => {
+      const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      el.setAttribute("x", x);
+      el.setAttribute("y", y);
+      el.setAttribute("font-size", "14");
+      el.setAttribute("fill", "#222");
+      el.setAttribute("text-anchor", "start");
+      el.setAttribute("dominant-baseline", "text-after-edge");
+      if (bold) el.setAttribute("font-weight", "bold");
+      el.innerHTML = text;
+      return el;
+    };
 
-        <!-- Content Section (initially hidden) -->
-        <g id="contentGroup" visibility="hidden">
-          <rect x="10" y="45" width="300" height="100" fill="#f9f9f9" stroke="#aaa" />
-          <text x="20" y="70" font-size="14">Dies ist ein Absatz im aufklappbaren Bereich.</text>
-        </g>
+    const createRect = (x, y, w, h, fill = "#fefdfb") => {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", x);
+      rect.setAttribute("y", y);
+      rect.setAttribute("width", w);
+      rect.setAttribute("height", h);
+      rect.setAttribute("fill", fill);
+      rect.setAttribute("stroke", "#eee");
+      return rect;
+    };
 
-        <!-- Nachfolgender Content -->
-        <text id="nextBlock" x="10" y="160" font-size="14">⬇ Weitere Inhalte hier</text>
-      </svg>
+    const drawEntryBlock = (entries, label, level = 1) => {
+      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const blockX = indent * level;
+      const blockW = width - blockX - padding;
 
-      <script>
-        const toggleRect = document.getElementById("toggleRect");
-        const contentGroup = document.getElementById("contentGroup");
-        const nextBlock = document.getElementById("nextBlock");
+      entries.forEach((text, i) => {
+        const y = currentY - blockHeight;
+        group.appendChild(createRect(blockX, y, blockW, blockHeight - 4));
+        group.appendChild(createText(text, blockX + padding, y + blockHeight - 16));
+        currentY -= blockHeight;
+      });
 
-        let isOpen = false;
+      // Titel des Blocks
+      currentY -= 10;
+      svg.appendChild(group);
+      svg.appendChild(createText(label, padding * level, currentY, true));
+      currentY -= blockMargin;
+    };
 
-        toggleRect.addEventListener("click", () => {
-          isOpen = !isOpen;
-          contentGroup.setAttribute("visibility", isOpen ? "visible" : "hidden");
-          nextBlock.setAttribute("y", isOpen ? 160 + 100 : 160); // verschiebe nachfolgenden Block
+    // Von unten nach oben: erste Section zuerst
+    data.forEach(section => {
+      if (section.chapters) {
+        section.chapters.forEach(chapter => {
+          if (chapter.sections) {
+            drawEntryBlock(chapter.sections.slice().reverse(), chapter.title, 2);
+          } else {
+            drawEntryBlock([chapter.title], "", 1);
+          }
         });
-      </script>
-
-    </div>
-
-</main>
-<footer>
-
-</footer>
-<script type="module" src="../../index.js"></script>
-
+      }
+      svg.appendChild(createText(section.title, padding, currentY, true));
+      currentY -= blockMargin;
+    });
+  </script>
 </body>
 </html>
