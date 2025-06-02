@@ -86,7 +86,7 @@
       let blockX, blockW, entryPad;
       if (level === 2) {
         blockX = padding / 2 + 32; // weiter eingerückt, innerhalb des Unterkapitel-Containers
-        blockW = width - padding - 48;
+        blockW = width - padding - 64; // noch schmaler, damit rechts mehr Abstand bleibt
         entryPad = padding * 2 + 8;
       } else {
         blockX = indent * level;
