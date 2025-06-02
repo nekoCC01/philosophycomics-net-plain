@@ -96,8 +96,28 @@
       currentY -= blockMargin;
     };
 
-    // NEU: Erst Kapitelüberschrift, dann Inhalte zeichnen
     data.forEach(section => {
+      // Berechne die benötigte Höhe für das Kapitel-Rect
+      let blockCount = 0;
+      if (section.chapters) {
+        section.chapters.forEach(chapter => {
+          if (chapter.sections) {
+            blockCount += chapter.sections.length;
+          } else {
+            blockCount += 1;
+          }
+        });
+      }
+      const totalBlockHeight = blockCount * blockHeight + (blockCount - 1) * blockMargin;
+      const rectY = currentY - totalBlockHeight - blockMargin;
+      if (blockCount > 0) {
+        // Hintergrund-Rect für das gesamte Kapitel
+        const chapterRect = createRect(padding / 2, rectY, width - padding, totalBlockHeight + blockMargin, '#f3e9d2');
+        chapterRect.setAttribute('stroke', '#d2c6b2');
+        chapterRect.setAttribute('stroke-width', '2');
+        svg.appendChild(chapterRect);
+      }
+
       // Kapitelüberschrift zuerst (wird unten erscheinen)
       svg.appendChild(createText(section.title, padding, currentY, true));
       currentY -= blockMargin;
