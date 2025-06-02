@@ -80,7 +80,7 @@
       return rect;
     };
 
-    const drawEntryBlock = (entries, label, level = 1) => {
+    const drawEntryBlock = (entries, level = 1) => {
       const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
       const blockX = indent * level;
       const blockW = width - blockX - padding;
@@ -92,26 +92,29 @@
         currentY -= blockHeight;
       });
 
-      // Titel des Blocks
-      currentY -= 10;
       svg.appendChild(group);
-      svg.appendChild(createText(label, padding * level, currentY, true));
       currentY -= blockMargin;
     };
 
-    // Von unten nach oben: erste Section zuerst
+    // NEU: Erst Kapitelüberschrift, dann Inhalte zeichnen
     data.forEach(section => {
+      // Kapitelüberschrift zuerst (wird unten erscheinen)
+      svg.appendChild(createText(section.title, padding, currentY, true));
+      currentY -= blockMargin;
+
       if (section.chapters) {
         section.chapters.forEach(chapter => {
           if (chapter.sections) {
-            drawEntryBlock(chapter.sections.slice().reverse(), chapter.title, 2);
+            // Kapitelüberschrift vor den Abschnitten
+            svg.appendChild(createText(chapter.title, padding * 2, currentY, true));
+            currentY -= blockMargin;
+            drawEntryBlock(chapter.sections.slice().reverse(), 2);
           } else {
-            drawEntryBlock([chapter.title], "", 1);
+            // Einzelkapitel
+            drawEntryBlock([chapter.title], 1);
           }
         });
       }
-      svg.appendChild(createText(section.title, padding, currentY, true));
-      currentY -= blockMargin;
     });
   </script>
 </body>
