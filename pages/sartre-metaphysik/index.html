@@ -111,8 +111,14 @@
       const totalBlockHeight = blockCount * blockHeight + (blockCount - 1) * blockMargin;
       const rectY = currentY - totalBlockHeight - blockMargin;
       if (blockCount > 0) {
-        // Hintergrund-Rect für das gesamte Kapitel
-        const chapterRect = createRect(padding / 2, rectY, width - padding, totalBlockHeight + blockMargin, '#f3e9d2');
+        // Hintergrund-Rect für das gesamte Kapitel mit mehr Padding
+        const chapterRect = createRect(
+          padding / 2 - 8, // links etwas mehr Abstand
+          rectY - 8,       // oben etwas mehr Abstand
+          width - padding + 16, // rechts etwas mehr Abstand
+          totalBlockHeight + blockMargin + 16, // unten etwas mehr Abstand
+          '#f3e9d2'
+        );
         chapterRect.setAttribute('stroke', '#d2c6b2');
         chapterRect.setAttribute('stroke-width', '2');
         svg.appendChild(chapterRect);
@@ -125,6 +131,22 @@
       if (section.chapters) {
         section.chapters.forEach(chapter => {
           if (chapter.sections) {
+            // Berechne Höhe für den Unterkapitel-Container
+            const subBlockCount = chapter.sections.length;
+            const subTotalBlockHeight = subBlockCount * blockHeight + (subBlockCount - 1) * blockMargin;
+            const subRectY = currentY - subTotalBlockHeight - blockMargin;
+            // Container für das Unterkapitel
+            const subRect = createRect(
+              padding * 2 - 8, // eingerückt
+              subRectY - 6,    // etwas mehr Abstand oben
+              width - (padding * 2) + 12, // etwas mehr Abstand rechts
+              subTotalBlockHeight + blockMargin + 12, // etwas mehr Abstand unten
+              '#f8f5ee'
+            );
+            subRect.setAttribute('stroke', '#e0d6c2');
+            subRect.setAttribute('stroke-width', '1.5');
+            svg.appendChild(subRect);
+
             // Kapitelüberschrift vor den Abschnitten
             svg.appendChild(createText(chapter.title, padding * 2, currentY, true));
             currentY -= blockMargin;
