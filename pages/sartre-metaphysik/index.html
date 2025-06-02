@@ -80,20 +80,28 @@
       return rect;
     };
 
-    const drawEntryBlock = (entries, level = 1) => {
+    const drawEntryBlock = (entries, level = 1, parentRectY = null) => {
       const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      const blockX = indent * level;
-      const blockW = width - blockX - padding;
-
+      // Passe Einrückung und Breite je nach Ebene an
+      let blockX, blockW, entryPad;
+      if (level === 2) {
+        blockX = padding / 2 + 32; // weiter eingerückt, innerhalb des Unterkapitel-Containers
+        blockW = width - padding - 48;
+        entryPad = padding * 2 + 8;
+      } else {
+        blockX = indent * level;
+        blockW = width - blockX - padding;
+        entryPad = blockX + padding;
+      }
+      let localY = (parentRectY !== null) ? parentRectY : currentY;
       entries.forEach((text, i) => {
-        const y = currentY - blockHeight;
+        const y = localY - blockHeight;
         group.appendChild(createRect(blockX, y, blockW, blockHeight - 4));
-        group.appendChild(createText(text, blockX + padding, y + blockHeight - 16));
-        currentY -= blockHeight;
+        group.appendChild(createText(text, entryPad, y + blockHeight - 16));
+        localY -= blockHeight;
       });
-
       svg.appendChild(group);
-      currentY -= blockMargin;
+      currentY = localY - blockMargin;
     };
 
     data.forEach(section => {
@@ -108,15 +116,17 @@
           }
         });
       }
+      // Padding für äußeren Container
+      const outerPad = 12;
       const totalBlockHeight = blockCount * blockHeight + (blockCount - 1) * blockMargin;
-      const rectY = currentY - totalBlockHeight - blockMargin;
+      const rectY = currentY - totalBlockHeight - blockMargin - outerPad;
       if (blockCount > 0) {
         // Hintergrund-Rect für das gesamte Kapitel mit mehr Padding
         const chapterRect = createRect(
-          padding / 2 - 8, // links etwas mehr Abstand
-          rectY - 8,       // oben etwas mehr Abstand
-          width - padding + 16, // rechts etwas mehr Abstand
-          totalBlockHeight + blockMargin + 16, // unten etwas mehr Abstand
+          padding / 2 - 8,
+          rectY,
+          width - padding + 16,
+          totalBlockHeight + blockMargin + 2 * outerPad,
           '#f3e9d2'
         );
         chapterRect.setAttribute('stroke', '#d2c6b2');
@@ -129,18 +139,21 @@
       currentY -= blockMargin;
 
       if (section.chapters) {
+        // Startpunkt für Untercontainer innerhalb des äußeren Containers
+        let subCurrentY = currentY;
         section.chapters.forEach(chapter => {
           if (chapter.sections) {
             // Berechne Höhe für den Unterkapitel-Container
             const subBlockCount = chapter.sections.length;
             const subTotalBlockHeight = subBlockCount * blockHeight + (subBlockCount - 1) * blockMargin;
-            const subRectY = currentY - subTotalBlockHeight - blockMargin;
-            // Container für das Unterkapitel
+            const subPad = 8;
+            const subRectY = subCurrentY - subTotalBlockHeight - blockMargin - subPad;
+            // Container für das Unterkapitel, eingerückt und innerhalb des äußeren Containers
             const subRect = createRect(
-              padding * 2 - 8, // eingerückt
-              subRectY - 6,    // etwas mehr Abstand oben
-              width - (padding * 2) + 12, // etwas mehr Abstand rechts
-              subTotalBlockHeight + blockMargin + 12, // etwas mehr Abstand unten
+              padding / 2 + 16, // weiter eingerückt, aber innerhalb des äußeren Containers
+              subRectY,
+              width - padding - 32, // schmaler, damit es im äußeren Container bleibt
+              subTotalBlockHeight + blockMargin + 2 * subPad,
               '#f8f5ee'
             );
             subRect.setAttribute('stroke', '#e0d6c2');
@@ -148,12 +161,17 @@
             svg.appendChild(subRect);
 
             // Kapitelüberschrift vor den Abschnitten
-            svg.appendChild(createText(chapter.title, padding * 2, currentY, true));
-            currentY -= blockMargin;
-            drawEntryBlock(chapter.sections.slice().reverse(), 2);
+            svg.appendChild(createText(chapter.title, padding * 2, subCurrentY, true));
+            subCurrentY -= blockMargin;
+            // Passe currentY für drawEntryBlock an
+            currentY = subCurrentY;
+            // Die Blöcke werden jetzt innerhalb des Unterkapitel-Containers platziert
+            drawEntryBlock(chapter.sections.slice().reverse(), 2, subCurrentY);
+            subCurrentY = currentY;
           } else {
             // Einzelkapitel
             drawEntryBlock([chapter.title], 1);
+            subCurrentY = currentY;
           }
         });
       }
