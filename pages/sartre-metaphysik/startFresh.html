@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+      <svg id="meinSVG" width="400" height="800" style="border:1px solid gray;"></svg>
+
+  <script>
+    const svg = document.getElementById("meinSVG");
+
+    // Gruppe erstellen
+    const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+    // Drei Rechtecke mit relativer Position
+    const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect1.setAttribute("x", 50);
+    rect1.setAttribute("y", 0); // ganz unten in der Gruppe
+    rect1.setAttribute("width", 200);
+    rect1.setAttribute("height", 100);
+    rect1.setAttribute("fill", "lightblue");
+
+    const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect2.setAttribute("x", 50);
+    rect2.setAttribute("y", -150); // 50px höher
+    rect2.setAttribute("width", 200);
+    rect2.setAttribute("height", 100);
+    rect2.setAttribute("fill", "lightgreen");
+
+    const rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect3.setAttribute("x", 50);
+    rect3.setAttribute("y", -300); // 100px höher als rect1
+    rect3.setAttribute("width", 200);
+    rect3.setAttribute("height", 100);
+    rect3.setAttribute("fill", "lightcoral");
+
+    // Rechtecke zur Gruppe hinzufügen
+    group.appendChild(rect1);
+    group.appendChild(rect2);
+    group.appendChild(rect3);
+
+    // Ganze Gruppe auf y=500 verschieben
+    group.setAttribute("transform", "translate(0, 500)");
+
+    // Gruppe zum SVG hinzufügen
+    svg.appendChild(group);
+  </script>
+
+    <script>
+        const data = [
+            {
+                "title": "Einleitung: Auf der Suche nach dem Sein",
+                "chapters": [
+                    {
+                        "title": "--",
+                        "sections": [
+                            "I. Die Idee des Phänomens",
+                            "II. Das Seinsphänomen und das Sein des Phänomens",
+                            "III. Das *präreflexive* Cogito und das Sein des *percipere*"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Erster Teil: Das Problem des Nichts",
+                "chapters": [
+                    {
+                        "title": "Erstes Kapitel: Der Ursprung der Negation",
+                        "sections": [
+                            "I. Die Frage",
+                            "II. Die Negationen",
+                            "III. Das Nichts",
+                            "IV. Das Sein des Menschen und das Nichts",
+                            "V. Die Negation und die Freiheit"
+                        ]
+                    },
+                    {
+                        "title": "Zweites Kapitel: Die Unaufrichtigkeit",
+                        "sections": [
+                            "I. Unaufrichtigkeit und Lüge",
+                            "II. Die Verhaltensweisen der Unaufrichtigkeit"
+                        ]
+                    }
+                ]
+            }
+        ];
+
+
+
+
+
+    </script>
+</body>
+
+</html>
