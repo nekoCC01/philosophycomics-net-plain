@@ -9,9 +9,10 @@
 
 <body>
 
-      <svg id="meinSVG" width="400" height="800" style="border:1px solid gray;"></svg>
+      <svg id="meinSVG" width="750" height="1200" style="border:1px solid gray;"></svg>
 
   <script>
+    /*
     const svg = document.getElementById("meinSVG");
 
     // Gruppe erstellen
@@ -49,10 +50,12 @@
 
     // Gruppe zum SVG hinzufügen
     svg.appendChild(group);
+    */
   </script>
 
     <script>
         const data = [
+            /*
             {
                 "title": "Einleitung: Auf der Suche nach dem Sein",
                 "chapters": [
@@ -65,7 +68,7 @@
                         ]
                     }
                 ]
-            },
+            },*/
             {
                 "title": "Erster Teil: Das Problem des Nichts",
                 "chapters": [
@@ -73,12 +76,13 @@
                         "title": "Erstes Kapitel: Der Ursprung der Negation",
                         "sections": [
                             { "title": "I. Die Frage", "height": 5 },
-                            { "title": "II. Die Negationen", "height": 5 },
-                            { "title": "III. Das Nichts", "height": 5 },
-                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 5 },
-                            { "title": "V. Die Negation und die Freiheit", "height": 5 }
+                            { "title": "II. Die Negationen", "height": 3 },
+                            { "title": "III. Das Nichts", "height": 1 },
+                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 6 },
+                            { "title": "V. Die Negation und die Freiheit", "height": 2 }
                         ]
                     },
+                    /*
                     {
                         "title": "Zweites Kapitel: Die Unaufrichtigkeit",
                         "sections": [
@@ -86,25 +90,50 @@
                             { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 5 }
                         ]
                     }
+                        */
                 ]
             }
         ];
 
 
+        let svg = document.getElementById("meinSVG");
         data.forEach(part => {
             // title
             console.log(part.title);
+            let rect = createRect(25, 25, 700, 50, "lightblue"); 
+            //svg.appendChild(rect);
+            
+            let height = 0;
+
+            let text = createText(30, 50, part.title);
+            //svg.appendChild(text);
 
             // chapters
             part.chapters.forEach(chapter => {
                 // chapter title
                 console.log("  " + chapter.title);
+                let chapterRect = createRect(50, 900, 600, 40, "lightgreen");
+                let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
                 // chapter sections
+                let y = 800;
+                let totalHeight = 0;
                 chapter.sections.forEach(section => {
                     // section title
                     console.log("    " + section.title);
+                    let height = 20 * section.height;
+                 // Adjust height based on section height
+                    let sectionRect = createRect(100, y-height , 500, height, "lightcoral");
+                
+                    y = y - height - 20;
+                    totalHeight += height + 20;
+                    group.appendChild(sectionRect);
                 });
+                chapterRect.setAttribute("height", totalHeight + 40);
+                chapterRect.setAttribute("y", 800 - totalHeight);
+                chapterRect.id = "chapterRect";
+                svg.appendChild(chapterRect);
+                svg.appendChild(group);
             });
         });
 
