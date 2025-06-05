@@ -91,6 +91,41 @@
         ];
 
 
+        data.forEach(part => {
+            // title
+            console.log(part.title);
+
+            // chapters
+            part.chapters.forEach(chapter => {
+                // chapter title
+                console.log("  " + chapter.title);
+
+                // chapter sections
+                chapter.sections.forEach(section => {
+                    // section title
+                    console.log("    " + section);
+                });
+            });
+        });
+
+        function createRect(x, y, width, height, fill) {
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
+            rect.setAttribute("width", width);
+            rect.setAttribute("height", height);
+            rect.setAttribute("fill", fill);
+            return rect;
+        }
+        function createText(x, y, textContent) {
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", x);
+            text.setAttribute("y", y);
+            text.setAttribute("font-size", "14");
+            text.setAttribute("fill", "#222");
+            text.textContent = textContent;
+            return text;
+        }
 
 
 
