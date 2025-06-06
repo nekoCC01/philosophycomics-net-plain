@@ -45,7 +45,6 @@
                             { "title": "V. Die Negation und die Freiheit", "height": 150 }
                         ]
                     },
-
                     {
                         "title": "Zweites Kapitel: Die Unaufrichtigkeit",
                         "sections": [
@@ -94,6 +93,8 @@
             partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
             group.appendChild(partRect);
 
+            let partHeight = 0;
+
             let yChapter = yPart - padding;
             part.chapters.forEach(chapter => {
                 console.log("  " + chapter.title);
@@ -119,17 +120,23 @@
                     group.appendChild(sectionRect);
 
                 });
-                sectionsHeight += padding; 
-                totalHeight += sectionsHeight + padding * 2;
-                chapterRect.setAttribute("height", sectionsHeight);
-                chapterRect.setAttribute("y", yChapter - sectionsHeight);
-                yChapter = yChapter - sectionsHeight - padding;
+               
+                let chapterHeight = sectionsHeight + padding;
+                chapterRect.setAttribute("height", chapterHeight);
+                chapterRect.setAttribute("y", yChapter - chapterHeight);
+                yChapter = yChapter - chapterHeight - padding;
+
+                partHeight += chapterHeight + padding;;
             });
 
-            partRect.setAttribute("height", totalHeight);
-            partRect.setAttribute("y", yPart - totalHeight);
-            yPart = yPart - totalHeight - padding;
+            partHeight += padding;
+            partRect.setAttribute("height", partHeight);
+            partRect.setAttribute("y", yPart - partHeight);
+            yPart = yPart - partHeight - padding;
+            
+            totalHeight += partHeight + padding;
         });
+        totalHeight += padding * 2;
         group.setAttribute("transform", "translate(0, " + totalHeight + ")");
         svg.appendChild(group);
 
