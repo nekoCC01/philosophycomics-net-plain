@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+            font-weight: normal;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,9 +31,9 @@
                     {
                         "title": "--",
                         "sections": [
-                            { "title": "I. Die Idee des Phänomens", "height": 100 },
-                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 200 },
-                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 150 }
+                            { "title": "I. Die Idee des Phänomens", "height": 200 },
+                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 300 },
+                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 250 }
                         ]
                     }
                 ]
@@ -38,18 +44,18 @@
                     {
                         "title": "Erstes Kapitel: Der Ursprung der Negation",
                         "sections": [
-                            { "title": "I. Die Frage", "height": 100 },
-                            { "title": "II. Die Negationen", "height": 300 },
-                            { "title": "III. Das Nichts", "height": 200 },
-                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 250 },
-                            { "title": "V. Die Negation und die Freiheit", "height": 150 }
+                            { "title": "I. Die Frage", "height": 200 },
+                            { "title": "II. Die Negationen", "height": 400 },
+                            { "title": "III. Das Nichts", "height": 300 },
+                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 350 },
+                            { "title": "V. Die Negation und die Freiheit", "height": 250 }
                         ]
                     },
                     {
                         "title": "Zweites Kapitel: Die Unaufrichtigkeit",
                         "sections": [
-                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 200 },
-                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 100 }
+                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 300 },
+                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 200 }
                         ]
                     }
                 ]
@@ -79,7 +85,7 @@
 
 
         let maxWidth = 1000;
-        let padding = 20;
+        let padding = 50;
         let marginLeft = 100;
         let totalHeight = 0;
         let yPart = 0;
@@ -90,8 +96,10 @@
 
             let x = marginLeft;
             let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+            let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
             partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
             group.appendChild(partRect);
+            group.appendChild(partText);
 
             let partHeight = 0;
 
@@ -99,41 +107,45 @@
             part.chapters.forEach(chapter => {
                 console.log("  " + chapter.title);
 
-                let x = marginLeft + padding;
-                
-                let width = maxWidth - padding * 2;
+                let x = marginLeft + padding / 2;
+
+                let width = maxWidth - padding;
                 let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
                 chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
+                let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
                 group.appendChild(chapterRect);
+                group.appendChild(chapterText);
 
                 let yChild = yChapter - padding;
                 let sectionsHeight = 0;
                 chapter.sections.forEach(section => {
                     console.log("    " + section.title);
 
-                    let x = marginLeft + padding * 2;
-                    let width = maxWidth - (padding * 4);
+                    let x = marginLeft + padding;
+                    let width = maxWidth - (padding * 2);
                     let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
                     sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
-                    yChild = yChild - section.height - padding;
-                    sectionsHeight += section.height + padding;
+                    let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
+                    yChild = yChild - section.height - padding / 2;
+                    sectionsHeight += section.height + padding / 2;
                     group.appendChild(sectionRect);
+                    group.appendChild(sectionText);
 
                 });
-               
+
                 let chapterHeight = sectionsHeight + padding;
                 chapterRect.setAttribute("height", chapterHeight);
                 chapterRect.setAttribute("y", yChapter - chapterHeight);
                 yChapter = yChapter - chapterHeight - padding;
 
-                partHeight += chapterHeight + padding;;
+                partHeight += chapterHeight + padding;
             });
 
-            partHeight += padding;
+            partHeight += padding / 2;
             partRect.setAttribute("height", partHeight);
             partRect.setAttribute("y", yPart - partHeight);
             yPart = yPart - partHeight - padding;
-            
+
             totalHeight += partHeight + padding;
         });
         totalHeight += padding * 2;
