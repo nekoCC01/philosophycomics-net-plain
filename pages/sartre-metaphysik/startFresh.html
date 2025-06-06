@@ -9,49 +9,12 @@
 
 <body>
     TEST 123
-    <svg id="meinSVG" width="750" height="1200" style="border:1px solid gray;"></svg>
+    <svg id="meinSVG" width="1200" height="2000" style="border:1px solid gray;">
 
-    <script>
-        /*
-        const svg = document.getElementById("meinSVG");
-    
-        // Gruppe erstellen
-        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    
-        // Drei Rechtecke mit relativer Position
-        const rect1 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        rect1.setAttribute("x", 50);
-        rect1.setAttribute("y", 0); // ganz unten in der Gruppe
-        rect1.setAttribute("width", 200);
-        rect1.setAttribute("height", 100);
-        rect1.setAttribute("fill", "lightblue");
-    
-        const rect2 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        rect2.setAttribute("x", 50);
-        rect2.setAttribute("y", -150); // 50px höher
-        rect2.setAttribute("width", 200);
-        rect2.setAttribute("height", 100);
-        rect2.setAttribute("fill", "lightgreen");
-    
-        const rect3 = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        rect3.setAttribute("x", 50);
-        rect3.setAttribute("y", -300); // 100px höher als rect1
-        rect3.setAttribute("width", 200);
-        rect3.setAttribute("height", 100);
-        rect3.setAttribute("fill", "lightcoral");
-    
-        // Rechtecke zur Gruppe hinzufügen
-        group.appendChild(rect1);
-        group.appendChild(rect2);
-        group.appendChild(rect3);
-    
-        // Ganze Gruppe auf y=500 verschieben
-        group.setAttribute("transform", "translate(0, 500)");
-    
-        // Gruppe zum SVG hinzufügen
-        svg.appendChild(group);
-        */
-    </script>
+
+
+    </svg>
+
 
     <script>
         const data =
@@ -98,50 +61,7 @@
             ]
         };
 
-
-
         let svg = document.getElementById("meinSVG");
-        /*
-        data.forEach(part => {
-            // title
-            console.log(part.title);
-            let rect = createRect(25, 25, 700, 50, "lightblue");
-            //svg.appendChild(rect);
-
-            let height = 0;
-
-            let text = createText(30, 50, part.title);
-            //svg.appendChild(text);
-
-            // chapters
-            part.chapters.forEach(chapter => {
-                // chapter title
-                console.log("  " + chapter.title);
-                let chapterRect = createRect(50, 900, 600, 40, "lightgreen");
-                let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-
-                // chapter sections
-                let y = 800;
-                let totalHeight = 0;
-                chapter.sections.forEach(section => {
-                    // section title
-                    console.log("    " + section.title);
-                    let height = 20 * section.height;
-                    // Adjust height based on section height
-                    let sectionRect = createRect(100, y - height, 500, height, "lightcoral");
-
-                    y = y - height - 20;
-                    totalHeight += height + 20;
-                    group.appendChild(sectionRect);
-                });
-                chapterRect.setAttribute("height", totalHeight + 40);
-                chapterRect.setAttribute("y", 800 - totalHeight);
-                chapterRect.id = "chapterRect";
-                svg.appendChild(chapterRect);
-                svg.appendChild(group);
-            });
-        });
-        */
 
         function createRect(x, y, width, height, fill) {
             const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -163,28 +83,40 @@
         }
 
 
+        let maxWidth = 1000;
+        let padding = 20;
+        let marginLeft = 100;
+        let x = marginLeft;
+        let y = 0;
+        let width = maxWidth - (4 * padding);
+        let step = 3;
+        let totalHeight = 0;
 
+        let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         function createContainerWithChildren(container) {
-
-            let containerRect = createRect(25, 25, 700, 50, "lightblue");
-            // 
-            let totalHeight = 0;
+            let containerHeight = 0;
             container.chapters.forEach(child => {
-                //
                 if (child.chapters) {
                     child = createContainerWithChildren(child);
                 }
-                // create a rectangle for each child
-                // track height
                 let childHeight = getHeight(child);
-                let childRect = createRect(50, 900, 500, childHeight, "lightgreen");
-                totalHeight += childHeight + 40; // adjust height based on child height
+                x = marginLeft + (step * padding);
+                y = y - childHeight;
+                let childRect = createRect(x, y, width, childHeight, "rgba(0, 0, 255, 0.1)");
+                let childText = createText(x + padding, y - padding, child.title);
+                group.appendChild(childRect);
+                group.appendChild(childText);
+                containerHeight += childHeight + padding; // adjust height based on child height
             });
-
-            containerRect.setAttribute("height", totalHeight);
+            step -= 1;
+            x = marginLeft + (step * padding);
+            let containerRect = createRect(x, y - containerHeight, 700, containerHeight, "rgba(255, 0, 0, 0.1)");
+            let containerText = createText(x + padding, y - containerHeight - padding, container.title);
+            containerRect.setAttribute("height", containerHeight);
+            totalHeight += containerHeight + padding;;
+            group.appendChild(containerRect);
+            group.appendChild(containerText);
             return containerRect;
-
-
         }
 
         function getHeight(child) {
@@ -200,6 +132,10 @@
 
 
         let container = createContainerWithChildren(data);
+        console.log(container);
+        console.log(group);
+        group.setAttribute("transform", "translate(0, " + totalHeight + ")");
+        svg.append(group);
 
     </script>
 </body>
