@@ -9,7 +9,7 @@
 
 <body>
     TEST 123
-    <svg id="meinSVG" width="1200" height="2000" style="border:1px solid gray;">
+    <svg id="meinSVG" width="1200" height="4000" style="border:1px solid gray;">
 
 
 
@@ -25,9 +25,9 @@
                     {
                         "title": "--",
                         "sections": [
-                            { "title": "I. Die Idee des Phänomens", "height": 5 },
-                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 5 },
-                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 5 }
+                            { "title": "I. Die Idee des Phänomens", "height": 100 },
+                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 200 },
+                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 150 }
                         ]
                     }
                 ]
@@ -38,19 +38,19 @@
                     {
                         "title": "Erstes Kapitel: Der Ursprung der Negation",
                         "sections": [
-                            { "title": "I. Die Frage", "height": 5 },
-                            { "title": "II. Die Negationen", "height": 3 },
-                            { "title": "III. Das Nichts", "height": 1 },
-                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 6 },
-                            { "title": "V. Die Negation und die Freiheit", "height": 2 }
+                            { "title": "I. Die Frage", "height": 100 },
+                            { "title": "II. Die Negationen", "height": 300 },
+                            { "title": "III. Das Nichts", "height": 200 },
+                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 250 },
+                            { "title": "V. Die Negation und die Freiheit", "height": 150 }
                         ]
                     },
 
                     {
                         "title": "Zweites Kapitel: Die Unaufrichtigkeit",
                         "sections": [
-                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 5 },
-                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 5 }
+                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 200 },
+                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 100 }
                         ]
                     }
                 ]
@@ -78,7 +78,63 @@
             return text;
         }
 
-        
+
+        let maxWidth = 1000;
+        let padding = 20;
+        let marginLeft = 100;
+        let totalHeight = 0;
+
+        let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        data.forEach(part => {
+            console.log(part.title);
+
+            let x = marginLeft;
+            let y = -totalHeight - padding;;
+            let partRect = createRect(x, y, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+            partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
+            group.appendChild(partRect);
+
+            part.chapters.forEach(chapter => {
+                console.log("  " + chapter.title);
+
+                let x = marginLeft + padding;
+                let yChapter = -totalHeight - (padding * 2);
+                let width = maxWidth - padding * 2;
+                let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
+                chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
+                group.appendChild(chapterRect);
+
+                let yChild = yChapter - padding;
+                let sectionsHeight = 0;
+                chapter.sections.forEach(section => {
+                    console.log("    " + section.title);
+
+                    let x = marginLeft + padding * 2;
+                    let width = maxWidth - (padding * 4);
+                    let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
+                    sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
+                    yChild = yChild - section.height - padding;
+                    sectionsHeight += section.height + padding;
+                    group.appendChild(sectionRect);
+
+                });
+                sectionsHeight += padding; 
+                totalHeight += sectionsHeight + padding * 2;
+                chapterRect.setAttribute("height", sectionsHeight);
+                chapterRect.setAttribute("y", yChapter - sectionsHeight);
+            });
+
+            partRect.setAttribute("height", totalHeight);
+            partRect.setAttribute("y", y - totalHeight);
+        });
+        group.setAttribute("transform", "translate(0, " + totalHeight + ")");
+        svg.appendChild(group);
+
+
+
+
+
+
 
     </script>
 </body>
