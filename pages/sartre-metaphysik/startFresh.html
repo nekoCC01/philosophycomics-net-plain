@@ -83,22 +83,23 @@
         let padding = 20;
         let marginLeft = 100;
         let totalHeight = 0;
+        let yPart = 0;
 
         let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         data.forEach(part => {
             console.log(part.title);
 
             let x = marginLeft;
-            let y = -totalHeight - padding;;
-            let partRect = createRect(x, y, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+            let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
             partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
             group.appendChild(partRect);
 
+            let yChapter = yPart - padding;
             part.chapters.forEach(chapter => {
                 console.log("  " + chapter.title);
 
                 let x = marginLeft + padding;
-                let yChapter = -totalHeight - (padding * 2);
+                
                 let width = maxWidth - padding * 2;
                 let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
                 chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
@@ -122,10 +123,12 @@
                 totalHeight += sectionsHeight + padding * 2;
                 chapterRect.setAttribute("height", sectionsHeight);
                 chapterRect.setAttribute("y", yChapter - sectionsHeight);
+                yChapter = yChapter - sectionsHeight - padding;
             });
 
             partRect.setAttribute("height", totalHeight);
-            partRect.setAttribute("y", y - totalHeight);
+            partRect.setAttribute("y", yPart - totalHeight);
+            yPart = yPart - totalHeight - padding;
         });
         group.setAttribute("transform", "translate(0, " + totalHeight + ")");
         svg.appendChild(group);
