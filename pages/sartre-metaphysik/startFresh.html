@@ -88,7 +88,7 @@
         let marginLeft = 100;
         let x = marginLeft;
         let y = 0;
-        let width = maxWidth - (4 * padding);
+        let width = maxWidth - (3 * padding);
         let step = 3;
         let totalHeight = 0;
 
@@ -101,9 +101,9 @@
                 }
                 let childHeight = getHeight(child);
                 x = marginLeft + (step * padding);
-                y = y - childHeight;
-                let childRect = createRect(x, y, width, childHeight, "rgba(0, 0, 255, 0.1)");
+                let childRect = createRect(x, y, width, y - childHeight, "rgba(0, 0, 255, 0.1)");
                 let childText = createText(x + padding, y - padding, child.title);
+                y = y - childHeight - padding;;
                 group.appendChild(childRect);
                 group.appendChild(childText);
                 containerHeight += childHeight + padding; // adjust height based on child height
@@ -113,7 +113,7 @@
             let containerRect = createRect(x, y - containerHeight, 700, containerHeight, "rgba(255, 0, 0, 0.1)");
             let containerText = createText(x + padding, y - containerHeight - padding, container.title);
             containerRect.setAttribute("height", containerHeight);
-            totalHeight += containerHeight + padding;;
+            totalHeight += containerHeight + padding;
             group.appendChild(containerRect);
             group.appendChild(containerText);
             return containerRect;
