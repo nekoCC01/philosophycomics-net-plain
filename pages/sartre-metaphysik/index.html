@@ -1,181 +1,164 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Sartre SVG Inhaltsverzeichnis</title>
-  <style>
-    body {
-      background: #e8e2d0;
-      padding: 2rem;
-      font-family: system-ui, sans-serif;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+            font-weight: normal;
+        }
+    </style>
 </head>
+
 <body>
-  <svg id="toc" width="600" height="1800"></svg>
+    TEST 123
+    <svg id="meinSVG" width="1200" height="4000" style="border:1px solid gray;">
 
-  <script>
-    const data = [
-      {
-        "title": "Einleitung: Auf der Suche nach dem Sein",
-        "chapters": [
-          { "title": "I. Die Idee des Phänomens" },
-          { "title": "II. Das Seinsphänomen und das Sein des Phänomens" },
-          { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*" }
-        ]
-      },
-      {
-        "title": "Erster Teil: Das Problem des Nichts",
-        "chapters": [
-          {
-            "title": "Erstes Kapitel: Der Ursprung der Negation",
-            "sections": [
-              "I. Die Frage",
-              "II. Die Negationen",
-              "III. Das Nichts",
-              "IV. Das Sein des Menschen und das Nichts",
-              "V. Die Negation und die Freiheit"
-            ]
-          },
-          {
-            "title": "Zweites Kapitel: Die Unaufrichtigkeit",
-            "sections": [
-              "I. Unaufrichtigkeit und Lüge",
-              "II. Die Verhaltensweisen der Unaufrichtigkeit"
-            ]
-          }
-        ]
-      }
-    ];
 
-    const svg = document.getElementById("toc");
-    const width = svg.clientWidth;
-    const padding = 24;
-    const blockHeight = 140;
-    const blockMargin = 40;
-    const indent = 28;
-    let currentY = svg.clientHeight - padding;
 
-    const createText = (text, x, y, bold = false) => {
-      const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      el.setAttribute("x", x);
-      el.setAttribute("y", y);
-      el.setAttribute("font-size", "14");
-      el.setAttribute("fill", "#222");
-      el.setAttribute("text-anchor", "start");
-      el.setAttribute("dominant-baseline", "text-after-edge");
-      if (bold) el.setAttribute("font-weight", "bold");
-      el.innerHTML = text;
-      return el;
-    };
+    </svg>
 
-    const createRect = (x, y, w, h, fill = "#fefdfb") => {
-      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      rect.setAttribute("x", x);
-      rect.setAttribute("y", y);
-      rect.setAttribute("width", w);
-      rect.setAttribute("height", h);
-      rect.setAttribute("fill", fill);
-      rect.setAttribute("stroke", "#eee");
-      return rect;
-    };
 
-    const drawEntryBlock = (entries, level = 1, parentRectY = null) => {
-      const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      // Passe Einrückung und Breite je nach Ebene an
-      let blockX, blockW, entryPad;
-      if (level === 2) {
-        blockX = padding / 2 + 32; // weiter eingerückt, innerhalb des Unterkapitel-Containers
-        blockW = width - padding - 64; // noch schmaler, damit rechts mehr Abstand bleibt
-        entryPad = padding * 2 + 8;
-      } else {
-        blockX = indent * level;
-        blockW = width - blockX - padding;
-        entryPad = blockX + padding;
-      }
-      let localY = (parentRectY !== null) ? parentRectY : currentY;
-      entries.forEach((text, i) => {
-        const y = localY - blockHeight;
-        group.appendChild(createRect(blockX, y, blockW, blockHeight - 4));
-        group.appendChild(createText(text, entryPad, y + blockHeight - 16));
-        localY -= blockHeight;
-      });
-      svg.appendChild(group);
-      currentY = localY - blockMargin;
-    };
+    <script>
+        const data = [
 
-    data.forEach(section => {
-      // Berechne die benötigte Höhe für das Kapitel-Rect
-      let blockCount = 0;
-      if (section.chapters) {
-        section.chapters.forEach(chapter => {
-          if (chapter.sections) {
-            blockCount += chapter.sections.length;
-          } else {
-            blockCount += 1;
-          }
+            {
+                "title": "Einleitung: Auf der Suche nach dem Sein",
+                "chapters": [
+                    {
+                        "title": "--",
+                        "sections": [
+                            { "title": "I. Die Idee des Phänomens", "height": 200 },
+                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 300 },
+                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 250 }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Erster Teil: Das Problem des Nichts",
+                "chapters": [
+                    {
+                        "title": "Erstes Kapitel: Der Ursprung der Negation",
+                        "sections": [
+                            { "title": "I. Die Frage", "height": 200 },
+                            { "title": "II. Die Negationen", "height": 400 },
+                            { "title": "III. Das Nichts", "height": 300 },
+                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 350 },
+                            { "title": "V. Die Negation und die Freiheit", "height": 250 }
+                        ]
+                    },
+                    {
+                        "title": "Zweites Kapitel: Die Unaufrichtigkeit",
+                        "sections": [
+                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 300 },
+                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 200 }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let svg = document.getElementById("meinSVG");
+
+        function createRect(x, y, width, height, fill) {
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("x", x);
+            rect.setAttribute("y", y);
+            rect.setAttribute("width", width);
+            rect.setAttribute("height", height);
+            rect.setAttribute("fill", fill);
+            return rect;
+        }
+        function createText(x, y, textContent) {
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", x);
+            text.setAttribute("y", y);
+            text.setAttribute("font-size", "14");
+            text.setAttribute("fill", "#222");
+            text.textContent = textContent;
+            return text;
+        }
+
+
+        let maxWidth = 1000;
+        let padding = 50;
+        let marginLeft = 100;
+        let totalHeight = 0;
+        let yPart = 0;
+
+        let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        data.forEach(part => {
+            console.log(part.title);
+
+            let x = marginLeft;
+            let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+            let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
+            partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
+            group.appendChild(partRect);
+            group.appendChild(partText);
+
+            let partHeight = 0;
+
+            let yChapter = yPart - padding;
+            part.chapters.forEach(chapter => {
+                console.log("  " + chapter.title);
+
+                let x = marginLeft + padding / 2;
+
+                let width = maxWidth - padding;
+                let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
+                chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
+                let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
+                group.appendChild(chapterRect);
+                group.appendChild(chapterText);
+
+                let yChild = yChapter - padding;
+                let sectionsHeight = 0;
+                chapter.sections.forEach(section => {
+                    console.log("    " + section.title);
+
+                    let x = marginLeft + padding;
+                    let width = maxWidth - (padding * 2);
+                    let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
+                    sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
+                    let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
+                    yChild = yChild - section.height - padding / 2;
+                    sectionsHeight += section.height + padding / 2;
+                    group.appendChild(sectionRect);
+                    group.appendChild(sectionText);
+
+                });
+
+                let chapterHeight = sectionsHeight + padding;
+                chapterRect.setAttribute("height", chapterHeight);
+                chapterRect.setAttribute("y", yChapter - chapterHeight);
+                yChapter = yChapter - chapterHeight - padding;
+
+                partHeight += chapterHeight + padding;
+            });
+
+            partHeight += padding / 2;
+            partRect.setAttribute("height", partHeight);
+            partRect.setAttribute("y", yPart - partHeight);
+            yPart = yPart - partHeight - padding;
+
+            totalHeight += partHeight + padding;
         });
-      }
-      // Padding für äußeren Container
-      const outerPad = 12;
-      const totalBlockHeight = blockCount * blockHeight + (blockCount - 1) * blockMargin;
-      const rectY = currentY - totalBlockHeight - blockMargin - outerPad;
-      if (blockCount > 0) {
-        // Hintergrund-Rect für das gesamte Kapitel mit mehr Padding
-        const chapterRect = createRect(
-          padding / 2 - 8,
-          rectY,
-          width - padding + 16,
-          totalBlockHeight + blockMargin + 2 * outerPad,
-          '#f3e9d2'
-        );
-        chapterRect.setAttribute('stroke', '#d2c6b2');
-        chapterRect.setAttribute('stroke-width', '2');
-        svg.appendChild(chapterRect);
-      }
+        totalHeight += padding * 2;
+        group.setAttribute("transform", "translate(0, " + totalHeight + ")");
+        svg.appendChild(group);
 
-      // Kapitelüberschrift zuerst (wird unten erscheinen)
-      svg.appendChild(createText(section.title, padding, currentY, true));
-      currentY -= blockMargin;
 
-      if (section.chapters) {
-        // Startpunkt für Untercontainer innerhalb des äußeren Containers
-        let subCurrentY = currentY;
-        section.chapters.forEach(chapter => {
-          if (chapter.sections) {
-            // Berechne Höhe für den Unterkapitel-Container
-            const subBlockCount = chapter.sections.length;
-            const subTotalBlockHeight = subBlockCount * blockHeight + (subBlockCount - 1) * blockMargin;
-            const subPad = 8;
-            const subRectY = subCurrentY - subTotalBlockHeight - blockMargin - subPad;
-            // Container für das Unterkapitel, eingerückt und innerhalb des äußeren Containers
-            const subRect = createRect(
-              padding / 2 + 16, // weiter eingerückt, aber innerhalb des äußeren Containers
-              subRectY,
-              width - padding - 32, // schmaler, damit es im äußeren Container bleibt
-              subTotalBlockHeight + blockMargin + 2 * subPad,
-              '#f8f5ee'
-            );
-            subRect.setAttribute('stroke', '#e0d6c2');
-            subRect.setAttribute('stroke-width', '1.5');
-            svg.appendChild(subRect);
 
-            // Kapitelüberschrift vor den Abschnitten
-            svg.appendChild(createText(chapter.title, padding * 2, subCurrentY, true));
-            subCurrentY -= blockMargin;
-            // Passe currentY für drawEntryBlock an
-            currentY = subCurrentY;
-            // Die Blöcke werden jetzt innerhalb des Unterkapitel-Containers platziert
-            drawEntryBlock(chapter.sections.slice().reverse(), 2, subCurrentY);
-            subCurrentY = currentY;
-          } else {
-            // Einzelkapitel
-            drawEntryBlock([chapter.title], 1);
-            subCurrentY = currentY;
-          }
-        });
-      }
-    });
-  </script>
+
+
+
+
+    </script>
 </body>
+
 </html>
