@@ -3,10 +3,21 @@
     "title": "Einleitung: Auf der Suche nach dem Sein",
     "chapters": [
       {
-        "title": "I. Die Idee des Phänomens"
-      },
-      {
-        "title": "II. Das Seinsphänomen und das Sein des Phänomens"
+        "title": "--",
+        "sections": [
+          {
+            "title": "I. Die Idee des Phänomens",
+            "height": 200
+          },
+          {
+            "title": "II. Das Seinsphänomen und das Sein des Phänomens",
+            "height": 300
+          },
+          {
+            "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*",
+            "height": 250
+          }
+        ]
       }
     ]
   },
@@ -16,18 +27,39 @@
       {
         "title": "Erstes Kapitel: Der Ursprung der Negation",
         "sections": [
-          "I. Die Frage",
-          "II. Die Negationen",
-          "III. Das Nichts",
-          "IV. Das Sein des Menschen und das Nichts",
-          "V. Die Negation und die Freiheit"
+          {
+            "title": "I. Die Frage",
+            "height": 200
+          },
+          {
+            "title": "II. Die Negationen",
+            "height": 400
+          },
+          {
+            "title": "III. Das Nichts",
+            "height": 300
+          },
+          {
+            "title": "IV. Das Sein des Menschen und das Nichts",
+            "height": 350
+          },
+          {
+            "title": "V. Die Negation und die Freiheit",
+            "height": 250
+          }
         ]
       },
       {
         "title": "Zweites Kapitel: Die Unaufrichtigkeit",
         "sections": [
-          "I. Unaufrichtigkeit und Lüge",
-          "II. Die Verhaltensweisen der Unaufrichtigkeit"
+          {
+            "title": "I. Unaufrichtigkeit und Lüge",
+            "height": 300
+          },
+          {
+            "title": "II. Die Verhaltensweisen der Unaufrichtigkeit",
+            "height": 200
+          }
         ]
       }
     ]

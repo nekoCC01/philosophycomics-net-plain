@@ -2,163 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
-            font-weight: normal;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+      font-weight: normal;
+    }
+  </style>
 </head>
 
 <body>
-    TEST 123
-    <svg id="meinSVG" width="1200" height="4000" style="border:1px solid gray;">
+  <svg id="meinSVG" width="1200" height="4000" style="border:1px solid gray;">
+  </svg>
 
+  <script>
 
+    let svg = document.getElementById("meinSVG");
 
-    </svg>
+    function createRect(x, y, width, height, fill) {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", x);
+      rect.setAttribute("y", y);
+      rect.setAttribute("width", width);
+      rect.setAttribute("height", height);
+      rect.setAttribute("fill", fill);
+      return rect;
+    }
+    function createText(x, y, textContent) {
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", x);
+      text.setAttribute("y", y);
+      text.setAttribute("font-size", "14");
+      text.setAttribute("fill", "#222");
+      text.textContent = textContent;
+      return text;
+    }
 
+    let maxWidth = 1000;
+    let padding = 50;
+    let marginLeft = 100;
+    let totalHeight = 0;
+    let yPart = 0;
 
-    <script>
-        const data = [
+    let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-            {
-                "title": "Einleitung: Auf der Suche nach dem Sein",
-                "chapters": [
-                    {
-                        "title": "--",
-                        "sections": [
-                            { "title": "I. Die Idee des Phänomens", "height": 200 },
-                            { "title": "II. Das Seinsphänomen und das Sein des Phänomens", "height": 300 },
-                            { "title": "III. Das *präreflexive* Cogito und das Sein des *percipere*", "height": 250 }
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Erster Teil: Das Problem des Nichts",
-                "chapters": [
-                    {
-                        "title": "Erstes Kapitel: Der Ursprung der Negation",
-                        "sections": [
-                            { "title": "I. Die Frage", "height": 200 },
-                            { "title": "II. Die Negationen", "height": 400 },
-                            { "title": "III. Das Nichts", "height": 300 },
-                            { "title": "IV. Das Sein des Menschen und das Nichts", "height": 350 },
-                            { "title": "V. Die Negation und die Freiheit", "height": 250 }
-                        ]
-                    },
-                    {
-                        "title": "Zweites Kapitel: Die Unaufrichtigkeit",
-                        "sections": [
-                            { "title": "I. Unaufrichtigkeit und Lüge", "height": 300 },
-                            { "title": "II. Die Verhaltensweisen der Unaufrichtigkeit", "height": 200 }
-                        ]
-                    }
-                ]
-            }
-        ];
+    fetch('kapitel.json')
+      .then(response => response.json())
+      .then(data => {
 
-        let svg = document.getElementById("meinSVG");
-
-        function createRect(x, y, width, height, fill) {
-            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            rect.setAttribute("x", x);
-            rect.setAttribute("y", y);
-            rect.setAttribute("width", width);
-            rect.setAttribute("height", height);
-            rect.setAttribute("fill", fill);
-            return rect;
-        }
-        function createText(x, y, textContent) {
-            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-            text.setAttribute("x", x);
-            text.setAttribute("y", y);
-            text.setAttribute("font-size", "14");
-            text.setAttribute("fill", "#222");
-            text.textContent = textContent;
-            return text;
-        }
-
-
-        let maxWidth = 1000;
-        let padding = 50;
-        let marginLeft = 100;
-        let totalHeight = 0;
-        let yPart = 0;
-
-        let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         data.forEach(part => {
-            console.log(part.title);
+          console.log(part.title);
 
-            let x = marginLeft;
-            let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
-            let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
-            partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
-            group.appendChild(partRect);
-            group.appendChild(partText);
+          let x = marginLeft;
+          let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+          let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
+          partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
+          group.appendChild(partRect);
+          group.appendChild(partText);
 
-            let partHeight = 0;
+          let partHeight = 0;
 
-            let yChapter = yPart - padding;
-            part.chapters.forEach(chapter => {
-                console.log("  " + chapter.title);
+          let yChapter = yPart - padding;
+          part.chapters.forEach(chapter => {
+            console.log("  " + chapter.title);
 
-                let x = marginLeft + padding / 2;
+            let x = marginLeft + padding / 2;
 
-                let width = maxWidth - padding;
-                let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
-                chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
-                let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
-                group.appendChild(chapterRect);
-                group.appendChild(chapterText);
+            let width = maxWidth - padding;
+            let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
+            chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
+            let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
+            group.appendChild(chapterRect);
+            group.appendChild(chapterText);
 
-                let yChild = yChapter - padding;
-                let sectionsHeight = 0;
-                chapter.sections.forEach(section => {
-                    console.log("    " + section.title);
+            let yChild = yChapter - padding;
+            let sectionsHeight = 0;
+            chapter.sections.forEach(section => {
+              console.log("    " + section.title);
 
-                    let x = marginLeft + padding;
-                    let width = maxWidth - (padding * 2);
-                    let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
-                    sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
-                    let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
-                    yChild = yChild - section.height - padding / 2;
-                    sectionsHeight += section.height + padding / 2;
-                    group.appendChild(sectionRect);
-                    group.appendChild(sectionText);
+              let x = marginLeft + padding;
+              let width = maxWidth - (padding * 2);
+              let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
+              sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
+              let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
+              yChild = yChild - section.height - padding / 2;
+              sectionsHeight += section.height + padding / 2;
+              group.appendChild(sectionRect);
+              group.appendChild(sectionText);
 
-                });
-
-                let chapterHeight = sectionsHeight + padding;
-                chapterRect.setAttribute("height", chapterHeight);
-                chapterRect.setAttribute("y", yChapter - chapterHeight);
-                yChapter = yChapter - chapterHeight - padding;
-
-                partHeight += chapterHeight + padding;
             });
 
-            partHeight += padding / 2;
-            partRect.setAttribute("height", partHeight);
-            partRect.setAttribute("y", yPart - partHeight);
-            yPart = yPart - partHeight - padding;
+            let chapterHeight = sectionsHeight + padding;
+            chapterRect.setAttribute("height", chapterHeight);
+            chapterRect.setAttribute("y", yChapter - chapterHeight);
+            yChapter = yChapter - chapterHeight - padding;
 
-            totalHeight += partHeight + padding;
+            partHeight += chapterHeight + padding;
+          });
+
+          partHeight += padding / 2;
+          partRect.setAttribute("height", partHeight);
+          partRect.setAttribute("y", yPart - partHeight);
+          yPart = yPart - partHeight - padding;
+
+          totalHeight += partHeight + padding;
         });
         totalHeight += padding * 2;
         group.setAttribute("transform", "translate(0, " + totalHeight + ")");
         svg.appendChild(group);
 
+      }).catch(error => console.error('Fehler beim Laden der Daten:', error));
 
-
-
-
-
-
-    </script>
+  </script>
 </body>
-
 </html>
