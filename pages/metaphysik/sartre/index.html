@@ -5,12 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    body {
-      font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
-      font-weight: normal;
-    }
-  </style>
+  <link rel="stylesheet" href="../../../index.css">
+
 </head>
 
 <body>
@@ -56,7 +52,7 @@
           console.log(part.title);
 
           let x = marginLeft;
-          let partRect = createRect(x, yPart, maxWidth, 100, "rgba(0, 0, 0, 0.1)");
+          let partRect = createRect(x, yPart, maxWidth, 100, "rgba(207, 194, 134, 0.2)");
           let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
           partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
           group.appendChild(partRect);
@@ -71,7 +67,7 @@
             let x = marginLeft + padding / 2;
 
             let width = maxWidth - padding;
-            let chapterRect = createRect(x, yChapter, width, 100, "rgba(0, 0, 0, 0.1)");
+            let chapterRect = createRect(x, yChapter, width, 100, "rgba(207, 194, 134, 0.2)");
             chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
             let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
             group.appendChild(chapterRect);
@@ -84,7 +80,7 @@
 
               let x = marginLeft + padding;
               let width = maxWidth - (padding * 2);
-              let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(0, 0, 0, 0.1)");
+              let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(207, 194, 134, 0.2)");
               sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
               let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
               yChild = yChild - section.height - padding / 2;
