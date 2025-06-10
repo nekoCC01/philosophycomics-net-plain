@@ -1,6 +1,6 @@
-// import './components/EveryLayout/import_all.js';
+// import './_assets/components/EveryLayout/import_all.js';
 
-import { registerAvatarComponent } from './components/avatar/avatar.js';
+import { registerAvatarComponent } from './_assets/components/avatar/avatar.js';
 const app = () => {
     registerAvatarComponent();
 }

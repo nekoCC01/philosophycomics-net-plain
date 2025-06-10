@@ -1,9 +1,9 @@
-@import url("./css/reset.css");
-@import url("./css/modular.css");
-@import url("./css/variables.css");
-@import url("./css/global.css");
+@import url("./_assets/css/reset.css");
+@import url("./_assets/css/modular.css");
+@import url("./_assets/css/variables.css");
+@import url("./_assets/css/global.css");
 
-@import url("./css/EveryLayout.css");
+@import url("./_assets/css/EveryLayout.css");
 /* @import url("./components/EveryLayout/all.css"); */
 
-@import url("./components/avatar/avatar.css");
+@import url("./_assets/components/avatar/avatar.css");
