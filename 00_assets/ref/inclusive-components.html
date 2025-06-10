@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Inclusive Components</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        @import url("../components/EveryLayout/all.css");
+
+        /*****************************************************************
+        * Global
+        *****************************************************************/
+        html {
+            font-family: sans-serif;
+            font-size: 125%;
+            line-height: 1.5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            max-width: 40rem;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        body > * + * {
+            margin-top: 1.5rem;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 0.125em 0.25rem;
+        }
+
+        /*****************************************************************
+        * Content Slider
+        *****************************************************************/
+
+        .gallery-container {
+            position: relative;
+        }
+
+        .gallery {
+            border: 2px solid;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            -webkit-scroll-snap-type: mandatory;
+            -ms-scroll-snap-type: mandatory;
+            scroll-snap-type: mandatory;
+            -webkit-scroll-snap-points-x: repeat(100%);
+            -ms-scroll-snap-points-x: repeat(100%);
+            scroll-snap-points-x: repeat(100%);
+        }
+
+        .gallery:focus,
+        .gallery-controls button:focus {
+            outline: 4px solid skyBlue;
+            outline-offset: -4px;
+        }
+
+        .gallery ul {
+            display: flex;
+        }
+
+        .gallery li {
+            flex: 0 0 100%;
+            display: flex;
+        }
+
+        .gallery img {
+            display: block;
+            margin: 2rem auto 0;
+            max-width: 100%;
+            max-height: calc(100% - 2rem);
+            min-width: 1px;
+            min-height: 1px;
+        }
+
+        .gallery::-webkit-scrollbar {
+            height: 0.75rem;
+        }
+
+        .gallery::-webkit-scrollbar-track {
+            background-color: #ddd;
+        }
+
+        .gallery::-webkit-scrollbar-thumb {
+            background-color: #000;
+        }
+
+        #instructions {
+            display: none;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .gallery:hover+#instructions,
+        .gallery:focus+#instructions,
+        .touch #instructions {
+            display: block;
+        }
+
+        .gallery figure,
+        noscript {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+            height: 50vh;
+        }
+
+        noscript {
+            padding: 0;
+        }
+
+        .gallery figcaption {
+            height: 2rem;
+            line-height: 2rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        @keyframes flash {
+            to {
+                opacity: 0;
+            }
+        }
+
+        img.dots {
+            max-width: 5rem;
+            max-height: 5rem;
+            padding: 0;
+            opacity: 1;
+            animation: flash 0.5s linear infinite;
+        }
+
+        .no-js .dots {
+            display: none;
+        }
+
+        .gallery-controls li {
+            display: inline;
+        }
+
+        .gallery-controls button {
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            width: 3rem;
+            border: 0;
+            padding: 0.5rem;
+            background: #000;
+        }
+
+        .gallery-controls svg {
+            width: 100%;
+            fill: #fff;
+            stroke: #000;
+            stroke-width: 1.5;
+            stroke-linejoin: round;
+        }
+
+        .previous {
+            left: 0;
+        }
+
+        .next {
+            left: calc(100% - 3rem);
+        }
+
+        .gallery-controls button[disabled] svg {
+            display: none;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            clip: rect(1px, 1px, 1px, 1px) !important;
+            padding: 0 !important;
+            border: 0 !important;
+            height: 1px !important;
+            width: 1px !important;
+            overflow: hidden !important;
+        }
+
+        /*****************************************************************
+        * Cards
+        *****************************************************************/
+        html {
+            font-family: sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: inherit;
+        }
+
+        body {
+            max-width: 60rem;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+        }
+
+        .cards > ul {
+            list-style: none;
+        }
+
+        .card + .card {
+            margin-top: 1.5rem;
+        }
+
+        @supports (display: grid) {
+            .cards > ul {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+                grid-column-gap: 1.5rem;
+                grid-row-gap: 1.5rem;
+            }
+
+            .card + .card {
+                margin-top: 0;
+            }
+        }
+
+        .card {
+            border: 1px solid;
+            border-radius: 0.25rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .card .text {
+            padding: 1rem;
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card p {
+            max-width: 60ch;
+        }
+
+        .card .img {
+            height: 6.5rem;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1rem));
+        }
+
+        .card .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .card a {
+            outline: none;
+        }
+
+        .card h2 a {
+            text-decoration: none;
+        }
+
+        .card h2 a:focus {
+            text-decoration: underline;
+        }
+
+        .cta:hover {
+            box-shadow: 0 0 0 0.125rem;
+        }
+
+        .card h2:focus-within ~ .cta {
+            box-shadow: 0 0 0 0.125rem;
+            outline: 2px solid transparent;
+        }
+
+        .card:focus-within h2 a:focus {
+            text-decoration: none;
+        }
+
+        .card small {
+            display: block;
+            text-align: right;
+        }
+
+        .card small a {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .card small a:hover,
+        .card small a:focus {
+            font-weight: bold;
+        }
+
+        .card .text > * + * {
+            margin-top: 0.75rem;
+        }
+
+        .card .text > :nth-last-child(3) {
+            margin-bottom: 0.75rem;
+        }
+
+        .card .text > :nth-last-child(2) {
+            margin-top: auto;
+            padding-top: 0.75rem;
+        }
+
+        .cta {
+            padding: 0.75rem;
+            border: 1px solid;
+            border-radius: 0.25rem;
+            text-align: center;
+        }
+
+        /*****************************************************************
+        * Collapsible sections
+        *****************************************************************/
+        .controls {
+            text-align: right;
+            margin-bottom: 1em;
+        }
+
+        .controls li {
+            display: inline;
+        }
+
+        .controls button {
+            background: #000;
+            color: #fff;
+            border: 0;
+            font-size: 0.85rem;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.75rem;
+        }
+
+        .controls button:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem skyBlue;
+        }
+
+        /*
+        Custom elements are inline by default
+        */
+
+        toggle-section {
+            display: block;
+        }
+
+        /*
+        Only applies if script runs and
+        `role="region"` is added
+        */
+
+        toggle-section[role="region"] {
+            border-width: 2px 0;
+            border-style: solid;
+        }
+
+        toggle-section[role="region"]+toggle-section {
+            border-top: 0;
+        }
+
+        /*****************************************************************
+        * Tabbed interface
+        *****************************************************************/
+        [role="tablist"] {
+            padding: 0;
+        }
+
+        [role="tablist"] li,
+        [role="tablist"] a {
+            display: inline-block;
+        }
+
+        [role="tablist"] a {
+            color: inherit;
+            text-decoration: none;
+            padding: 0.5rem 1em;
+        }
+
+        [role="tablist"] [aria-selected] {
+            border: 2px solid;
+            background: #fff;
+            border-bottom: 0;
+            position: relative;
+            top: 2px;
+        }
+
+        [role="tabpanel"] {
+            border: 2px solid;
+            padding: 1.5rem;
+        }
+
+        [role="tabpanel"] *+* {
+            margin-top: 0.75rem;
+        }
+
+        *:focus {
+            outline: 2px solid transparent;
+            /* ↑ for WHCM users */
+            box-shadow: inset 0 0 0 4px lightBlue;
+        }
+
+        @media (max-width: 550px) {
+
+            [role="tablist"] li,
+            [role="tablist"] a {
+                display: block;
+                position: static;
+            }
+
+            [role="tablist"] a {
+                border: 2px solid #222 !important;
+            }
+
+            [role="tablist"] li+li a {
+                border-top: 0 !important;
+            }
+
+            [role="tablist"] [aria-selected] {
+                position: static;
+            }
+
+            [role="tablist"] [aria-selected]::after {
+                content: '\0020⬅';
+            }
+
+            [role="tabpanel"] {
+                border-top: 0;
+            }
+
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
+<header>
+
+</header>
+<main>
+    <box-l style="margin-bottom: 40px; background-color: black; color: white;">
+        <center-l style="text-align: center;">
+            <a style="color: white; text-decoration: none;font-size: 24px;" href="https://inclusive-components.design/">Link to Inclusive Components Page</a>
+        </center-l>
+    </box-l>
+
+    <stack-l>
+        <box-l>
+            <content-slider></content-slider>
+        </box-l>
+        <box-l>
+            <cards-component></cards-component>
+        </box-l>
+        <box-l>
+            <h2>Collapsible Sections</h2>
+
+            <toggle-section open>
+                <h2 id="section-1">Section 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non lectus sit amet nunc facilisis molestie.
+                    Praesent
+                    quis libero et mauris facilisis dignissim at sed nisi.</p>
+                <p>Nullam efficitur porttitor lectus, ac finibus nibh fermentum ac. Phasellus aliquam, nibh non efficitur
+                    pharetra,
+                    tellus diam posuere lectus, a consequat elit ex nec ligula.</p>
+            </toggle-section>
+            <toggle-section>
+                <h2 id="section-2">Section 2</h2>
+                <p>Aliquam erat volutpat. Nulla facilisi. Nunc porttitor, elit non eleifend aliquam, est leo scelerisque nibh, nec
+                    faucibus odio urna ac nulla.</p>
+                <p>Maecenas laoreet in metus eget convallis. Vivamus at eleifend felis. Proin non vehicula neque. Etiam eleifend
+                    sapien
+                    ut nulla malesuada, ac condimentum nisl efficitur.</p>
+            </toggle-section>
+        </box-l>
+        <box-l>
+            <tabbed-interface></tabbed-interface>
+        </box-l>
+    </stack-l>
+
+
+</main>
+<footer>
+
+</footer>
+<script type="module" src="../index.js"></script>
+<script type="module">
+    import '../components/EveryLayout/import_all.js';
+</script>
+<script>
+
+    /*****************************************************************
+     * Content Slider
+     *****************************************************************/
+
+    class ContentSlider extends HTMLElement {
+        constructor() {
+            super();
+            this.append(ContentSlider.template.content.cloneNode(true));
+        }
+    }
+
+    ContentSlider.template = document.createElement("template");
+    ContentSlider.template.innerHTML = `
+<h2>Content slider with buttons</h2>
+<div class="gallery-container">
+  <div role="group" class="gallery no-js" aria-label="gallery (scroll for more)" tabindex="0">
+    <ul>
+      <li>
+        <figure>
+          <img class="dots" data-src="https://picsum.photos/200/300"
+               src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 2" stroke="currentColor" stroke-dasharray="1,0.5"><path d="M1,1 5,1" /></svg>'
+               alt="A tessellation of diagonal lines, forming interlocked patterns. Some lines are missing, giving the appearance of an eroded structure like the aerial view of an excavated city." />
+          <noscript>
+            <img src="https://picsum.photos/200/300"
+                 alt="A tessellation of diagonal lines, forming interlocked patterns. Some lines are missing, giving the appearance of an eroded structure like the aerial view of an excavated city." />
+          </noscript>
+          <figcaption>Ruins 4536723229</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img class="dots" data-src="https://picsum.photos/200/300"
+               src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 2" stroke="currentColor" stroke-dasharray="1,0.5"><path d="M1,1 5,1" /></svg>'
+               alt="Pairs of concentric circles - some with fills - are connected up by a single line. The line has a patterned fill composed of smaller circles, casting a tangled net over the form. The appearance is of a solar system or a configuration of wheels and pulleys." />
+          <noscript>
+            <img src="https://picsum.photos/200/300"
+                 alt="Pairs of concentric circles - some with fills - are connected up by a single line. The line has a patterned fill composed of smaller circles, casting a tangled net over the form. The appearance is of a solar system or a configuration of wheels and pulleys." />
+          </noscript>
+          <figcaption>System 8763652991</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img class="dots" data-src="https://picsum.photos/200/300"
+               src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 2" stroke="currentColor" stroke-dasharray="1,0.5"><path d="M1,1 5,1" /></svg>'
+               alt="Jagged, seemingly hand-drawn scrawls become more complex and tightly knotted moving down the canvas until they begin to form distinct, enumerable ball shapes." />
+          <noscript>
+            <img src="https://picsum.photos/200/300"
+                 alt="Jagged, seemingly hand-drawn scrawls become more complex and tightly knotted moving down the canvas until they begin to form distinct, enumerable ball shapes." />
+          </noscript>
+          <figcaption>Anger 1827590204</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img class="dots" data-src="https://picsum.photos/200/300"
+               src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 2" stroke="currentColor" stroke-dasharray="1,0.5"><path d="M1,1 5,1" /></svg>'
+               alt="Dots connect horizontal and vertical lines forming a configuration reminiscent of a circuit board or subway map. Small right angle 'stoppers' appear at the end of some lines, to indicate that is where they terminate." />
+          <noscript>
+            <img src="https://picsum.photos/200/300"
+                 alt="Dots connect horizontal and vertical lines forming a configuration reminiscent of a circuit board or subway map. Small right angle 'stoppers' appear at the end of some lines, to indicate that is where they terminate." />
+          </noscript>
+          <figcaption>Board 8674569199</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img class="dots" data-src="https://picsum.photos/200/300"
+               src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 2" stroke="currentColor" stroke-dasharray="1,0.5"><path d="M1,1 5,1" /></svg>'
+               alt="Horizontal lines form the circular shape of a planet, diminishing in width as they reach the perimeter. The appearance is of a planet as represented by a malfunctioning printer." />
+          <noscript>
+            <img src="https://picsum.photos/200/300"
+                 alt="Horizontal lines form the circular shape of a planet, diminishing in width as they reach the perimeter. The appearance is of a planet as represented by a malfunctioning printer." />
+          </noscript>
+          <figcaption>Planetoid 0038492674</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+    customElements.define("content-slider", ContentSlider);
+
+
+    const gallery = document.querySelector('.gallery');
+    gallery.classList.remove('no-js');
+    const list = gallery.querySelector('ul');
+    const slides = list.querySelectorAll('.gallery li');
+
+    const observerSettings = {
+        root: document.querySelector('.gallery'),
+        rootMargin: '-10px'
+    }
+
+    if ('IntersectionObserver' in window) {
+        Array.prototype.forEach.call(slides, function (slide) {
+            let img = slide.querySelector('figure > img');
+            img.classList.add('dots');
+        });
+
+        const callback = (slides, observer) => {
+            Array.prototype.forEach.call(slides, function (entry) {
+                entry.target.classList.remove('visible');
+                if (!entry.intersectionRatio > 0) {
+                    return;
+                }
+                let img = entry.target.querySelector('img');
+                img.onload = () => img.classList.remove('dots');
+                img.setAttribute('src', img.dataset.src);
+                entry.target.classList.add('visible');
+            })
+        }
+
+        const observer = new IntersectionObserver(callback, observerSettings);
+        Array.prototype.forEach.call(slides, t => observer.observe(t));
+    } else {
+        Array.prototype.forEach.call(slides, function (s) {
+            let img = s.querySelector('img');
+            img.setAttribute('src', img.getAttribute('data-src'));
+            img.classList.remove('dots');
+        })
+    }
+
+    const controls = document.createElement('ul')
+    controls.classList.add('gallery-controls');
+    controls.setAttribute('aria-label', 'gallery controls');
+    controls.innerHTML = `
+    <li>
+      <button class="previous" aria-label="previous artwork">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20">
+          <path d="M18,2 2,10 18,18" />
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button class="next" aria-label="next artwork">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20">
+          <path d="M2,2 18,10 2,18" />
+        </svg>
+      </button>
+    </li>
+    `;
+
+    const prev = controls.querySelector('.previous');
+    const next = controls.querySelector('.next');
+    prev.disabled = true;
+
+    const instructions = document.getElementById('instructions');
+    gallery.parentNode.insertBefore(controls, gallery);
+    gallery.parentNode.style.padding = '0 3rem';
+
+    function scrollIt(slideToShow) {
+        let scrollPos = Array.prototype.indexOf.call(slides, slideToShow) * (gallery.scrollWidth / slides.length);
+        gallery.scrollLeft = scrollPos;
+        return scrollPos;
+    }
+
+    function showSlide(dir, slides) {
+        let visible = document.querySelectorAll('.gallery .visible');
+        let i = dir === prev ? 0 : 1;
+
+        if (visible.length > 1) {
+            scrollIt(visible[i]);
+        } else {
+            let newSlide = i === 0 ? visible[0].previousElementSibling : visible[0].nextElementSibling;
+            if (newSlide) {
+                scrollIt(newSlide);
+            }
+        }
+    }
+
+    controls.addEventListener('click', function (e) {
+        showSlide(e.target.closest('button'), slides);
+    });
+
+    function disable() {
+        prev.disabled = gallery.scrollLeft < 1;
+        next.disabled = gallery.scrollLeft === list.scrollWidth - list.offsetWidth;
+    }
+
+    var debounced;
+    gallery.addEventListener('scroll', function () {
+        window.clearTimeout(debounced);
+        debounced = setTimeout(disable, 200);
+    });
+
+
+
+
+
+    /*****************************************************************
+     * Cards
+     *****************************************************************/
+
+
+    class CardsComponent extends HTMLElement {
+        constructor() {
+            super();
+            this.append(CardsComponent.template.content.cloneNode(true));
+        }
+    }
+
+    CardsComponent.template = document.createElement("template");
+    CardsComponent.template.innerHTML = `
+<h2>Cards demo (with read more call to action)</h2>
+<div class="cards">
+  <ul>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-a-card">A card</a></h2>
+        <p>Commodo ut laborum fugiat aliqua eiusmod voluptate pariatur.</p>
+        <span class="cta" aria-hidden="true" id="desc-a-card">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-another-card-instance">Another card instance</a></h2>
+        <p>Cupidatat tempor sint mollit in tempor ut fugiat excepteur laborum labore.</p>
+        <span class="cta" aria-hidden="true" id="desc-another-card-instance">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-more-card">More card</a></h2>
+        <p>Eu dolore labore ad occaecat minim in minim ad ea commodo excepteur ullamco.</p>
+        <span class="cta" aria-hidden="true" id="desc-more-card">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-this-is-a-card">This is a card</a></h2>
+        <p>Amet esse sunt ex officia ea ipsum veniam ad elit duis.</p>
+        <span class="cta" aria-hidden="true" id="desc-this-is-a-card">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-this-card-here">This card here</a></h2>
+        <p>Laboris adipisicing enim enim duis id magna in eu.</p>
+        <span class="cta" aria-hidden="true" id="desc-this-card-here">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-the-card-to-beat-all-cards">The card to beat all cards</a></h2>
+        <p>Non officia quis sint commodo reprehenderit consectetur ipsum ex eu.</p>
+        <span class="cta" aria-hidden="true" id="desc-the-card-to-beat-all-cards">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-your-mams-fave-card">Your Mam's fave card</a></h2>
+        <p>Dolore nisi deserunt quis occaecat sunt eiusmod exercitation nostrud ad dolore cupidatat exercitation minim.</p>
+        <span class="cta" aria-hidden="true" id="desc-your-mams-fave-card">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+    <li class="card">
+      <div class="img"><img src="https://picsum.photos/200/300" alt=""></div>
+      <div class="text">
+        <h2><a href="#card-link" aria-describedby="desc-just-another-card">Just another card</a></h2>
+        <p>Sunt deserunt ea sint enim laborum ut qui cupidatat esse sit labore ut.</p>
+        <span class="cta" aria-hidden="true" id="desc-just-another-card">Read more →</span>
+        <small>By <a href="#author-link">Heydon Pickering</a></small>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+    customElements.define("cards-component", CardsComponent);
+
+
+
+    const cards = [...document.querySelectorAll('.card')];
+    cards.forEach(card => {
+        card.style.cursor = 'pointer';
+        let down, up, link = card.querySelector('h2 a');
+        card.onmousedown = () => down = +new Date();
+        card.onmouseup = () => {
+            up = +new Date();
+            if ((up - down) < 200) {
+                link.click();
+            }
+        }
+    });
+
+
+
+    /*****************************************************************
+     * Collapsible sections
+     *****************************************************************/
+
+    (function () {
+        // Check for <template> support
+        if ('content' in document.createElement('template')) {
+            const tmpl = document.createElement('template');
+
+            // Create the web component's template
+            // featuring a <slot> for the Light DOM content
+            tmpl.innerHTML = `
+          <h2>
+            <button aria-expanded="false">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 10 10">
+                <rect class="vert" height="8" width="2" y="1" x="4"/>
+                <rect height="2" width="8" y="4" x="1"/>
+              </svg>
+            </button>
+          </h2>
+          <div class="content" hidden>
+            <slot></slot>
+          </div>
+          <style>
+            h2 {
+              margin: 0;
+            }
+
+            h2 + div {
+              padding-bottom: 1.5rem;
+            }
+
+            h2 button {
+              all: inherit;
+              box-sizing: border-box;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              padding: 0.5em 0;
+            }
+
+            h2 button:focus svg {
+              outline: 2px solid;
+            }
+
+            button svg {
+              height: 1em;
+              margin-left: 0.5em;
+            }
+
+            [aria-expanded="true"] .vert {
+              display: none;
+            }
+
+            [aria-expanded] rect {
+              fill: currentColor;
+            }
+          </style>
+        `;
+
+            // Check for latest Shadow DOM syntax support
+            if (document.head.attachShadow) {
+                class ToggleSection extends HTMLElement {
+                    constructor() {
+                        super();
+
+                        // Make the host element a region
+                        this.setAttribute('role', 'region');
+
+                        // Create a `shadowRoot` and populate from template
+                        this.attachShadow({ mode: 'open' });
+                        this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
+                        // Assign the toggle button
+                        this.btn = this.shadowRoot.querySelector('h2 button');
+
+                        // Get the first element in Light DOM
+                        const oldHeading = this.querySelector(':first-child');
+                        // and cast its heading level (which should, but may not, exist)
+                        let level = parseInt(oldHeading.tagName.substr(1));
+                        // Then take its `id` (may be null)
+                        let id = oldHeading.id;
+
+                        // Get the Shadow DOM <h2>
+                        this.heading = this.shadowRoot.querySelector('h2');
+
+                        // If `id` exists, apply it
+                        if (id) {
+                            this.heading.id = id;
+                        }
+
+                        // If there is no level, there is no heading.
+                        // Add a warning.
+                        if (!level) {
+                            console.warn('The first element inside each <toggle-section> should be a heading of an appropriate level.');
+                        }
+
+                        // If the level is a real integer but not 2
+                        // set `aria-level` accordingly
+                        if (level && level !== 2) {
+                            this.heading.setAttribute('aria-level', level);
+                        }
+
+                        // Add the Light DOM heading label to the innerHTML of the toggle button
+                        // and remove the now unwanted Light DOM heading
+                        this.btn.innerHTML = oldHeading.textContent + this.btn.innerHTML;
+                        oldHeading.parentNode.removeChild(oldHeading);
+
+                        // The main state switching function
+                        this.switchState = () => {
+                            let expanded = this.hasAttribute('open');
+
+                            // Toggle `aria-expanded`
+                            this.btn.setAttribute('aria-expanded', expanded);
+                            // Toggle the `.content` element's visibility
+                            this.shadowRoot.querySelector('.content').hidden = !expanded;
+                        }
+
+                        this.btn.onclick = () => {
+                            // Change the component's `open` attribute value on click
+                            let open = this.hasAttribute('open');
+                            this.toggleAttribute('open');
+
+                            // Update the hash if the collapsible section's
+                            // heading has an `id` and we are opening, not closing
+                            if (this.heading.id && !open) {
+                                history.pushState(null, null, '#' + this.heading.id);
+                            }
+                        }
+                    }
+
+                    connectedCallback() {
+                        if (window.location.hash.substr(1) === this.heading.id) {
+                            this.setAttribute('open', '');
+                            this.btn.focus();
+                        }
+                    }
+
+                    // Identify just the `open` attribute as an observed attribute
+                    static get observedAttributes() {
+                        return ['open'];
+                    }
+
+                    // When `open` changes value, execute switchState()
+                    attributeChangedCallback(name) {
+                        if (name === 'open') {
+                            this.switchState();
+                        }
+                    }
+                }
+
+                // Add our new custom element to the window for use
+                window.customElements.define('toggle-section', ToggleSection);
+
+                // Define the expand/collapse all template
+                const buttons = document.createElement('div')
+                buttons.innerHTML = `
+            <ul class="controls">
+              <li><button id="expand">expand all</button></li>
+              <li><button id="collapse">collapse all</button></li>
+            </ul>
+          `;
+
+                // Get the first `toggle-section` on the page
+                // and all toggle sections as a node list
+                const first = document.querySelector('toggle-section');
+                const all = document.querySelectorAll('toggle-section');
+
+                // Insert the button controls before the first <toggle-section>
+                first.parentNode.insertBefore(buttons, first);
+
+                // Place the click on the parent <ul>...
+                buttons.addEventListener('click', e => {
+                    // ...then determine which button was the target
+                    let expand = e.target.id === 'expand';
+
+                    // Iterate over the toggle sections to switch
+                    // each one's state uniformly
+                    Array.prototype.forEach.call(all, t => {
+                        if (expand) {
+                            t.setAttribute('open', '');
+                        } else {
+                            t.removeAttribute('open');
+                        }
+                    });
+                });
+            }
+        }
+    })();
+
+
+    /*****************************************************************
+     * Tabbed interface
+     *****************************************************************/
+
+    class TabbedInterface extends HTMLElement {
+        constructor() {
+            super();
+            this.append(TabbedInterface.template.content.cloneNode(true));
+        }
+    }
+
+    TabbedInterface.template = document.createElement("template");
+    TabbedInterface.template.innerHTML = `
+<h2>A true tabbed interface</h2>
+<div class="tabbed">
+  <ul>
+    <li>
+      <a href="#section1">Section 1</a>
+    </li>
+    <li>
+      <a href="#section2">Section 2</a>
+    </li>
+    <li>
+      <a href="#section3">Section 3</a>
+    </li>
+    <li>
+      <a href="#section4">Section 4</a>
+    </li>
+  </ul>
+  <section id="section1">
+    <h2>Section 1</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod, tortor nec pharetra ultricies, ante erat
+      imperdiet
+      velit, nec laoreet enim lacus a velit.
+      <a href="#">Nam luctus</a>, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet
+      lectus. Praesent
+      non odio bibendum magna bibendum accumsan.</p>
+  </section>
+  <section id="section2">
+    <h2>Section 2</h2>
+    <p>Nullam at diam nec arcu suscipit auctor non a erat. Sed et magna semper, eleifend magna non, facilisis nisl.
+      Proin
+      et est et lorem dictum finibus ut nec turpis. Aenean nisi tortor, euismod a mauris a, mattis scelerisque
+      tortor.
+      Sed dolor risus, varius a nibh id, condimentum lacinia est. In lacinia cursus odio a aliquam. Curabitur tortor
+      magna,
+      laoreet ut rhoncus at, sodales consequat tellus.</p>
+  </section>
+  <section id="section3">
+    <h2>Section 3</h2>
+    <p>Phasellus ac tristique orci. Nulla maximus
+      <a href="">justo nec dignissim consequat</a>. Sed vehicula diam sit amet mi efficitur vehicula in in nisl.
+      Aliquam erat volutpat.
+      Suspendisse lorem turpis, accumsan consequat consectetur gravida,
+      <a href="#">pellentesque ac ante</a>. Aliquam in commodo ligula, sit amet mollis neque. Vestibulum at facilisis
+      massa.</p>
+  </section>
+  <section id="section4">
+    <h2>Section 4</h2>
+    <p>Nam luctus, enim in interdum condimentum, nisl diam iaculis lorem, vel volutpat mi leo sit amet lectus.
+      Praesent non
+      odio bibendum magna bibendum accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod,
+      tortor
+      nec pharetra ultricies, ante erat imperdiet velit, nec laoreet enim lacus a velit. </p>
+  </section>
+</div>
+`;
+    customElements.define("tabbed-interface", TabbedInterface);
+
+
+
+    (function () {
+        // Get relevant elements and collections
+        const tabbed = document.querySelector('.tabbed');
+        const tablist = tabbed.querySelector('ul');
+        const tabs = tablist.querySelectorAll('a');
+        const panels = tabbed.querySelectorAll('[id^="section"]');
+
+        // The tab switching function
+        const switchTab = (oldTab, newTab) => {
+            newTab.focus();
+            // Make the active tab focusable by the user (Tab key)
+            newTab.removeAttribute('tabindex');
+            // Set the selected state
+            newTab.setAttribute('aria-selected', 'true');
+            oldTab.removeAttribute('aria-selected');
+            oldTab.setAttribute('tabindex', '-1');
+            // Get the indices of the new and old tabs to find the correct
+            // tab panels to show and hide
+            let index = Array.prototype.indexOf.call(tabs, newTab);
+            let oldIndex = Array.prototype.indexOf.call(tabs, oldTab);
+            panels[oldIndex].hidden = true;
+            panels[index].hidden = false;
+        }
+
+        // Add the tablist role to the first <ul> in the .tabbed container
+        tablist.setAttribute('role', 'tablist');
+
+        // Add semantics are remove user focusability for each tab
+        Array.prototype.forEach.call(tabs, (tab, i) => {
+            tab.setAttribute('role', 'tab');
+            tab.setAttribute('id', 'tab' + (i + 1));
+            tab.setAttribute('tabindex', '-1');
+            tab.parentNode.setAttribute('role', 'presentation');
+
+            // Handle clicking of tabs for mouse users
+            tab.addEventListener('click', e => {
+                e.preventDefault();
+                let currentTab = tablist.querySelector('[aria-selected]');
+                if (e.currentTarget !== currentTab) {
+                    switchTab(currentTab, e.currentTarget);
+                }
+            });
+
+            // Handle keydown events for keyboard users
+            tab.addEventListener('keydown', e => {
+                // Get the index of the current tab in the tabs node list
+                let index = Array.prototype.indexOf.call(tabs, e.currentTarget);
+
+                // Determine arrow key pressed
+                var dir = e.which === 37 ? index - 1 : e.which === 39 ? index + 1 : null;
+
+                // Switch to the new tab if it exists
+                if (dir !== null) {
+                    e.preventDefault();
+
+                    // Find correct tab to focus
+                    let newIndex;
+                    if (tabs[dir]) {
+                        newIndex = dir;
+                    } else {
+                        // Loop around if adjacent tab doesn't exist
+                        newIndex = dir === index - 1 ? tabs.length - 1 : 0;
+                    }
+                    switchTab(e.currentTarget, tabs[newIndex]);
+                    tabs[newIndex].focus();
+                }
+            });
+        });
+
+        // Add tab panel semantics and hide them all
+        Array.prototype.forEach.call(panels, (panel, i) => {
+            panel.setAttribute('role', 'tabpanel');
+            panel.setAttribute('tabindex', '-1');
+            let id = panel.getAttribute('id');
+            panel.setAttribute('aria-labelledby', tabs[i].id);
+            panel.hidden = true;
+        });
+
+        // Initially activate the first tab and reveal the first tab panel
+        tabs[0].removeAttribute('tabindex');
+        tabs[0].setAttribute('aria-selected', 'true');
+        panels[0].hidden = false;
+    })();
+
+
+</script>
+</body>
+</html>

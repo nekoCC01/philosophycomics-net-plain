@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Scales 1.5</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="../index.css">
+    <style>
+
+        @import url("../components/EveryLayout/all.css");
+
+        .barContainer {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+        }
+        .bar {
+            background-color: black;
+            height: 10px;
+            position: relative;
+        }
+        .info {
+            font-size: small;
+        }
+
+        :root {
+            --s6: calc(var(--s5) * var(--ratio));
+            --s7: calc(var(--s6) * var(--ratio));
+            --s8: calc(var(--s7) * var(--ratio));
+            --s9: calc(var(--s8) * var(--ratio));
+            --s10: calc(var(--s9) * var(--ratio));
+        }
+
+    </style>
+</head>
+<body>
+<noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
+<header>
+
+</header>
+<main>
+
+    <box-l borderWidth="0">
+        <center-l max="1500px">
+            <stack-l>
+                <box-l>
+                    <stack-l id="boxes">
+
+                    </stack-l>
+                </box-l>
+                <box-l>
+                    <stack-l id="text">
+
+                    </stack-l>
+                </box-l>
+            </stack-l>
+
+        </center-l>
+    </box-l>
+
+
+
+
+
+</main>
+<footer>
+
+</footer>
+<script type="module" src="../index.js"></script>
+<script type="module">
+    import '../components/EveryLayout/import_all.js';
+</script>
+<script>
+    const rootStyles = getComputedStyle(document.documentElement);
+    const ratio = rootStyles.getPropertyValue('--ratio');
+    const stackBoxes = document.querySelector('stack-l#boxes');
+    const stackText = document.querySelector('stack-l#text');
+
+    for (i = -5; i <= 10; i++) {
+        let scale = rootStyles.getPropertyValue('--s' + i);
+        console.log(i);
+        console.log(scale);
+        console.log(1.5 ** i);
+
+        // Balken mit Breite
+        let container = document.createElement('div');
+        container.classList.add('barContainer');
+        let bar = document.createElement('div');
+        bar.classList.add('bar');
+        let info = document.createElement('div');
+        info.classList.add('info');
+        info.innerText = '--s' + i + ' ('+ returnREMValue(i) +'rem - '+convertRemToPixelsModular(i, ratio)+'px)';
+        bar.style.width = scale;
+        container.append(bar);
+        container.append(info);
+        stackBoxes.append(container);
+
+        if (i <= 6) {
+            // Text mit Größe
+            let text = document.createElement('div');
+            text.innerText = 'Textbeispiel --s' + i + ' ('+convertRemToPixelsModular(i, ratio)+'px)';
+            text.style.fontSize = scale;
+            stackText.append(text);
+        }
+
+    }
+
+    function convertRemToPixelsModular(i, ratio) {
+        return Math.round(16 * Math.pow(ratio, i));
+    }
+    function returnREMValue(i) {
+        return Math.round((1.5 ** i) * 100) / 100
+    }
+
+</script>
+</body>
+</html>
