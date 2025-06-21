@@ -1,4 +1,4 @@
-[
+export default [
   {
     "title": "Einleitung: Auf der Suche nach dem Sein",
     "chapters": [
