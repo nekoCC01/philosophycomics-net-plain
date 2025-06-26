@@ -1,7 +1,7 @@
 // import './00_assets/components/EveryLayout/import_all.js';
 
-import { registerAvatarComponent } from './00_assets/components/avatar/avatar.js';
+// old example: import { registerAvatarComponent } from './00_assets/components/avatar/avatar.js';
 const app = () => {
-    registerAvatarComponent();
+    // old example: registerAvatarComponent();
 }
 document.addEventListener('DOMContentLoaded', app);
