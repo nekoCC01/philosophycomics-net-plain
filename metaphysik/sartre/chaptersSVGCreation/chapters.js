@@ -284,7 +284,7 @@ export default [
             "height": 400
           },
           {
-            "title": "III. Übe rdie Qualität als seinsenthüllend",
+            "title": "III. Über die Qualität als seinsenthüllend",
             "height": 400
           }
         ]
