@@ -22,11 +22,14 @@ function createText(x, y, textContent) {
 function createID(prefix, title) {
     return prefix + title.replace(/\s+/g, '-').toLowerCase();
 }
-function addTOCEntry(title, id) {
+function addTOCEntry(title, id, indent = false) {
     let a = document.createElement("a");
     a.href = "#" + id;
     a.textContent = title;
     let li = document.createElement("li");
+    if (indent) {
+        li.style.marginLeft = "40px";
+    }
     li.append(a);
     toc.append(li);
 }
@@ -65,7 +68,7 @@ chapterData.forEach(part => {
         let chapterRect = createRect(x, yChapter, width, 100, "rgba(207, 194, 134, 0.2)");
         let chapterID = createID("chapter-", chapter.title);
         chapterRect.id = chapterID;
-        addTOCEntry(chapter.title, chapterID);
+        addTOCEntry(chapter.title, chapterID, true);
         let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
         group.appendChild(chapterRect);
         group.appendChild(chapterText);
