@@ -30,6 +30,25 @@
       font-size: 14px;
       text-decoration: none;
     }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 1000;
+      display: none;
+      /* Erst sichtbar, wenn gescrollt */
+    }
+
+    #back-to-top svg {
+      display: block;
+    }
   </style>
 </head>
 
@@ -245,10 +264,26 @@
       </div>
     </div>
 
+    <button id="back-to-top" title="Nach oben">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="12" fill="#7C7763" />
+        <path d="M12 7 L12 17" stroke="white" stroke-width="2" stroke-linecap="round" />
+        <path d="M8 11 L12 7 L16 11" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" />
+      </svg>
+    </button>
 
   </div>
 
   <script src="chaptersSVGCreation/creationScript.js" type="module"></script>
+  <script>
+  const btn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 </body>
 
 </html>
