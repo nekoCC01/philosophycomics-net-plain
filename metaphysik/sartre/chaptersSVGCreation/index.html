@@ -6,13 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>chaptersSVGCreation</title>
   <link rel="stylesheet" href="../../../index.css">
+  <style>
+    :root {
+      --measure: 1400px;
+    }
+  </style>
 
 </head>
 
 <body>
-  <svg id="chapters" width="1400" height="72500" style="border:1px solid gray;">
-  </svg>
+  <div id="table-of-contents">
+    <ul id="table-of-contents-ul">
+    </ul>
+  </div>
+  <div id="SVGWrapper" style="position: relative;" class="center">
+    <svg id="chapters" width="1400" height="72500" style="border:1px solid gray;">
+    </svg>
+  </div>
 
   <script src="creationScript.js" type="module"></script>
 </body>
+
 </html>

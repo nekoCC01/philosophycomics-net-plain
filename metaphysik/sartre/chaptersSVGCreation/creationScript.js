@@ -1,4 +1,5 @@
 let svg = document.getElementById("chapters");
+let toc = document.getElementById("table-of-contents-ul");
 
 function createRect(x, y, width, height, fill) {
     const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -18,6 +19,17 @@ function createText(x, y, textContent) {
     text.textContent = textContent;
     return text;
 }
+function createID(prefix, title) {
+    return prefix + title.replace(/\s+/g, '-').toLowerCase();
+}
+function addTOCEntry(title, id) {
+    let a = document.createElement("a");
+    a.href = "#" + id;
+    a.textContent = title;
+    let li = document.createElement("li");
+    li.append(a);
+    toc.append(li);
+}
 
 let maxWidth = 1000;
 let padding = 50;
@@ -35,7 +47,9 @@ chapterData.forEach(part => {
     let x = marginLeft;
     let partRect = createRect(x, yPart, maxWidth, 100, "rgba(207, 194, 134, 0.2)");
     let partText = createText(x + padding / 2, yPart - padding / 2, part.title);
-    partRect.id = "part-" + part.title.replace(/\s+/g, '-').toLowerCase();
+    let partID = createID("part-", part.title);
+    partRect.id = partID;
+    addTOCEntry(part.title, partID);
     group.appendChild(partRect);
     group.appendChild(partText);
 
@@ -49,7 +63,9 @@ chapterData.forEach(part => {
 
         let width = maxWidth - padding;
         let chapterRect = createRect(x, yChapter, width, 100, "rgba(207, 194, 134, 0.2)");
-        chapterRect.id = "chapter-" + chapter.title.replace(/\s+/g, '-').toLowerCase();
+        let chapterID = createID("chapter-", chapter.title);
+        chapterRect.id = chapterID;
+        addTOCEntry(chapter.title, chapterID);
         let chapterText = createText(x + padding / 2, yChapter - padding / 2, chapter.title);
         group.appendChild(chapterRect);
         group.appendChild(chapterText);
@@ -62,7 +78,7 @@ chapterData.forEach(part => {
             let x = marginLeft + padding;
             let width = maxWidth - (padding * 2);
             let sectionRect = createRect(x, yChild - section.height, width, section.height, "rgba(207, 194, 134, 0.2)");
-            sectionRect.id = "section-" + section.title.replace(/\s+/g, '-').toLowerCase();
+            sectionRect.id = createID("section-", section.title);
             let sectionText = createText(x + padding / 2, yChild - padding / 2, section.title);
             yChild = yChild - section.height - padding / 2;
             sectionsHeight += section.height + padding / 2;
@@ -89,3 +105,4 @@ chapterData.forEach(part => {
 totalHeight += padding * 2;
 group.setAttribute("transform", "translate(0, " + totalHeight + ")");
 svg.appendChild(group);
+

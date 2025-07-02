@@ -11,7 +11,7 @@
       --measure: 1400px;
     }
 
-    #SVGWrapper p {
+    #web-texts p {
       position: absolute;
       font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
       font-weight: normal;
@@ -22,11 +22,15 @@
 </head>
 
 <body>
-
+  <div id="table-of-contents">
+    <ul id="table-of-contents-ul">
+    </ul>
+  </div>
   <div id="SVGWrapper" style="position: relative;" class="center">
-    <svg id="meinSVG" width="1400" height="72500" style="border:1px solid gray;">
+
+    <svg width="1400" height="72500" style="border:1px solid gray;">
       <g id="chapters"></g>
-      <g id="texts">
+      <g id="svg-elements">
         <g transform="matrix(32.2249,0,0,32.2249,1118.82,9207.86)">
         </g>
         <text x="768.249px" y="9207.86px" style="font-family:'Blushes-Regular', 'Blushes';font-size:32.225px;">das
@@ -218,15 +222,15 @@
         </g>
       </g>
     </svg>
-    <p style="left: 589px; top: 7628px; width: 338px;">
-      Wenn man also um jeden Preis will, dass das Sein des Phänomens vom Bewusstsein abhängt, muss sich das Objekt
-      nicht durch seine Anwesenheit von dem Bewusstsein unterscheiden, sondern durch seine Abwesenheit, nicht durch
-      seine Fülle, sondern durch sein Nichts.
-    </p>
+    <div id="web-texts">
+      <p style="left: 589px; top: 7628px; width: 338px;">
+        Wenn man also um jeden Preis will, dass das Sein des Phänomens vom Bewusstsein abhängt, muss sich das Objekt
+        nicht durch seine Anwesenheit von dem Bewusstsein unterscheiden, sondern durch seine Abwesenheit, nicht durch
+        seine Fülle, sondern durch sein Nichts.
+      </p>
+    </div>
+
   </div>
-
-
-
 
   <script src="chaptersSVGCreation/creationScript.js" type="module"></script>
 </body>
