@@ -14,7 +14,9 @@ export function renderQuestions(data, answers, onAnswerClicked) {
                 const btn = document.createElement('button');
                 btn.textContent = val === '1' ? 'Stimmt' : val === '0.5' ? 'Stimmt etwas' : 'Stimmt nicht';
                 btn.onclick = () => onAnswerClicked(q.id, val);
-                if (answers[q.id] === val) btn.style.fontWeight = 'bold';
+                if (answers[q.id] === val) {
+                    btn.classList.add('selected');
+                }
                 div.appendChild(btn);
             });
             section.appendChild(div);
