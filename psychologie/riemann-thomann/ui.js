@@ -18,13 +18,21 @@ export function renderQuestions(data, answers, onAnswerClicked) {
             const text = document.createElement('p');
             text.textContent = q.text;
             div.appendChild(text);
+            const btns = [];
             ['1', '0.5', '0'].forEach(val => {
                 const btn = document.createElement('button');
                 btn.textContent = val === '1' ? 'Stimmt' : val === '0.5' ? 'Stimmt etwas' : 'Stimmt nicht';
-                btn.onclick = () => onAnswerClicked(q.id, val);
                 if (answers[q.id] === val) {
                     btn.classList.add('selected');
                 }
+                btn.onclick = () => {
+                    // Alle Buttons dieser Frage deselektieren
+                    btns.forEach(b => b.classList.remove('selected'));
+                    // Diesen Button selektieren
+                    btn.classList.add('selected');
+                    onAnswerClicked(q.id, val);
+                };
+                btns.push(btn);
                 div.appendChild(btn);
             });
             section.appendChild(div);
