@@ -11,6 +11,7 @@ fetch('./questions.json')
             persons = getPersonKeys();
             if (isComplete(data, persons)) {
                 document.body.innerHTML = '';
+                console.log(getResultScores(data, persons));
                 renderResult(getResultScores(data, persons));
             }
         }, persons, {

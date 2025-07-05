@@ -3,15 +3,12 @@ export function renderResult(scores) {
     const oldCanvas = document.getElementById('result-canvas');
     if (oldCanvas) oldCanvas.remove();
 
-    // Werte für Visualisierung extrahieren
-    // Annahme: scores = { person1: {NÄHE, DISTANZ, WECHSEL, DAUER}, person2: ... }
-    // Die Achsen: X = Nähe/Distanz, Y = Wechsel/Dauer
-    // Nähe = negativ X, Distanz = positiv X, Wechsel = positiv Y, Dauer = negativ Y
-    const persons = Object.values(scores);
-    const getVal = (obj, key) => obj[key] || 0;
-    let p1 = persons[0] || {};
-    let p2 = persons[1] || {};
-    // X: Distanz minus Nähe, Y: Wechsel minus Dauer
+    // Extrahiere Werte für Visualisierung
+    // scores = { person1: {Dauer, Nähe, Wechsel, Distanz}, person2: ... }
+    // X: Distanz - Nähe, Y: Wechsel - Dauer
+    const getVal = (obj, key) => Number(obj?.[key]) || 0;
+    const p1 = scores.person1 || {};
+    const p2 = scores.person2 || {};
     const x1 = getVal(p1, 'Distanz') - getVal(p1, 'Nähe');
     const y1 = getVal(p1, 'Wechsel') - getVal(p1, 'Dauer');
     const x2 = getVal(p2, 'Distanz') - getVal(p2, 'Nähe');
@@ -41,13 +38,11 @@ export function renderResult(scores) {
         function drawAxes(sk, scale, maxVal) {
             sk.stroke(0);
             sk.strokeWeight(1);
-            // X-Achse
             sk.line(-maxVal * scale, 0, maxVal * scale, 0);
             for (let i = -maxVal; i <= maxVal; i++) {
                 sk.line(i * scale, -5, i * scale, 5);
                 if (i !== 0) sk.text(i, i * scale, 15);
             }
-            // Y-Achse
             sk.line(0, -maxVal * scale, 0, maxVal * scale);
             for (let i = -maxVal; i <= maxVal; i++) {
                 sk.line(-5, -i * scale, 5, -i * scale);
@@ -74,7 +69,7 @@ export function renderResult(scores) {
                 sk.rect(Math.min(0, x1) * scale, Math.min(0, y1) * scale, Math.max(0, x1) * scale, Math.max(0, y1) * scale);
             }
             // Person 2
-            if (x2 !== 0 || y2 !== 0) {
+            if ((x2 !== 0 || y2 !== 0) && (x2 !== x1 || y2 !== y1)) {
                 sk.fill(100, 200, 255, 150);
                 sk.rectMode(sk.CORNERS);
                 sk.rect(Math.min(0, x2) * scale, Math.min(0, y2) * scale, Math.max(0, x2) * scale, Math.max(0, y2) * scale);
