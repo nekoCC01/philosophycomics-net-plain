@@ -26,3 +26,7 @@ export function getResultScores(data) {
     });
     return scores;
 }
+
+export function resetAnswers() {
+    localStorage.removeItem(STORAGE_KEY);
+}

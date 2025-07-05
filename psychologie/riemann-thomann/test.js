@@ -1,4 +1,4 @@
-import { loadAnswers, saveAnswer, isComplete, getResultScores } from './storage.js';
+import { loadAnswers, saveAnswer, isComplete, getResultScores, resetAnswers } from './storage.js';
 import { renderQuestions } from './ui.js';
 import { renderResult } from './result.js';
 
@@ -14,3 +14,11 @@ fetch('./questions.json')
             }
         });
     });
+
+const resetBtn = document.getElementById('reset-btn');
+if (resetBtn) {
+    resetBtn.onclick = () => {
+        resetAnswers();
+        location.reload();
+    };
+}
