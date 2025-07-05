@@ -5,14 +5,14 @@ export function renderResult(scores) {
 
     // Extrahiere Werte für Visualisierung
     // scores = { person1: {Dauer, Nähe, Wechsel, Distanz}, person2: ... }
-    // X: Distanz - Nähe, Y: Wechsel - Dauer
+    // X: Distanz - Nähe, Y: Dauer - Wechsel (wichtig!)
     const getVal = (obj, key) => Number(obj?.[key]) || 0;
     const p1 = scores.person1 || {};
     const p2 = scores.person2 || {};
     const x1 = getVal(p1, 'Distanz') - getVal(p1, 'Nähe');
-    const y1 = getVal(p1, 'Wechsel') - getVal(p1, 'Dauer');
+    const y1 = getVal(p1, 'Dauer') - getVal(p1, 'Wechsel');
     const x2 = getVal(p2, 'Distanz') - getVal(p2, 'Nähe');
-    const y2 = getVal(p2, 'Wechsel') - getVal(p2, 'Dauer');
+    const y2 = getVal(p2, 'Dauer') - getVal(p2, 'Wechsel');
 
     // Erstelle Container für Canvas
     const container = document.createElement('div');
@@ -66,13 +66,13 @@ export function renderResult(scores) {
             if (x1 !== 0 || y1 !== 0) {
                 sk.fill(255, 255, 100, 150);
                 sk.rectMode(sk.CORNERS);
-                sk.rect(Math.min(0, x1) * scale, Math.min(0, y1) * scale, Math.max(0, x1) * scale, Math.max(0, y1) * scale);
+                sk.rect(Math.min(0, x1) * scale, Math.min(0, -y1) * scale, Math.max(0, x1) * scale, Math.max(0, -y1) * scale);
             }
             // Person 2
             if ((x2 !== 0 || y2 !== 0) && (x2 !== x1 || y2 !== y1)) {
                 sk.fill(100, 200, 255, 150);
                 sk.rectMode(sk.CORNERS);
-                sk.rect(Math.min(0, x2) * scale, Math.min(0, y2) * scale, Math.max(0, x2) * scale, Math.max(0, y2) * scale);
+                sk.rect(Math.min(0, x2) * scale, Math.min(0, -y2) * scale, Math.max(0, x2) * scale, Math.max(0, -y2) * scale);
             }
         }
     });
