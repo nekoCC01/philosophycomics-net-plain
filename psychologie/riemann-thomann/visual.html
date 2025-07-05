@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Riemann-Thomann Kreuz</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+</head>
+
+<body>
+    <script>
+        const scale = 20;
+        const maxVal = 12;
+
+        function setup() {
+            createCanvas(600, 600);
+            angleMode(DEGREES);
+            textAlign(CENTER, CENTER);
+        }
+
+        function draw() {
+            background(255);
+            translate(width / 2, height / 2);
+            drawAxes();
+            drawLabels();
+            drawExampleRects();
+        }
+
+        function drawAxes() {
+            stroke(0);
+            strokeWeight(1);
+
+            // X-Achse (Nähe – Distanz)
+            line(-maxVal * scale, 0, maxVal * scale, 0);
+            for (let i = -maxVal; i <= maxVal; i++) {
+                line(i * scale, -5, i * scale, 5);
+                if (i !== 0) text(i, i * scale, 15);
+            }
+
+            // Y-Achse (Wechsel – Dauer)
+            line(0, -maxVal * scale, 0, maxVal * scale);
+            for (let i = -maxVal; i <= maxVal; i++) {
+                line(-5, -i * scale, 5, -i * scale);
+                if (i !== 0) text(i, -15, -i * scale);
+            }
+
+            // Nullpunkt
+            fill(0);
+            circle(0, 0, 5);
+        }
+
+        function drawLabels() {
+            noStroke();
+            fill(0);
+            textSize(16);
+            text('NÄHE', -maxVal * scale - 30, 0);
+            text('DISTANZ', maxVal * scale + 30, 0);
+            text('DAUER', 0, -maxVal * scale - 30);
+            text('WECHSEL', 0, maxVal * scale + 30);
+        }
+
+        function drawExampleRects() {
+            noStroke();
+
+            // Rechteck Person 1: Nähe 8, Dauer 4 (also -8, -4) bis (0,0)
+            fill(255, 255, 100, 150);
+            rectMode(CORNERS);
+            rect(-8 * scale, 4 * scale, 0, 0);
+
+            // Rechteck Person 2: Distanz 6, Dauer 10
+            fill(100, 200, 255, 150);
+            rectMode(CORNERS);
+            rect(0, -10 * scale, 6 * scale, 0);
+        }
+
+    </script>
+</body>
+
+</html>
