@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../index.css">
+    <style>
+        #test {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        #test.twoPersons {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        .test-section-heading {
+            grid-column: 1 / -1;
+            background-color: antiquewhite;
+        }
+
+        .col-bg {
+            grid-row: 1 / -1;
+            /* über alle Zeilen */
+            z-index: 0;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .col2 {
+            grid-column: 2;
+            background: #b3d1ff;
+        }
+
+        .col3 {
+            grid-column: 3;
+            background: #fff7b3;
+        }
+
+        #test>*:not(.col-bg) {
+            z-index: 1;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <h1>Riemann Thomann</h1>
+
+        <div id="test" class="twoPersons">
+            <div class="col-bg col2"></div>
+            <div class="col-bg col3"></div>
+            <div class="test-section-heading">SECTION HEADING</div>
+            <p>Es ist mir wichtig, meiner Sache ganz sicher zu sein.</p>
+            <div>
+                Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <div>
+                 Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <p>Es ist mir wichtig, meiner Sache ganz sicher zu sein.</p>
+            <div>
+                Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <div>
+                 Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <p>Es ist mir wichtig, meiner Sache ganz sicher zu sein.</p>
+            <div>
+                Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <div>
+                 Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <p>Es ist mir wichtig, meiner Sache ganz sicher zu sein.</p>
+            <div>
+                Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+            <div>
+                 Stimmt - Stimmt etwas - Stimmt nicht
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
