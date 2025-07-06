@@ -1,0 +1,214 @@
+[
+  {
+    "dimension": "Dauer",
+    "questions": [
+      {
+        "id": "D1",
+        "text": "Es ist mir wichtig, meiner Sache ganz sicher zu sein."
+      },
+      {
+        "id": "D2",
+        "text": "Ich wäge lange ab, bevor ich mich entscheide."
+      },
+      {
+        "id": "D3",
+        "text": "Ich lasse lieber alles beim Alten."
+      },
+      {
+        "id": "D4",
+        "text": "Es ist mir wichtig, die Übersicht zu haben."
+      },
+      {
+        "id": "D5",
+        "text": "Ich würde nie unvorbereitet in eine unbekannte Situation springen."
+      },
+      {
+        "id": "D6",
+        "text": "Gesetze sind dazu da, eingehalten zu werden. Ich halte mich ja auch an die Regeln."
+      },
+      {
+        "id": "D7",
+        "text": "Ich bin belastungsfähig."
+      },
+      {
+        "id": "D8",
+        "text": "Ich halte mich für einen eher konservativen Menschen."
+      },
+      {
+        "id": "D9",
+        "text": "Vertrauen ist gut, Kontrolle ist besser."
+      },
+      {
+        "id": "D10",
+        "text": "Ich bin ein zuverlässiger Mensch."
+      },
+      {
+        "id": "D11",
+        "text": "Wie es in mir drinnen aussieht, geht niemand etwas an."
+      },
+      {
+        "id": "D12",
+        "text": "Menschen wenden sich gerne an mich, wenn sie eine Aufgabe in guten Händen wissen wollen."
+      }
+    ]
+  },
+  {
+    "dimension": "Nähe",
+    "questions": [
+      {
+        "id": "NÄ1",
+        "text": "Ich neige dazu, mich ausnutzen zu lassen."
+      },
+      {
+        "id": "NÄ2",
+        "text": "Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst."
+      },
+      {
+        "id": "NÄ3",
+        "text": "Um des lieben Friedens willen gebe ich nach."
+      },
+      {
+        "id": "NÄ4",
+        "text": "Menschen wenden sich gerne an mich, wenn sie Trost brauchen."
+      },
+      {
+        "id": "NÄ5",
+        "text": "Ich bin ein friedfertiger Mensch."
+      },
+      {
+        "id": "NÄ6",
+        "text": "Bescheidenheit ist eine Zier."
+      },
+      {
+        "id": "NÄ7",
+        "text": "Ich habe immer ein offenes Ohr für die Sorgen anderer Menschen."
+      },
+      {
+        "id": "NÄ8",
+        "text": "Ich wehre mich nicht, aus Angst, die Zuneigung anderer zu verlieren."
+      },
+      {
+        "id": "NÄ9",
+        "text": "Ich beklage mich häufig über mein Los."
+      },
+      {
+        "id": "NÄ10",
+        "text": "Ich sorge sehr für mein leibliches Wohl / das meiner Familie."
+      },
+      {
+        "id": "NÄ11",
+        "text": "Die anderen sollten mich auch so verwöhnen, wie ich sie."
+      },
+      {
+        "id": "NÄ12",
+        "text": "Dauernd will einer etwas von mir."
+      }
+    ]
+  },
+  {
+    "dimension": "Wechsel",
+    "questions": [
+      {
+        "id": "W1",
+        "text": "Von mir gehen kreative Impulse aus."
+      },
+      {
+        "id": "W2",
+        "text": "Ich neige zur Unpünktlichkeit."
+      },
+      {
+        "id": "W3",
+        "text": "Regeln empfinde ich als Begrenzung meiner Freiheit."
+      },
+      {
+        "id": "W4",
+        "text": "Ich kann mühelos eine ganze Gesellschaft unterhalten."
+      },
+      {
+        "id": "W5",
+        "text": "Menschen fühlen sich von mir angezogen."
+      },
+      {
+        "id": "W6",
+        "text": "Ich kann schlecht warten."
+      },
+      {
+        "id": "W7",
+        "text": "Ich bin ausgesprochen kontaktfähig."
+      },
+      {
+        "id": "W8",
+        "text": "Ich möchte von allen geliebt werden."
+      },
+      {
+        "id": "W9",
+        "text": "Ich kann mich schnell für etwas begeistern."
+      },
+      {
+        "id": "W10",
+        "text": "Der Reiz des Neuen ist schnell vorbei."
+      },
+      {
+        "id": "W11",
+        "text": "Ich bin leider so inkonsequent."
+      },
+      {
+        "id": "W12",
+        "text": "Ich wage nicht, meine Meinung zu sagen, wenn sie von der anderer abweicht."
+      }
+    ]
+  },
+  {
+    "dimension": "Distanz",
+    "questions": [
+      {
+        "id": "DI1",
+        "text": "Menschen wenden sich gerne an mich, um einen fachlichen Rat zu bekommen."
+      },
+      {
+        "id": "DI2",
+        "text": "Ich mache meine Sachen lieber allein, bevor ich jemanden um Rat frage."
+      },
+      {
+        "id": "DI3",
+        "text": "Es fällt mir leicht, Zusammenhänge zu durchschauen."
+      },
+      {
+        "id": "DI4",
+        "text": "Ich möchte nicht einer unter vielen sein, sondern aus der Masse herausragen."
+      },
+      {
+        "id": "DI5",
+        "text": "Ich möchte es im Leben weit bringen / habe es weit gebracht."
+      },
+      {
+        "id": "DI6",
+        "text": "Ich lasse mich häufiger zu spitzen Bemerkungen hinreißen."
+      },
+      {
+        "id": "DI7",
+        "text": "Es liegt mir, Verantwortung zu tragen."
+      },
+      {
+        "id": "DI8",
+        "text": "Ich bin ein eher distanzierter Mensch."
+      },
+      {
+        "id": "DI9",
+        "text": "Ich fühle mich schnell angegriffen."
+      },
+      {
+        "id": "DI10",
+        "text": "Ich bin eher ein Einzelkämpfer."
+      },
+      {
+        "id": "DI11",
+        "text": "Argumente sind wichtiger als Emotionen."
+      },
+      {
+        "id": "DI12",
+        "text": "Meiner Argumentation ist so leicht keiner gewachsen."
+      }
+    ]
+  }
+]

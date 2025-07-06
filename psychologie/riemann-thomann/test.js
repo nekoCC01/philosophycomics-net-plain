@@ -6,54 +6,32 @@ fetch('./questions.json')
     .then(res => res.json())
     .then(data => {
         let persons = getPersonKeys();
-        renderQuestions(data, loadAnswers(), (personKey, questionId, value) => {
-            saveAnswer(personKey, questionId, value);
-            persons = getPersonKeys();
-            if (isComplete(data, persons)) {
-                document.body.innerHTML = '';
-                console.log(getResultScores(data, persons));
-                renderResult(getResultScores(data, persons));
-            }
-        }, persons, {
-            onAddPerson: () => {
-                addPerson();
-                persons = getPersonKeys();
-                renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
-            },
-            onRemovePerson: () => {
-                removePerson();
-                persons = getPersonKeys();
-                renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
-            }
-        });
 
-        function onAnswerClicked(personKey, questionId, value) {
+        const updateAndRender = () => {
+            persons = getPersonKeys();
+            renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
+        };
+
+        const onAnswerClicked = (personKey, questionId, value) => {
             saveAnswer(personKey, questionId, value);
             persons = getPersonKeys();
             if (isComplete(data, persons)) {
                 document.body.innerHTML = '';
                 renderResult(getResultScores(data, persons));
             }
-        }
+        };
+
         const handlers = {
             onAddPerson: () => {
                 addPerson();
-                persons = getPersonKeys();
-                renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
+                updateAndRender();
             },
             onRemovePerson: () => {
                 removePerson();
-                persons = getPersonKeys();
-                renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
+                updateAndRender();
             }
         };
+
+        renderQuestions(data, loadAnswers(), onAnswerClicked, persons, handlers);
     });
 
-// Reset-Button bleibt wie gehabt
-const resetBtn = document.getElementById('reset-btn');
-if (resetBtn) {
-    resetBtn.onclick = () => {
-        resetAnswers();
-        location.reload();
-    };
-}
