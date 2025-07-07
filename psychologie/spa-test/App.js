@@ -1,28 +1,19 @@
 
 class App extends HTMLElement {
     connectedCallback() {
-        let template = document.querySelector('template#app')
+        let template = document.querySelector('template#home')
         this.appendChild(template.content.cloneNode(true));
     }
 }
 
 class AppLayout extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `
-        <nav>
-            <ul>
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/about">About</a></li>
-                <li><a href="#/dashboard">Dashboard</a></li>
-                <li><a href="#/nothing-here">Nothing Here</a></li>
-            </ul>
-        </nav>
-        <hr />
-        `;
+        let template = document.querySelector('template#result')
+        this.appendChild(template.content.cloneNode(true));
     }
 }
 
 export const registerApp = () => {
     customElements.define('x-app', App);
-    customElements.define('x-app-layout', AppLayout);
+    customElements.define('x-result', AppLayout);
 }
