@@ -1,3 +1,5 @@
+import { testImport } from '../storage.js';
+
 class Test extends HTMLElement {
     async connectedCallback() {
         let template = document.querySelector('template#test')
@@ -15,6 +17,9 @@ class Test extends HTMLElement {
             li.textContent = item.name;
             listContainer.appendChild(li);
         });
+
+        //Test
+        console.log(testImport());
     }
 }
 
