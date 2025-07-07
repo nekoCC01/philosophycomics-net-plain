@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+        import { registerApp } from "./App.js";
+        import { registerRouteComponent } from "./route.js";
+
+        const app = () => {
+            registerRouteComponent();
+            registerApp();
+
+            const template = document.querySelector('template#root');
+            if (template) document.body.appendChild(template.content, true);
+        }
+
+        document.addEventListener('DOMContentLoaded', app);
+    </script>
+</head>
+
+<body>
+    <template id="root">
+        <x-app></x-app>
+    </template>
+</body>
+
+</html>
