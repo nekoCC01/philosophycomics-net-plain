@@ -7,12 +7,21 @@
         "title": "Stoa",
         "path": "meditation/stoa",
         "children": [
-          { "title": "Stoa Hauptseite", "path": "meditation/stoa/index.html" }
+          {
+            "title": "Stoa Hauptseite",
+            "path": "meditation/stoa/index.html"
+          }
         ]
       },
       {
         "title": "Watts",
-        "path": "meditation/watts/index.html"
+        "path": "meditation/watts",
+        "children": [
+          {
+            "title": "Watts Hauptseite",
+            "path": "meditation/watts/index.html"
+          }
+        ]
       },
       {
         "title": "Meditation Übersicht",
@@ -28,16 +37,105 @@
         "title": "Sartre",
         "path": "metaphysik/sartre",
         "children": [
-          { "title": "Sartre Hauptseite", "path": "metaphysik/sartre/index.html" }
+          {
+            "title": "Sartre Hauptseite",
+            "path": "metaphysik/sartre/index.html"
+          },
+          {
+            "title": "Kapitelansicht",
+            "path": "metaphysik/sartre/chaptersSVGCreation/index.html"
+          }
         ]
       },
       {
-        "title": "Spinoza",
+        "title": "Spinoza Hauptseite",
         "path": "metaphysik/spinoza/index.html"
       },
       {
         "title": "Metaphysik Übersicht",
         "path": "metaphysik/index.html"
+      }
+    ]
+  },
+  {
+    "title": "Psychologie",
+    "path": "psychologie",
+    "children": [
+      {
+        "title": "Gutes Leben",
+        "path": "psychologie/gutes-leben.html"
+      },
+      {
+        "title": "Riemann-Thomann",
+        "path": "psychologie/riemann-thomann",
+        "children": [
+          {
+            "title": "Riemann Startseite",
+            "path": "psychologie/riemann-thomann/index.html"
+          },
+          {
+            "title": "Visual",
+            "path": "psychologie/riemann-thomann/visual.html"
+          }
+        ]
+      },
+      {
+        "title": "Tiefenpsychologie",
+        "path": "psychologie/tiefenpsychologie",
+        "children": [
+          {
+            "title": "Tiefenpsychologie Start",
+            "path": "psychologie/tiefenpsychologie/index.html"
+          }
+        ]
+      },
+      {
+        "title": "SPA-Test",
+        "path": "psychologie/spa-test",
+        "children": [
+          {
+            "title": "SPA-Test Startseite",
+            "path": "psychologie/spa-test/index.html"
+          }
+        ]
+      },
+      {
+        "title": "Psychologie Übersicht",
+        "path": "psychologie/index.html"
+      }
+    ]
+  },
+  {
+    "title": "Um-Welt",
+    "path": "um-welt",
+    "children": [
+      {
+        "title": "Um-Welt Übersicht",
+        "path": "um-welt/index.html"
+      },
+      {
+        "title": "Hamburg",
+        "path": "um-welt/stadt/hamburg",
+        "children": [
+          {
+            "title": "Hamburg Timeline",
+            "path": "um-welt/stadt/hamburg/timeline/index.html"
+          },
+          {
+            "title": "Touren",
+            "path": "um-welt/stadt/hamburg/touren.html"
+          }
+        ]
+      },
+      {
+        "title": "Timeline Map Transform",
+        "path": "um-welt/stadt/timelineMapTransform",
+        "children": [
+          {
+            "title": "Timeline Map Hauptseite",
+            "path": "um-welt/stadt/timelineMapTransform/index.html"
+          }
+        ]
       }
     ]
   }
