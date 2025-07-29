@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Meditation",
+    "path": "meditation",
+    "children": [
+      {
+        "title": "Stoa",
+        "path": "meditation/stoa",
+        "children": [
+          { "title": "Stoa Hauptseite", "path": "meditation/stoa/index.html" }
+        ]
+      },
+      {
+        "title": "Watts",
+        "path": "meditation/watts/index.html"
+      },
+      {
+        "title": "Meditation Übersicht",
+        "path": "meditation/index.html"
+      }
+    ]
+  },
+  {
+    "title": "Metaphysik",
+    "path": "metaphysik",
+    "children": [
+      {
+        "title": "Sartre",
+        "path": "metaphysik/sartre",
+        "children": [
+          { "title": "Sartre Hauptseite", "path": "metaphysik/sartre/index.html" }
+        ]
+      },
+      {
+        "title": "Spinoza",
+        "path": "metaphysik/spinoza/index.html"
+      },
+      {
+        "title": "Metaphysik Übersicht",
+        "path": "metaphysik/index.html"
+      }
+    ]
+  }
+]
