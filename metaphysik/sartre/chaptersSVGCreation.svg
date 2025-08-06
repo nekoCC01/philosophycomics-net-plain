@@ -1,70 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sartre - Sein & Zeit</title>
-  <link rel="stylesheet" href="../../index.css">
-  <style>
-    :root {
-      --measure: 1400px;
-    }
-
-    #web-texts p {
-      position: absolute;
-      font-family: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
-      font-weight: normal;
-      color: #7C7763;
-      font-size: 13px;
-      line-height: 15px;
-    }
-
-    #table-of-contents {
-      padding-block: 20px;
-      margin-block: 15px;
-      background-color: #7C7763;
-    }
-
-    #table-of-contents * {
-      color: white;
-      font-size: 14px;
-      text-decoration: none;
-    }
-
-    #back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 48px;
-      height: 48px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      z-index: 1000;
-      display: none;
-      /* Erst sichtbar, wenn gescrollt */
-    }
-
-    #back-to-top svg {
-      display: block;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="center">
-    <div id="table-of-contents">
-      <ul id="table-of-contents-ul">
-      </ul>
-    </div>
-    <div id="SVGWrapper" style="position: relative;" class="center">
-      <svg width="1400" height="72500" style="border:1px solid gray;">
-        <g id="chapters"></g>
-        <g id="affinity-export">
-                  <g id="export">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1400 72500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <rect id="sartre-sn" x="0" y="0" width="1400" height="72500" style="fill:none;"/>
+    <g id="sartre-sn1" serif:id="sartre-sn">
+        <g id="export">
             <g id="scribbles">
             </g>
             <g id="svg-elements">
@@ -121,38 +60,5 @@
                 </g>
             </g>
         </g>
-
-
-
-        </g>
-      </svg>
-      <div id="web-texts">
-        <p style="left: 505px; top: 71922px; width: 175px; font-size: 10px;">
-          Was es ist, ist es absolut, denn es enthüllt sich, <i>wie es ist</i>.
-        </p>
-      </div>
-    </div>
-
-    <button id="back-to-top" title="Nach oben">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="12" fill="#7C7763" />
-        <path d="M12 7 L12 17" stroke="white" stroke-width="2" stroke-linecap="round" />
-        <path d="M8 11 L12 7 L16 11" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" />
-      </svg>
-    </button>
-
-  </div>
-
-  <script src="chaptersSVGCreation/creationScript.js" type="module"></script>
-  <script>
-    const btn = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
-    btn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-</body>
-
-</html>
+    </g>
+</svg>

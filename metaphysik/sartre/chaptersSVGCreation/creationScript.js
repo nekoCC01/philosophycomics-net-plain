@@ -15,6 +15,7 @@ function createText(x, y, textContent) {
     text.setAttribute("x", x);
     text.setAttribute("y", y);
     text.setAttribute("font-size", "14");
+    text.setAttribute("font-weight", "bold");
     text.setAttribute("fill", "#222");
     text.textContent = textContent;
     return text;
