@@ -1,170 +1,226 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <title>Hamburg Geschichte</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../index.css">
+    <link rel="stylesheet" href="../../../../index.css">
     <style>
-        body { margin: 0; background: #999; }
-        svg { background: white; display: block; margin: auto; }
-        .year-label { font-family: sans-serif; font-weight: bold; fill: #4c4439; text-anchor: middle; }
-        .decade-line { stroke: rgba(235, 214, 154, 0.3); }
-        .mid-decade-line { stroke: rgba(235, 214, 154, 0.8); }
-        .label { font-family: sans-serif; fill: #333; }
-        .entry-line { stroke: steelblue; }
-        .entry-circle { fill: darkred; }
+        body {
+            margin: 0;
+            background: #999;
+        }
+
+        svg {
+            background: white;
+            display: block;
+            margin: auto;
+        }
+
+        .year-label {
+            font-family: sans-serif;
+            font-weight: bold;
+            fill: #4c4439;
+            text-anchor: middle;
+        }
+
+        .decade-line {
+            stroke: rgba(235, 214, 154, 0.3);
+        }
+
+        .mid-decade-line {
+            stroke: rgba(235, 214, 154, 0.8);
+        }
+
+        .label {
+            font-family: sans-serif;
+            fill: #333;
+        }
+
+        .entry-line {
+            stroke: steelblue;
+        }
+
+        .entry-circle {
+            fill: darkred;
+        }
     </style>
 </head>
+
 <body>
-<main>
-    <!-- Äußere SVG-Maße bleiben erhalten (Höhe-Attribut + dynamische Breite ohne 2x) -->
-    <svg id="timeline" height="750">
-        <g id="container"></g>
-        <image href="sketch.png"/>
-    </svg>
-</main>
-<script type="module" src="../../../index.js"></script>
-<script>
-    // ===== Skalierungs-Setup (2x interne Auflösung) =====
-    const SCALE = 2; // Alles innen doppelt zeichnen, äußere SVG-Größe bleibt gleich
+    <main>
+        <!-- Äußere SVG-Maße bleiben erhalten (Höhe-Attribut + dynamische Breite ohne 2x) -->
+        <!--<svg id="timeline" height="750">
+            <g id="container"></g>
+            <image href="sketch.png" />
+        </svg>-->
 
-    const startYear = 500;
-    const endYear = 2050;
-    const pixelsPerYear = 6; // "äußere" Basis – für die sichtbare Breite
+        <x-timeline></x-timeline>
 
-    const svg = document.getElementById('timeline');
-    const container = document.getElementById('container');
+    </main>
+    <script type="module" src="../../../../index.js"></script>
+    <script>
 
-    const height = Number(svg.getAttribute('height'));              // äußere Höhe in CSS-Pixeln
-    const totalYears = endYear - startYear;
+    </script>
 
-    // Äußere Breite wie bisher (ohne SCALE), damit die sichtbare Größe gleich bleibt
-    const outerWidth = totalYears * pixelsPerYear;
-    svg.setAttribute('width', outerWidth);
+    <script>
+        class TimelineComponent extends HTMLElement {
+            connectedCallback() {
+        
 
-    // Interne (gezeichnete) Maße 2x
-    const ppy = pixelsPerYear * SCALE;                              // interne x-Skalierung
-    const innerHeight = height * SCALE;                             // interne y-Skalierung
-    const innerWidth = totalYears * ppy;                            // interne Breite
+                // ===== Skalierungs-Setup (2x interne Auflösung) =====
+                const SCALE = 2; // Alles innen doppelt zeichnen, äußere SVG-Größe bleibt gleich
 
-    // ViewBox auf doppelte interne Maße setzen
-    svg.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`);
+                const startYear = 500;
+                const endYear = 2050;
+                const pixelsPerYear = 6; // "äußere" Basis – für die sichtbare Breite
 
-    // Typografie- & Strichmaßstäbe 2x
-    const YEAR_FONT = 24 * SCALE;                                   // war 24
-    const LABEL_FONT = 10 * SCALE;                                  // war 10
-    const STROKE_DECADE = 2 * SCALE;                                // war 2
-    const STROKE_MID = 3 * SCALE;                                   // war 3
-    const STROKE_ENTRY = 4 * SCALE;                                 // war 4
-    const R_ENTRY = 4 * SCALE;                                      // war 4
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.id = "timeline"
+                const container = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                svg.appendChild(container);
 
-    // Vertikale Layoutmaße 2x
-    const ROW_BASE_Y = 80 * SCALE;                                  // war 80
-    const ROW_STEP = 140 * SCALE;                                   // war 140
-    const BG_PAD_TOP = 30 * SCALE;                                  // war 30
-    const BG_HEIGHT = 130 * SCALE;                                  // war 130
-    const LABEL_OFFSET = 6 * SCALE;                                 // war 6
-    const DOT_ROW_OFFSET_STEP = 20 * SCALE;                         // war 20
+                const height = 750;
+                svg.setAttribute("height", height);              // äußere Höhe in CSS-Pixeln
+                const totalYears = endYear - startYear;
 
-    // ===== Zeitachse vorbereiten =====
-    function drawBaseTimeline() {
-        for (let year = startYear; year <= endYear; year += 10) {
-            const x = (year - startYear) * ppy;
+                // Äußere Breite wie bisher (ohne SCALE), damit die sichtbare Größe gleich bleibt
+                const outerWidth = totalYears * pixelsPerYear;
+                svg.setAttribute('width', outerWidth);
 
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", x);
-            line.setAttribute("y1", 0);
-            line.setAttribute("x2", x);
-            line.setAttribute("y2", innerHeight);
-            const isCentury = (year % 100 === 0);
-            const isHalf = (year % 100 === 50);
-            line.setAttribute("class", (isCentury || isHalf) ? "mid-decade-line" : "decade-line");
-            line.setAttribute("stroke-width", (isCentury || isHalf) ? STROKE_MID : STROKE_DECADE);
-            container.appendChild(line);
+                // Interne (gezeichnete) Maße 2x
+                const ppy = pixelsPerYear * SCALE;                              // interne x-Skalierung
+                const innerHeight = height * SCALE;                             // interne y-Skalierung
+                const innerWidth = totalYears * ppy;                            // interne Breite
 
-            if (isCentury) {
-                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                text.setAttribute("x", x);
-                text.setAttribute("y", 40 * SCALE); // war 40
-                text.setAttribute("class", "year-label");
-                text.setAttribute("font-size", YEAR_FONT);
-                text.textContent = year;
-                container.appendChild(text);
+                // ViewBox auf doppelte interne Maße setzen
+                svg.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`);
+
+                // Typografie- & Strichmaßstäbe 2x
+                const YEAR_FONT = 24 * SCALE;                                   // war 24
+                const LABEL_FONT = 10 * SCALE;                                  // war 10
+                const STROKE_DECADE = 2 * SCALE;                                // war 2
+                const STROKE_MID = 3 * SCALE;                                   // war 3
+                const STROKE_ENTRY = 4 * SCALE;                                 // war 4
+                const R_ENTRY = 4 * SCALE;                                      // war 4
+
+                // Vertikale Layoutmaße 2x
+                const ROW_BASE_Y = 80 * SCALE;                                  // war 80
+                const ROW_STEP = 140 * SCALE;                                   // war 140
+                const BG_PAD_TOP = 30 * SCALE;                                  // war 30
+                const BG_HEIGHT = 130 * SCALE;                                  // war 130
+                const LABEL_OFFSET = 6 * SCALE;                                 // war 6
+                const DOT_ROW_OFFSET_STEP = 20 * SCALE;                         // war 20
+
+                // ===== Zeitachse vorbereiten =====
+                function drawBaseTimeline() {
+                    for (let year = startYear; year <= endYear; year += 10) {
+                        const x = (year - startYear) * ppy;
+
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute("x1", x);
+                        line.setAttribute("y1", 0);
+                        line.setAttribute("x2", x);
+                        line.setAttribute("y2", innerHeight);
+                        const isCentury = (year % 100 === 0);
+                        const isHalf = (year % 100 === 50);
+                        line.setAttribute("class", (isCentury || isHalf) ? "mid-decade-line" : "decade-line");
+                        line.setAttribute("stroke-width", (isCentury || isHalf) ? STROKE_MID : STROKE_DECADE);
+                        container.appendChild(line);
+
+                        if (isCentury) {
+                            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                            text.setAttribute("x", x);
+                            text.setAttribute("y", 40 * SCALE); // war 40
+                            text.setAttribute("class", "year-label");
+                            text.setAttribute("font-size", YEAR_FONT);
+                            text.textContent = year;
+                            container.appendChild(text);
+                        }
+                    }
+                }
+
+                // ===== Daten aus JSON darstellen =====
+                function renderTimelineData(jsonData) {
+                    Object.keys(jsonData).forEach((category, index) => {
+                        const { entries, color = "#eeeeee" } = jsonData[category];
+                        const yValue = ROW_BASE_Y + index * ROW_STEP;
+
+                        // Hintergrund-Rechteck hinter die Einträge
+                        const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        bg.setAttribute("x", 0);
+                        bg.setAttribute("y", yValue - BG_PAD_TOP);
+                        bg.setAttribute("width", innerWidth);
+                        bg.setAttribute("height", BG_HEIGHT);
+                        bg.setAttribute("fill", color);
+                        bg.setAttribute("opacity", 0.4);
+                        svg.insertBefore(bg, svg.firstChild);
+
+                        entries.forEach((entry, i) => {
+                            const offset = (i % 5) * DOT_ROW_OFFSET_STEP;
+                            const y = yValue + offset;
+                            const xStart = (entry.start - startYear) * ppy;
+
+                            if (entry.end) {
+                                const xEnd = (entry.end - startYear) * ppy;
+                                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                                line.setAttribute("x1", xStart);
+                                line.setAttribute("y1", y);
+                                line.setAttribute("x2", xEnd);
+                                line.setAttribute("y2", y);
+                                line.setAttribute("class", "entry-line");
+                                line.setAttribute("stroke-width", STROKE_ENTRY);
+                                container.appendChild(line);
+
+                                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                                text.setAttribute("x", (xStart + xEnd) / 2);
+                                text.setAttribute("y", y - LABEL_OFFSET);
+                                text.setAttribute("class", "label");
+                                text.setAttribute("text-anchor", "middle");
+                                text.setAttribute("font-size", LABEL_FONT);
+                                text.textContent = entry.name;
+                                container.appendChild(text);
+                            } else {
+                                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                                circle.setAttribute("cx", xStart);
+                                circle.setAttribute("cy", y);
+                                circle.setAttribute("r", R_ENTRY);
+                                circle.setAttribute("class", "entry-circle");
+                                container.appendChild(circle);
+
+                                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                                text.setAttribute("x", xStart);
+                                text.setAttribute("y", y - LABEL_OFFSET);
+                                text.setAttribute("class", "label");
+                                text.setAttribute("text-anchor", "middle");
+                                text.setAttribute("font-size", LABEL_FONT);
+                                text.textContent = entry.name;
+                                container.appendChild(text);
+                            }
+                        });
+                    });
+                }
+
+                // ===== Daten laden & rendern =====
+                fetch('daten.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        Object.values(data).forEach(category => category.entries.sort((a, b) => a.start - b.start));
+                        drawBaseTimeline();
+                        renderTimelineData(data);
+                    })
+                    .catch(error => console.error('Fehler beim Laden der Daten:', error));
+
+                    const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
+                    image.setAttributeNS("http://www.w3.org/1999/xlink", "href", "sketch.png");
+                    svg.appendChild(image);
+                    this.appendChild(svg);
             }
         }
-    }
+        customElements.define('x-timeline', TimelineComponent);
+    </script>
 
-    // ===== Daten aus JSON darstellen =====
-    function renderTimelineData(jsonData) {
-        Object.keys(jsonData).forEach((category, index) => {
-            const { entries, color = "#eeeeee" } = jsonData[category];
-            const yValue = ROW_BASE_Y + index * ROW_STEP;
-
-            // Hintergrund-Rechteck hinter die Einträge
-            const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            bg.setAttribute("x", 0);
-            bg.setAttribute("y", yValue - BG_PAD_TOP);
-            bg.setAttribute("width", innerWidth);
-            bg.setAttribute("height", BG_HEIGHT);
-            bg.setAttribute("fill", color);
-            bg.setAttribute("opacity", 0.4);
-            svg.insertBefore(bg, svg.firstChild);
-
-            entries.forEach((entry, i) => {
-                const offset = (i % 5) * DOT_ROW_OFFSET_STEP;
-                const y = yValue + offset;
-                const xStart = (entry.start - startYear) * ppy;
-
-                if (entry.end) {
-                    const xEnd = (entry.end - startYear) * ppy;
-                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                    line.setAttribute("x1", xStart);
-                    line.setAttribute("y1", y);
-                    line.setAttribute("x2", xEnd);
-                    line.setAttribute("y2", y);
-                    line.setAttribute("class", "entry-line");
-                    line.setAttribute("stroke-width", STROKE_ENTRY);
-                    container.appendChild(line);
-
-                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                    text.setAttribute("x", (xStart + xEnd) / 2);
-                    text.setAttribute("y", y - LABEL_OFFSET);
-                    text.setAttribute("class", "label");
-                    text.setAttribute("text-anchor", "middle");
-                    text.setAttribute("font-size", LABEL_FONT);
-                    text.textContent = entry.name;
-                    container.appendChild(text);
-                } else {
-                    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                    circle.setAttribute("cx", xStart);
-                    circle.setAttribute("cy", y);
-                    circle.setAttribute("r", R_ENTRY);
-                    circle.setAttribute("class", "entry-circle");
-                    container.appendChild(circle);
-
-                    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                    text.setAttribute("x", xStart);
-                    text.setAttribute("y", y - LABEL_OFFSET);
-                    text.setAttribute("class", "label");
-                    text.setAttribute("text-anchor", "middle");
-                    text.setAttribute("font-size", LABEL_FONT);
-                    text.textContent = entry.name;
-                    container.appendChild(text);
-                }
-            });
-        });
-    }
-
-    // ===== Daten laden & rendern =====
-    fetch('daten.json')
-        .then(response => response.json())
-        .then(data => {
-            Object.values(data).forEach(category => category.entries.sort((a, b) => a.start - b.start));
-            drawBaseTimeline();
-            renderTimelineData(data);
-        })
-        .catch(error => console.error('Fehler beim Laden der Daten:', error));
-</script>
 </body>
+
 </html>
