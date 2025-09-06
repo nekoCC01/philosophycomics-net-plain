@@ -56,7 +56,7 @@
             <image href="sketch.png" />
         </svg>-->
 
-        <x-timeline></x-timeline>
+        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json"></x-timeline>
 
     </main>
     <script type="module" src="../../../../index.js"></script>
@@ -73,9 +73,10 @@
                 // ===== Skalierungs-Setup (2x interne Auflösung) =====
                 this.SCALE = 2; // Alles innen doppelt zeichnen, äußere SVG-Größe bleibt gleich
 
-                this.startYear = 500;
-                this.endYear = 2050;
+                this.startYear = Number(this.getAttribute("startYear"));
+                this.endYear = Number(this.getAttribute("endYear"));
                 this.pixelsPerYear = 6; // "äußere" Basis – für die sichtbare Breite
+                this.stepYears = Number(this.getAttribute("stepYears"));
 
                 this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 this.svg.id = "timeline"
@@ -117,7 +118,7 @@
 
             connectedCallback() {
                 // ===== Daten laden & rendern =====
-                fetch('daten.json')
+                fetch(this.getAttribute("dataFile"))
                     .then(response => response.json())
                     .then(data => {
                         Object.values(data).forEach(category => category.entries.sort((a, b) => a.start - b.start));
@@ -134,7 +135,7 @@
 
             // ===== Zeitachse vorbereiten =====
             drawBaseTimeline() {
-                for (let year = this.startYear; year <= this.endYear; year += 10) {
+                for (let year = this.startYear; year <= this.endYear; year += this.stepYears) {
                     const x = (year - this.startYear) * this.ppy;
 
                     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
