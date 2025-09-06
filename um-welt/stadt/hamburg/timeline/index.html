@@ -56,7 +56,8 @@
             <image href="sketch.png" />
         </svg>-->
 
-        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json" imgFile="sketch.png"></x-timeline>
+        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json"
+            imgFile="sketch.png"></x-timeline>
 
     </main>
     <script type="module" src="../../../../index.js"></script>
@@ -163,6 +164,14 @@
 
             // ===== Daten aus JSON darstellen =====
             renderTimelineData = (jsonData) => {
+                const categorySizes = Object.entries(jsonData).map(
+                    ([key, value]) => ({ key, length: value.entries.length })
+                );
+                const totalEntries = categorySizes.reduce((sum, cat) => sum + cat.length, 0);
+                
+                console.log(categorySizes);
+                console.log(totalEntries);
+                
                 Object.keys(jsonData).forEach((category, index) => {
                     const { entries, color = "#eeeeee" } = jsonData[category];
                     const yValue = this.ROW_BASE_Y + index * this.ROW_STEP;
