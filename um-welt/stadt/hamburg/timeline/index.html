@@ -56,7 +56,7 @@
             <image href="sketch.png" />
         </svg>-->
 
-        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json"></x-timeline>
+        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json" imgFile="sketch.png"></x-timeline>
 
     </main>
     <script type="module" src="../../../../index.js"></script>
@@ -128,7 +128,7 @@
                     .catch(error => console.error('Fehler beim Laden der Daten:', error));
 
                 const image = document.createElementNS("http://www.w3.org/2000/svg", "image");
-                image.setAttributeNS("http://www.w3.org/1999/xlink", "href", "sketch.png");
+                image.setAttributeNS("http://www.w3.org/1999/xlink", "href", this.getAttribute("imgFile"));
                 this.svg.appendChild(image);
                 this.appendChild(this.svg);
             }
