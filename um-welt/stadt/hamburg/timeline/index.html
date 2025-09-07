@@ -19,7 +19,6 @@
         }
 
         .year-label {
-            font-family: sans-serif;
             font-weight: bold;
             fill: #4c4439;
             text-anchor: middle;
@@ -34,7 +33,6 @@
         }
 
         .label {
-            font-family: sans-serif;
             fill: #333;
         }
 
@@ -56,7 +54,7 @@
             <image href="sketch.png" />
         </svg>-->
 
-        <x-timeline startYear="500" endYear="2050" stepYears="10" dataFile="daten.json"
+        <x-timeline height="750" startYear="500" endYear="2050" stepYears="10" dataFile="daten.json"
             imgFile="sketch.png"></x-timeline>
 
     </main>
@@ -84,7 +82,7 @@
                 this.container = document.createElementNS("http://www.w3.org/2000/svg", "g");
                 this.svg.appendChild(this.container);
 
-                this.height = 750;
+                this.height = this.getAttribute("height");
                 this.svg.setAttribute("height", this.height);              // äußere Höhe in CSS-Pixeln
                 this.totalYears = this.endYear - this.startYear;
 
@@ -109,10 +107,10 @@
                 this.R_ENTRY = 4 * this.SCALE;                                      // war 4
 
                 // Vertikale Layoutmaße 2x
-                this.ROW_BASE_Y = 80 * this.SCALE;                                  // war 80
+                this.ROW_BASE_Y = 100 * this.SCALE;                                  // war 80
                 this.ROW_STEP = 140 * this.SCALE;                                   // war 140
-                this.BG_PAD_TOP = 30 * this.SCALE;                                  // war 30
-                this.BG_HEIGHT = 130 * this.SCALE;                                  // war 130
+                this.BG_PAD_TOP = 25 * this.SCALE;                                  // war 30
+
                 this.LABEL_OFFSET = 6 * this.SCALE;                                 // war 6
                 this.DOT_ROW_OFFSET_STEP = 20 * this.SCALE;                         // war 20
             }
@@ -164,30 +162,38 @@
 
             // ===== Daten aus JSON darstellen =====
             renderTimelineData = (jsonData) => {
-                const categorySizes = Object.entries(jsonData).map(
-                    ([key, value]) => ({ key, length: value.entries.length })
-                );
-                const totalEntries = categorySizes.reduce((sum, cat) => sum + cat.length, 0);
-                
-                console.log(categorySizes);
-                console.log(totalEntries);
-                
+
+                let contentHeight = this.innerHeight - this.ROW_BASE_Y - 10; // 10 for bottom
+                const contentHeightDivision = contentHeight / Object.entries(jsonData).length;
+                const BG_HEIGHT = contentHeightDivision - 20;
+
+                let rowNumber = Math.floor((BG_HEIGHT - 40) / this.DOT_ROW_OFFSET_STEP);
+                let maxRows = false;
+                if (rowNumber > 7) {
+                    rowNumber = 7;
+                    maxRows = true;
+                }
+
                 Object.keys(jsonData).forEach((category, index) => {
                     const { entries, color = "#eeeeee" } = jsonData[category];
-                    const yValue = this.ROW_BASE_Y + index * this.ROW_STEP;
+                    let yValue = this.ROW_BASE_Y + index * contentHeightDivision;
 
                     // Hintergrund-Rechteck hinter die Einträge
                     const bg = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                     bg.setAttribute("x", 0);
                     bg.setAttribute("y", yValue - this.BG_PAD_TOP);
                     bg.setAttribute("width", this.innerWidth);
-                    bg.setAttribute("height", this.BG_HEIGHT);
+                    bg.setAttribute("height", BG_HEIGHT);
                     bg.setAttribute("fill", color);
                     bg.setAttribute("opacity", 0.4);
                     this.svg.insertBefore(bg, this.svg.firstChild);
 
+                    if (maxRows) {
+                        yValue = yValue + (BG_HEIGHT / 2) - ((rowNumber / 2) * this.DOT_ROW_OFFSET_STEP) - 30;
+                    }
+
                     entries.forEach((entry, i) => {
-                        const offset = (i % 5) * this.DOT_ROW_OFFSET_STEP;
+                        const offset = (i % rowNumber) * this.DOT_ROW_OFFSET_STEP;
                         const y = yValue + offset;
                         const xStart = (entry.start - this.startYear) * this.ppy;
 
@@ -198,7 +204,7 @@
                             line.setAttribute("y1", y);
                             line.setAttribute("x2", xEnd);
                             line.setAttribute("y2", y);
-                            line.setAttribute("class", "entry-line");
+                            line.setAttribute("stroke", color);
                             line.setAttribute("stroke-width", this.STROKE_ENTRY);
                             this.container.appendChild(line);
 
@@ -215,7 +221,7 @@
                             circle.setAttribute("cx", xStart);
                             circle.setAttribute("cy", y);
                             circle.setAttribute("r", this.R_ENTRY);
-                            circle.setAttribute("class", "entry-circle");
+                            circle.setAttribute("fill", color);
                             this.container.appendChild(circle);
 
                             const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
