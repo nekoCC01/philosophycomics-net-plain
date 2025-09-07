@@ -1,6 +1,6 @@
 {
   "Philosophen & Wissenschaftler": {
-    "color": "#e0dbb8",
+    "color": "#b5af86",
     "entries": [
       {
         "name": "Boethius",
@@ -145,7 +145,7 @@
     ]
   },
   "Künstler": {
-    "color": "#e9c3eb",
+    "color": "#ab7dad",
     "entries": [
       {
         "name": "Jan van Eyck",
@@ -215,7 +215,7 @@
     ]
   },
   "Stadtgeschichte - Hamburg": {
-    "color": "#e3c998",
+    "color": "#9e8a64",
     "entries": [
       {
         "name": "Ansgar",
@@ -523,7 +523,7 @@
     ]
   },
   "Globale Geschichte": {
-    "color": "#cfe398",
+    "color": "#7c875d",
     "entries": [
       {
         "name": "Mohammed",
@@ -687,7 +687,7 @@
     ]
   },
   "Geschichte Japans": {
-    "color": "#e394a9",
+    "color": "#85505e",
     "entries": [
       {
         "name": "Shotoku Taishi",

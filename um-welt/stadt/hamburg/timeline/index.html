@@ -25,15 +25,15 @@
         }
 
         .decade-line {
-            stroke: rgba(235, 214, 154, 0.3);
+            stroke: rgba(161, 159, 154, 0.2);
         }
 
         .mid-decade-line {
-            stroke: rgba(235, 214, 154, 0.8);
+            stroke: rgba(161, 159, 154, 0.5);
         }
 
         .label {
-            fill: #333;
+            fill: black;
         }
 
         .entry-line {
@@ -149,6 +149,15 @@
                     this.container.appendChild(line);
 
                     if (isCentury) {
+                        const bgText = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        bgText.setAttribute("fill", "white");
+                        bgText.setAttribute("width", 200);
+                        bgText.setAttribute("height", 80);
+                        bgText.setAttribute("x", x - 100);
+                        bgText.setAttribute("y", 20); // war 40
+                        this.container.appendChild(bgText);
+
+
                         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                         text.setAttribute("x", x);
                         text.setAttribute("y", 40 * this.SCALE); // war 40
@@ -185,7 +194,7 @@
                     bg.setAttribute("width", this.innerWidth);
                     bg.setAttribute("height", BG_HEIGHT);
                     bg.setAttribute("fill", color);
-                    bg.setAttribute("opacity", 0.4);
+                    bg.setAttribute("opacity", 0.3);
                     this.svg.insertBefore(bg, this.svg.firstChild);
 
                     if (maxRows) {
