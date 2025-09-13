@@ -7,19 +7,13 @@ class Test extends HTMLElement {
         let templateDimension = document.querySelector('template#dimension');
         let templateQuestion = document.querySelector('template#question');
 
-        // this.appendChild(templateTest.content.cloneNode(true));
-
         let fragmentTest = templateTest.content.cloneNode(true);
         let rootDimensions = fragmentTest.getElementById("dimensions");
 
-
-        // Jetzt ist das Template im DOM des Elements!
-        // Beispiel: Daten laden
         const res = await fetch('questions.json');
         const questions = await res.json();
 
         questions.forEach(dimQ => {
-            // h2 mit dimQ.dimension -> templateDimension
             let fragmentDimension = templateDimension.content.cloneNode(true);
             fragmentDimension.querySelector('h2').textContent = dimQ.dimension;
             let rootQuestions = fragmentDimension.querySelector('.questions');
@@ -37,13 +31,11 @@ class Test extends HTMLElement {
             })
         })
 
-
         fragmentTest.querySelectorAll('input').forEach(radio => {
             radio.addEventListener('change', e => {
                 console.log("Ausgewählt", e.target, e.target.value, e.target.name);
             })
         })
-
 
         this.appendChild(fragmentTest);
 
