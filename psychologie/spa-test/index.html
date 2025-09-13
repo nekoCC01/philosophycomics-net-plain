@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../index.css">
     <script type="module">
         import { registerRouteComponent } from "../../00_assets/components/Route.js";
         import { registerTest } from "./components/Test.js";
@@ -19,27 +20,56 @@
         document.addEventListener('DOMContentLoaded', app);
     </script>
     <style>
+        main {
+            padding: 30px;
+        }
         .dim-questions {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .dim-questions > * + * {
+            margin-block-start: 20px;;
+        }
+        .dim-questions .row {
             display: grid;
             grid-template-columns: 3fr 1fr;
             width: 600px;
         }
-        fieldset, .legend {
-            border: none;
-            display: flex;
-            justify-content: space-around;
+        .dim-questions .row p {
+            padding-inline-end: 10px;
         }
-        .legend div {
+
+        fieldset,
+        .legend {
+            border: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 0;
+            margin: 0;
+        }
+
+        .legend div,
+        fieldset div {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
             font-size: x-small;
+        }
+
+        .legend div {
+            text-align: center;
+        }
+
+        input {
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
 
 <body>
+    <main>
 
     <x-route path="/">
         <x-route path="/" exact>
@@ -52,24 +82,48 @@
 
 
 
-    <h2>Test</h2>
+    <h2>Dimension</h2>
     <div class="dim-questions">
-        <div></div>
-        <div class="legend">
-            <div>Stimmt</div>
-            <div>Stimmt etwas</div>
-            <div>Stimmt nicht</div>
+        <div class="row">
+            <div class="legend" style="grid-column-start: 2;">
+                <div class="input">Stimmt</div>
+                <div class="input">Stimmt etwas</div>
+                <div class="input">Stimmt nicht</div>
+            </div>
         </div>
-        <p>Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst.</p>
-        <fieldset>
-            <input type="radio" name="test" value="1" />
-            <input type="radio" name="test" value="0.5" />
-            <input type="radio" name="test" value="0" />
-        </fieldset>
+        <div class="row">
+            <p>Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst.</p>
+            <fieldset>
+                <div class="input">
+                    <input type="radio" name="test" value="1" />
+                </div>
+                <div class="input"><input type="radio" name="test" value="0.5" /></div>
+                <div class="input"><input type="radio" name="test" value="0" /></div>
+            </fieldset>
+        </div>
 
+        <div class="row">
+            <p>Ich neige dazu, mich ausnutzen zu lassen.</p>
+            <fieldset>
+                <div class="input">
+                    <input type="radio" name="test2" value="1" />
+                </div>
+                <div class="input"><input type="radio" name="test2" value="0.5" /></div>
+                <div class="input"><input type="radio" name="test2" value="0" /></div>
+            </fieldset>
+        </div>
 
     </div>
+    </main>
+
 </body>
+<script>
+            document.querySelectorAll('input').forEach(radio => {
+                radio.addEventListener('change', e => {
+                    console.log("Ausgewählt", e.target, e.target.value, e.target.name);
+                })
+            })
+        </script>
 
 <template id="test">
     <h1>HOME/TEST</h1>
