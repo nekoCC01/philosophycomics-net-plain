@@ -23,20 +23,27 @@
         main {
             padding: 30px;
         }
-        .dim-questions {
+
+        .questions {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            margin-bottom: 40px;
+            ;
         }
-        .dim-questions > * + * {
-            margin-block-start: 20px;;
+
+        .questions>*+* {
+            margin-block-start: 20px;
+            ;
         }
-        .dim-questions .row {
+
+        .questions .row {
             display: grid;
             grid-template-columns: 3fr 1fr;
             width: 600px;
         }
-        .dim-questions .row p {
+
+        .questions .row p {
             padding-inline-end: 10px;
         }
 
@@ -71,19 +78,41 @@
 <body>
     <main>
 
-    <x-route path="/">
-        <x-route path="/" exact>
-            <x-test></x-test>
+        <x-route path="/">
+            <x-route path="/" exact>
+                <x-test></x-test>
+            </x-route>
+            <x-route path="/result" exact>
+                <x-result></x-result>
+            </x-route>
         </x-route>
-        <x-route path="/result" exact>
-            <x-result></x-result>
-        </x-route>
-    </x-route>
 
+    </main>
 
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        document.querySelectorAll('input').forEach(radio => {
+            console.log(radio);
+            radio.addEventListener('change', e => {
+                console.log("Ausgewählt", e.target, e.target.value, e.target.name);
+            })
+        })
+    });
 
+</script>
+
+<template id="test">
+    <h1>HOME/TEST</h1>
+    <a href="#/result">RESULT</a>
+    <div id="dimensions">
+
+    </div>
+</template>
+
+<template id="dimension">
     <h2>Dimension</h2>
-    <div class="dim-questions">
+    <div class="questions">
         <div class="row">
             <div class="legend" style="grid-column-start: 2;">
                 <div class="input">Stimmt</div>
@@ -91,55 +120,26 @@
                 <div class="input">Stimmt nicht</div>
             </div>
         </div>
-        <div class="row">
-            <p>Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst.</p>
-            <fieldset>
-                <div class="input">
-                    <input type="radio" name="test" value="1" />
-                </div>
-                <div class="input"><input type="radio" name="test" value="0.5" /></div>
-                <div class="input"><input type="radio" name="test" value="0" /></div>
-            </fieldset>
-        </div>
-
-        <div class="row">
-            <p>Ich neige dazu, mich ausnutzen zu lassen.</p>
-            <fieldset>
-                <div class="input">
-                    <input type="radio" name="test2" value="1" />
-                </div>
-                <div class="input"><input type="radio" name="test2" value="0.5" /></div>
-                <div class="input"><input type="radio" name="test2" value="0" /></div>
-            </fieldset>
-        </div>
-
-    </div>
-    </main>
-
-</body>
-<script>
-            document.querySelectorAll('input').forEach(radio => {
-                radio.addEventListener('change', e => {
-                    console.log("Ausgewählt", e.target, e.target.value, e.target.name);
-                })
-            })
-        </script>
-
-<template id="test">
-    <h1>HOME/TEST</h1>
-    <a href="#/result">RESULT</a>
-    <div id="questions">
-
     </div>
 </template>
 
 <template id="question">
-
-    <h2></h2>
-    <div class="dim-questions">
-
+    <div class="row">
+        <p>Question</p>
+        <fieldset>
+            <div class="input">
+                <input type="radio" name="test2" value="1" />
+            </div>
+            <div class="input">
+                <input type="radio" name="test2" value="0.5" />
+            </div>
+            <div class="input">
+                <input type="radio" name="test2" value="0" />
+            </div>
+        </fieldset>
     </div>
 </template>
+
 
 <template id="result">
     <h1>RESULT</h1>
