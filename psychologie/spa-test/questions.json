@@ -1,0 +1,54 @@
+[
+  {
+    "dimension": "Dauer",
+    "questions": [
+      {
+        "id": "D1",
+        "text": "Es ist mir wichtig, meiner Sache ganz sicher zu sein."
+      },
+      {
+        "id": "D2",
+        "text": "Ich wäge lange ab, bevor ich mich entscheide."
+      }
+    ]
+  },
+  {
+    "dimension": "Nähe",
+    "questions": [
+      {
+        "id": "NÄ1",
+        "text": "Ich neige dazu, mich ausnutzen zu lassen."
+      },
+      {
+        "id": "NÄ2",
+        "text": "Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst."
+      }
+    ]
+  },
+  {
+    "dimension": "Wechsel",
+    "questions": [
+      {
+        "id": "W1",
+        "text": "Von mir gehen kreative Impulse aus."
+      },
+      {
+        "id": "W2",
+        "text": "Ich neige zur Unpünktlichkeit."
+      }
+    ]
+  },
+  {
+    "dimension": "Distanz",
+    "questions": [
+      {
+        "id": "DI1",
+        "text": "Menschen wenden sich gerne an mich, um einen fachlichen Rat zu bekommen."
+      },
+      {
+        "id": "DI2",
+        "text": "Ich mache meine Sachen lieber allein, bevor ich jemanden um Rat frage."
+      }
+    ]
+  }
+]

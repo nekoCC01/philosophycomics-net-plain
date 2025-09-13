@@ -18,6 +18,25 @@
 
         document.addEventListener('DOMContentLoaded', app);
     </script>
+    <style>
+        .dim-questions {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            width: 600px;
+        }
+        fieldset, .legend {
+            border: none;
+            display: flex;
+            justify-content: space-around;
+        }
+        .legend div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: x-small;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,12 +51,40 @@
     </x-route>
 
 
+
+    <h2>Test</h2>
+    <div class="dim-questions">
+        <div></div>
+        <div class="legend">
+            <div>Stimmt</div>
+            <div>Stimmt etwas</div>
+            <div>Stimmt nicht</div>
+        </div>
+        <p>Es fällt mir leichter, für meine(n) Partner/Partnerin ein Geschenk zu kaufen, als für mich selbst.</p>
+        <fieldset>
+            <input type="radio" name="test" value="1" />
+            <input type="radio" name="test" value="0.5" />
+            <input type="radio" name="test" value="0" />
+        </fieldset>
+
+
+    </div>
 </body>
 
 <template id="test">
     <h1>HOME/TEST</h1>
     <a href="#/result">RESULT</a>
-    <ul id="meine-liste"></ul>
+    <div id="questions">
+
+    </div>
+</template>
+
+<template id="question">
+
+    <h2></h2>
+    <div class="dim-questions">
+
+    </div>
 </template>
 
 <template id="result">

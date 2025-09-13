@@ -7,9 +7,15 @@ class Test extends HTMLElement {
 
         // Jetzt ist das Template im DOM des Elements!
         // Beispiel: Daten laden
-        const res = await fetch('daten.json');
-        const daten = await res.json();
+        const res = await fetch('questions.json');
+        const questions = await res.json();
 
+        questions.forEach(elem => {
+            console.log(elem)
+            
+        })
+
+        /*
         // Ziel-Container im Template finden
         const listContainer = this.querySelector('#meine-liste');
         daten.forEach(item => {
@@ -20,6 +26,8 @@ class Test extends HTMLElement {
 
         //Test
         console.log(testImport());
+        */
+
     }
 }
 
