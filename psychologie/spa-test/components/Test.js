@@ -18,8 +18,6 @@ class Test extends HTMLElement {
             fragmentDimension.querySelector('h2').textContent = dimQ.dimension;
             let rootQuestions = fragmentDimension.querySelector('.questions');
 
-            rootDimensions.appendChild(fragmentDimension);
-
             // Questions
             dimQ.questions.forEach(question => {
                 let fragmentQuestion = templateQuestion.content.cloneNode(true);
@@ -29,6 +27,9 @@ class Test extends HTMLElement {
                 })
                 rootQuestions.appendChild(fragmentQuestion);
             })
+
+            rootDimensions.appendChild(fragmentDimension);
+
         })
 
         fragmentTest.querySelectorAll('input').forEach(radio => {
