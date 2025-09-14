@@ -4,6 +4,10 @@
     "path": "meditation",
     "children": [
       {
+        "title": "Musik > Wagner - Zeit-Verteilung",
+        "path": "meditation/musik/wagner-ring-zeit-visualisierung.html"
+      },
+      {
         "title": "Stoa",
         "path": "meditation/stoa",
         "children": [
