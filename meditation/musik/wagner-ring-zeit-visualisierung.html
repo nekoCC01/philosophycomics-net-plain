@@ -14,17 +14,28 @@
             justify-content: center;
             align-items: center;
         }
+
         #container {
             display: flex;
             flex-direction: row;
         }
 
-        #container div {
-            height: 50px;
+        #container>div {
+            height: 70px;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        #container .inner {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #container .inner span:nth-child(2) {
+            font-size: small;
         }
     </style>
 </head>
@@ -38,7 +49,14 @@
         </div>
     </main>
 
-
+    <template>
+        <div class="outer">
+            <div class="inner">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </template>
 
 
     <script>
@@ -78,6 +96,7 @@
         const SCALE = 100;
         let container = document.getElementById("container");
         let totalTime = 0;
+        let template = document.querySelector("template");
 
         tracksArray.forEach(track => {
 
@@ -85,10 +104,14 @@
             let length = timeToDecimal(track.duration);
             totalTime += length;
 
-            let trackDiv = document.createElement("div");
-            trackDiv.style.width = length * SCALE + "px";
-            trackDiv.style.backgroundColor = track.color;
-            trackDiv.textContent = track.title;
+            let trackDiv = template.content.cloneNode(true);
+            // let trackDiv = document.createElement("div");
+            let outerDiv = trackDiv.querySelector('.outer');
+            outerDiv.style.width = length * SCALE + "px";
+            outerDiv.style.backgroundColor = track.color;
+
+            trackDiv.querySelector('span:first-child').textContent = track.title;
+            trackDiv.querySelector('span:nth-child(2)').textContent = track.duration;
 
             container.appendChild(trackDiv);
 
