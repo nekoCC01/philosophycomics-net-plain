@@ -70,6 +70,14 @@
             padding: 0;
             margin: 0;
         }
+
+        .name-input {
+            margin-block: 25px;
+        }
+        .name-input input,
+        .name-input button {
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -92,6 +100,10 @@
 <template id="test">
     <h1>HOME/TEST</h1>
     <a href="#/result">RESULT</a>
+    <form class="name-input" action="">
+        <input type="text" name="username" placeholder="Namen eingeben">
+        <button type="submit">Abschicken</button>
+    </form>
     <div id="dimensions">
 
     </div>
