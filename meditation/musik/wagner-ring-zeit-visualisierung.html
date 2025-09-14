@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagner - Überblick</title>
+    <link rel="stylesheet" href="../../index.css">
+    <style>
+        main {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #container div {
+            height: 50px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <main>
+        <p id="total" style="margin-bottom: 20px;;"></p>
+        <div id="container">
+        </div>
+    </main>
+
+
+
+
+    <script>
+        let tracksArray = [
+            {
+                title: "Rheingold",
+                duration: "2:26",
+                color: "#62808a"
+            },
+            {
+                title: "Walküre - 1",
+                duration: "1:02",
+                color: "#b89c74"
+            },
+            {
+                title: "Walküre - 2",
+                duration: "1:26",
+                color: "#b5894a"
+            },
+            {
+                title: "Walküre - 3",
+                duration: "1:05",
+                color: "#94621b"
+            },
+            {
+                title: "Siegfried",
+                duration: "3:50",
+                color: "#704673"
+            },
+            {
+                title: "Götterdämmerung",
+                duration: "4:10",
+                color: "#171117"
+            }
+        ];
+
+        const SCALE = 100;
+        let container = document.getElementById("container");
+        let totalTime = 0;
+
+        tracksArray.forEach(track => {
+
+            // Länge Balken
+            let length = timeToDecimal(track.duration);
+            totalTime += length;
+
+            let trackDiv = document.createElement("div");
+            trackDiv.style.width = length * SCALE + "px";
+            trackDiv.style.backgroundColor = track.color;
+            trackDiv.textContent = track.title;
+
+            container.appendChild(trackDiv);
+
+        });
+        console.log(totalTime);
+        document.getElementById("total").textContent = "TOTAL: " + Math.round(totalTime) + " h"
+
+        function timeToDecimal(timeStr) {
+            const [hours, minutes] = timeStr.split(":").map(Number);
+            return hours + minutes / 60;
+        }
+
+    </script>
+
+
+</body>
+
+</html>
