@@ -24,6 +24,18 @@
             padding: 30px;
         }
 
+        x-test {
+            max-width: 1300px;
+            display: block;
+        }
+        #dimensions {
+            width: 600px;
+            display: none;
+        }
+        #persons {
+            width: 500px;
+        }
+
         .questions {
             display: flex;
             flex-direction: column;
@@ -38,14 +50,13 @@
         .questions .row {
             display: grid;
             grid-template-columns: 3fr 1fr;
-            width: 600px;
         }
 
         .questions .row p {
             padding-inline-end: 10px;
         }
 
-        fieldset,
+        fieldset.answer-options,
         .legend {
             border: none;
             display: grid;
@@ -55,7 +66,7 @@
         }
 
         .legend div,
-        fieldset div {
+        fieldset.answer-options div {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -73,6 +84,7 @@
 
         .name-input {
             margin-block: 25px;
+            display: none;
         }
         .name-input input,
         .name-input button {
@@ -100,10 +112,24 @@
 <template id="test">
     <h1>HOME/TEST</h1>
     <a href="#/result">RESULT</a>
-    <form class="name-input" action="">
+
+    <fieldset id="persons">
+        <legend>Wieviel Teilnehmer?</legend>
+        <input class="persons-input" type="radio" name="persons" value="1" id="p1">
+        <label for="p1">1 Person</label>
+        <input class="persons-input" type="radio" name="persons" value="2" id="p2">
+        <label for="p2">2 Personen</label>
+    </fieldset>
+
+    <form class="name-input" id="name-input" action="">
         <input type="text" name="username" placeholder="Namen eingeben">
         <button type="submit">Abschicken</button>
     </form>
+    <form class="name-input" id="name-input2" action="">
+        <input type="text" name="username2" placeholder="Namen eingeben">
+        <button type="submit">Abschicken</button>
+    </form>
+    
     <div id="dimensions">
 
     </div>
@@ -114,9 +140,9 @@
     <div class="questions">
         <div class="row">
             <div class="legend" style="grid-column-start: 2;">
-                <div class="input">Stimmt</div>
-                <div class="input">Stimmt etwas</div>
-                <div class="input">Stimmt nicht</div>
+                <div>Stimmt</div>
+                <div>Stimmt etwas</div>
+                <div>Stimmt nicht</div>
             </div>
         </div>
     </div>
@@ -125,15 +151,15 @@
 <template id="question">
     <div class="row">
         <p>Question</p>
-        <fieldset>
-            <div class="input">
-                <input type="radio" name="test2" value="1" />
+        <fieldset class="answer-options">
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="1" />
             </div>
-            <div class="input">
-                <input type="radio" name="test2" value="0.5" />
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="0.5" />
             </div>
-            <div class="input">
-                <input type="radio" name="test2" value="0" />
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="0" />
             </div>
         </fieldset>
     </div>
