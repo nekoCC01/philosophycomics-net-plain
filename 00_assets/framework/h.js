@@ -14,3 +14,7 @@ export function h(tag, props = {}, children = []) {
         type: DOM_TYPES.ELEMENT
     };
 }
+
+export function hString(str) {
+    return { type: DOM_TYPES.TEXT, value: str }
+}
