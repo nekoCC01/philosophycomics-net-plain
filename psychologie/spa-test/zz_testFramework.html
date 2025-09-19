@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type="module" src="../../00_assets/framework/src/h.js"></script>
 </head>
+
 <body>
-    
+
+
+    <script type="module">
+        import { h } from '../../00_assets/framework/src/h.js';
+
+        function login(event) {
+            event.preventDefault();
+            console.log('Login-Button geklickt!');
+        }
+
+        let test = h('form', { class: 'login-form', action: 'login' }, [
+            h('input', { type: 'text', name: 'user' }),
+            h('input', { type: 'password', name: 'pass' }),
+            h('button', { on: { click: login } }, ['Log in'])
+        ])
+
+        console.log(test)
+
+    </script>
+
+
 </body>
+
 </html>
