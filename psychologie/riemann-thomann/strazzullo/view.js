@@ -1,14 +1,13 @@
 const getTodoElement = todo => {
     const {
-        text,
-        completed
+        id,
+        text
     } = todo
 
     return `
-  <li ${completed ? 'class="completed"' : ''}>
+  <li>
     <div class="view">
       <input 
-        ${completed ? 'checked' : ''}
         class="toggle" 
         type="checkbox">
       <label>${text}</label>

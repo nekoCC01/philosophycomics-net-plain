@@ -1,8 +1,8 @@
-import getTodos from './getTodos.js'
+import getQuestions from './getQuestions.js'
 import view from './view.js'
 
 const state = {
-    todos: getTodos(),
+    todos: getQuestions,
     currentFilter: 'All'
 }
 
