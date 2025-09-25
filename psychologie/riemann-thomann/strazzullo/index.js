@@ -1,12 +1,11 @@
-import getQuestions from './getQuestions.js'
+import questions from './questions.js'
 import view from './view.js'
 
 const state = {
-    todos: getQuestions,
-    currentFilter: 'All'
+    questions: questions
 }
 
-const main = document.querySelector('.todoapp')
+const main = document.querySelector('#test')
 
 window.requestAnimationFrame(() => {
     const newMain = view(main, state)

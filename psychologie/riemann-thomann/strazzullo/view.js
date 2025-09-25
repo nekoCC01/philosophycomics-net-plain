@@ -1,58 +1,39 @@
-const getTodoElement = todo => {
+const getQuestion = question => {
     const {
         id,
         text
-    } = todo
+    } = question
 
     return `
-  <li>
-    <div class="view">
-      <input 
-        class="toggle" 
-        type="checkbox">
-      <label>${text}</label>
-      <button class="destroy"></button>
+  <div class="row">
+        <p>${text}</p>
+        <fieldset class="answer-options">
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="1" />
+            </div>
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="0.5" />
+            </div>
+            <div>
+                <input class="answer-input" type="radio" name="test2" value="0" />
+            </div>
+        </fieldset>
     </div>
-    <input class="edit" value="${text}">
-  </li>`
+    `
+
 }
 
-const getTodoCount = todos => {
-    const notCompleted = todos
-        .filter(todo => !todo.completed)
-
-    const { length } = notCompleted
-    if (length === 1) {
-        return '1 Item left'
-    }
-
-    return `${length} Items left`
-}
 
 export default (targetElement, state) => {
     const {
-        currentFilter,
-        todos
+        questions
     } = state
 
     const element = targetElement.cloneNode(true)
 
-    const list = element.querySelector('.todo-list')
-    const counter = element.querySelector('.todo-count')
-    const filters = element.querySelector('.filters')
+    const questionsSection = element.querySelector('.questions')
 
-    list.innerHTML = todos.map(getTodoElement).join('')
-    counter.textContent = getTodoCount(todos)
-
-    Array
-        .from(filters.querySelectorAll('li a'))
-        .forEach(a => {
-            if (a.textContent === currentFilter) {
-                a.classList.add('selected')
-            } else {
-                a.classList.remove('selected')
-            }
-        })
+    questionsSection.innerHTML = questions.map(getQuestion).join('')
 
     return element
 }

@@ -1,0 +1,70 @@
+main {
+            padding: 30px;
+        }
+
+        x-test {
+            max-width: 1300px;
+            display: block;
+        }
+        #dimensions {
+            width: 600px;
+            display: none;
+        }
+        #persons {
+            width: 500px;
+        }
+
+        .questions {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .questions>*+* {
+            margin-block-start: 20px;
+        }
+
+        .questions .row {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+
+        .questions .row p {
+            padding-inline-end: 10px;
+        }
+
+        fieldset.answer-options,
+        .legend {
+            border: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 0;
+            margin: 0;
+        }
+
+        .legend div,
+        fieldset.answer-options div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: x-small;
+        }
+
+        .legend div {
+            text-align: center;
+        }
+
+        input {
+            padding: 0;
+            margin: 0;
+        }
+
+        .name-input {
+            margin-block: 25px;
+            display: none;
+        }
+        .name-input input,
+        .name-input button {
+            padding: 5px;
+        }
