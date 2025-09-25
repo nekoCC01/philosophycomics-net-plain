@@ -1,6 +1,5 @@
 const getQuestion = question => {
     const {
-        id,
         text
     } = question
 
