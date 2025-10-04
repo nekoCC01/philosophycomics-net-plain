@@ -1,14 +1,19 @@
 import questions from './questions.js'
-import appView from './view/app.js'
+
+import inputView from './view/input.js';
+import questionsView from './view/questions.js';
+import registry from './registry.js'
+
+registry.add('input', inputView)
+registry.add('questions', questionsView)
 
 const state = {
     questions: questions,
     persons: 'Daniel'
 }
 
-const main = document.querySelector('#test')
-
 window.requestAnimationFrame(() => {
-    const newMain = appView(main, state)
-    main.replaceWith(newMain)
+  const main = document.querySelector('#test')
+  const newMain = registry.renderRoot(main, state)
+  main.replaceWith(newMain)
 })
