@@ -1,13 +1,14 @@
 import questions from './questions.js'
-import view from './view.js'
+import appView from './view/app.js'
 
 const state = {
-    questions: questions
+    questions: questions,
+    persons: 'Daniel'
 }
 
 const main = document.querySelector('#test')
 
 window.requestAnimationFrame(() => {
-    const newMain = view(main, state)
+    const newMain = appView(main, state)
     main.replaceWith(newMain)
 })
