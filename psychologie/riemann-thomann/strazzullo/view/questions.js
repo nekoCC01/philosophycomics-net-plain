@@ -33,13 +33,13 @@ export default (targetElement, state) => {
     const questionsSection = element.querySelector('.questions')
 
     questionsSection.innerHTML = `
-    <div class="row">
-                    <div class="legend" style="grid-column-start: 2;">
-                        <div>Stimmt</div>
-                        <div>Stimmt etwas</div>
-                        <div>Stimmt nicht</div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="legend" style="grid-column-start: 2;">
+                <div>Stimmt</div>
+                <div>Stimmt etwas</div>
+                <div>Stimmt nicht</div>
+            </div>
+        </div>
     `;
     questionsSection.innerHTML += questions.map(getQuestion).join('')
 
