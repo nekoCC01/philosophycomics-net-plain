@@ -4,12 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storyboard Gallery</title>
+    <title>Mockup - Storyboard Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            overflow-x: auto;
+            align-items: flex-start;
+        }
+    </style>
 </head>
 
 <body>
 
-    <storyboard-gallery>
+    <section class="gallery">
         <figure>
             <h1>Antike Unsterblichkeit</h1>
             <img src="img/arendt/1.jpg" alt="">
@@ -58,9 +67,7 @@
                 heruntergestuft wurde. (vgl S. 80f, VA)
             </figcaption>
         </figure>
-    </storyboard-gallery>
-
-    <script src="storyboard-gallery.js"></script>
+    </section>
 
 
 </body>
