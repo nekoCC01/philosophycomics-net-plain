@@ -14,6 +14,10 @@
           {
             "title": "Stoa Hauptseite",
             "path": "meditation/stoa/index.html"
+          },
+          {
+            "title": "Nullpunkt",
+            "path": "meditation/stoa/nullpunkt.html"
           }
         ]
       },
