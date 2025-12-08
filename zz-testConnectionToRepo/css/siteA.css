@@ -1,0 +1,13 @@
+/* siteA/css/siteA.css */
+
+/* Überschreibt Default-Werte aus repo/styles.css */
+:root {
+  --brand-color: #e91e63;
+  --spacing: 1.5rem;
+  --text-color: #333;
+}
+
+/* Optionale zusätzliche Styles nur für siteA */
+body[data-site="siteA"] {
+  background: #fff7fb;
+}
