@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>siteA – Beispiel</title>
+
+    <!-- Gemeinsame Styles aus repo -->
+    <link rel="stylesheet" href="https://nekocc01.github.io/sandbox/testRepo/styles/styles.css">
+
+    <!-- Site-spezifische Overrides (CSS-Variablen usw.) -->
+    <link rel="stylesheet" href="./css/siteA.css">
+</head>
+
+<body data-site="siteA">
+    <main>
+        <h1>siteA</h1>
+
+        <div data-shared-widget>
+            <!-- Inhalt wird vom shared module angepasst -->
+        </div>
+    </main>
+
+    <!-- 1) Kontext der Seite definieren -->
+    <script>
+        window.SITE_CONFIG = {
+            siteId: 'siteA',
+            theme: 'light',
+            apiBaseUrl: 'https://api.site-a.example',
+            varA: 'contextA'
+        };
+    </script>
+
+    
+    <script type="module">
+        import { initSharedModule } from 'https://nekocc01.github.io/sandbox/testRepo/scripts/module.js';
+
+        const context = {
+            siteId: 'siteA',
+            varA: 'contextA'
+        };
+
+        initSharedModule(context);
+    </script>
+
+</body>
+
+</html>
