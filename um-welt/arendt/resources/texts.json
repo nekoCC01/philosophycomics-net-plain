@@ -1,63 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mockup - Storyboard Gallery</title>
-    <style>
-        .gallery {
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            overflow-x: auto;
-            align-items: flex-start;
-        }
-    </style>
-</head>
-
-<body>
-
-
-    <header>
-        <h1>Revolution</h1>
-    </header>
-    <main>
-        <section id="stage">
-            <img src="img/arendt/1.jpg" alt="">
-            <img src="img/arendt/2.jpg" alt="">
-            <img src="img/arendt/3.jpg" alt="">
-        </section>
-        <nav></nav>
-        <section id="text">
-            <blockquote>„Der Sinn von Politik ist Freiheit.“ (Was ist Politik?, 2003)</blockquote>
-
-                Die Freiheit zum Handeln ist der Notwendigkeit des Überlebens entgegengesetzt. Im griechischen
-                Stadtstaat war es die konzeptionelle Aufgabe der Politik, dem Mensch ein Raum zur Entfaltung zu bieten.
-                Diesem Raum der öffentlichen Tat war der private Bereich des Haushalts entgegengesetzt, der sich um die
-                Frage drehte, wie man den Lebensunterhalt sichert – im Vergleich zum Glanz der öffentlichen Kultur eher
-                gering geschätzt:
-
-                <blockquote>„Wenn jemand, der genug besaß, um den eigenen Lebensunterhalt zu bestreiten, beschloß,
-                    seinen Besitz zu vermehren, anstatt ihn aufzubrauchen oder gerade soviel Sorgfalt auf ihn zu
-                    verwenden, wie zu seiner Erhaltung notwendig war, so hatte er eben freiwillig auf seine Freiheit
-                    verzichtet und sich zu dem erniedrigt, was die Sklaven und die Armen nur unter dem Druck der
-                    Umstände geworden waren – ein Knecht der Notwendigkeit.“ (S. 80, VA)</blockquote>
-
-                Ein prägendes Ereignis der Neuzeit war die Französische Revolution, die sich erneut die Freiheit auf die
-                Fahnen schrieb. Doch die Revolution fand statt inmitten gewaltiger gesellschaftlicher Umwälzungen, als
-                deren Folge die Sphäre politischer Freiheit im Verhältnis zur ökonomischen Freiheit des Erwerbs
-                heruntergestuft wurde. (vgl S. 80f, VA)
-        </section>
-    </main>
-
-
-    <section class="gallery">
-        <figure>
-            <h1>Antike Unsterblichkeit</h1>
-            <img src="img/arendt/1.jpg" alt="">
-            <figcaption>
-                Hannah Arendt (1906-1975) widmet sich in ihrem philosophischen Werk „Vita activa – Vom tätigen Leben“ –
+[
+    'Hannah Arendt (1906-1975) widmet sich in ihrem philosophischen Werk „Vita activa – Vom tätigen Leben“ –
                 wie der Titel andeutet – dem tätigen Leben, oder der scheinbar einfachen Frage: was tun wir, wenn wir
                 tätig sind?
 
@@ -74,14 +16,9 @@
                     href="http://www.openisbn.com/isbn/9783492236232/">Vita Activa </a>(im folgenden: VA))
 
                 <blockquote>„Ohne dies Übersteigen in eine mögliche irdische Unsterblichkeit kann es im Ernst weder
-                    Politik noch eine gemeinsame Welt noch eine Öffentlichkeit geben.“ (S. 68, VA)</blockquote>
-            </figcaption>
-        </figure>
-        <figure>
-            <h1>Revolution</h1>
-            <img src="img/arendt/2.jpg" alt="">
-            <figcaption>
-                <blockquote>„Der Sinn von Politik ist Freiheit.“ (Was ist Politik?, 2003)</blockquote>
+                    Politik noch eine gemeinsame Welt noch eine Öffentlichkeit geben.“ (S. 68, VA)</blockquote>',
+                    '<blockquote>„Der Sinn von Politik ist Freiheit.“ (Was ist Politik?,
+    2003)</blockquote>
 
                 Die Freiheit zum Handeln ist der Notwendigkeit des Überlebens entgegengesetzt. Im griechischen
                 Stadtstaat war es die konzeptionelle Aufgabe der Politik, dem Mensch ein Raum zur Entfaltung zu bieten.
@@ -98,14 +35,8 @@
                 Ein prägendes Ereignis der Neuzeit war die Französische Revolution, die sich erneut die Freiheit auf die
                 Fahnen schrieb. Doch die Revolution fand statt inmitten gewaltiger gesellschaftlicher Umwälzungen, als
                 deren Folge die Sphäre politischer Freiheit im Verhältnis zur ökonomischen Freiheit des Erwerbs
-                heruntergestuft wurde. (vgl S. 80f, VA)
-            </figcaption>
-        </figure>
-        <figure>
-            <h1>Restauration</h1>
-            <img src="img/arendt/3.jpg" alt="">
-            <figcaption>
-                Das berühmte Bild „<a class="nonblock"
+                heruntergestuft wurde. (vgl S. 80f, VA)',
+                'Das berühmte Bild „<a class="nonblock"
                     href="[http://upload.wikimedia.org/wikipedia/commons/a/a7/Eugène_Delacroix_-_La_liberté_guidant_le_peuple.jpg](http://upload.wikimedia.org/wikipedia/commons/a/a7/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg)">Die
                     Freiheit führt das Volk an</a>“ zeigt die Aufstände, die gut 40 Jahre nach der Französischen
                 Revolution Paris erschütterten, doch politisch folgenlos blieben. In dem Mann mit dem Zylinder
@@ -113,7 +44,8 @@
                 kämpfenden Arbeitern einen sympathisierenden Vertreter des Bürgertums zur Seite.
 
                 <blockquote>„Mit den alten Haudegen trauert die junge Generation, zu der auch Delacroix gehört, die
-                    Generation der 20-,30-Jährigen, ‘gezeugt zwischen zwei Schlachten, unter Trommelwirbeln in den
+                    Generation der 20-,
+    30-Jährigen, ‘gezeugt zwischen zwei Schlachten, unter Trommelwirbeln in den
                     Schulen erzogen’, wie der Dichter Alfred de Musset schreibt. Es sind die unzufriedenen ‘enfants du
                     siècle’. Ihre ganze Kindheit hörten und träumten sie von Heldentaten und ‘grandeur’ und fühlen sich
                     jetzt, da im Zeitalter der Restauration die Bürger und Bankiers das Sagen haben, um alles betrogen.“
@@ -121,12 +53,5 @@
                         Detail</a>– Bd 2, Rose-Marie & Rainer Hagen, Taschen Verlag)</blockquote>
 
                 Es ist letztlich jene Gesellschaftsschicht der Bürgerlichen, der auch Delacroix angehört, die in ihrem
-                geschäftigen Treiben den Lauf der Welt bestimmte.
-            </figcaption>
-        </figure>
-    </section>
-
-
-</body>
-
-</html>
+                geschäftigen Treiben den Lauf der Welt bestimmte.'
+]
