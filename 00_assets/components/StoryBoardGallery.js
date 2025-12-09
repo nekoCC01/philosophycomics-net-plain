@@ -4,6 +4,7 @@ class StoryboardGallery extends HTMLElement {
         const resourceFolder = this.getAttribute('resource-folder') || this.getAttribute('folder') || 'resources';
         const imageCount = Number(this.getAttribute('image-count')) || 3;
 
+        // import HTML as JS module
         this.innerHTML = `
             <header>
                 <h1>Revolution</h1>
@@ -65,6 +66,15 @@ class StoryboardGallery extends HTMLElement {
             console.error(`Fehler beim Laden der Texte aus ${url}`, error);
         }
     }
+
+    // Prepare: 
+        // texts, imgs + nav (total, current)
+
+    // Functions Prev Next
+        // addEventListener (<>) - img slide + showText(x)+Title + nav-mark (x of total)
+
+    // Track (State) - current focus (x of total) --> End/Start? (no more next (mute))
+
 }
 
 customElements.define('storyboard-gallery', StoryboardGallery);
