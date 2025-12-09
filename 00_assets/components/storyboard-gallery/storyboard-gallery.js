@@ -1,19 +1,13 @@
 
+import Template from './template.js';
+
 class StoryboardGallery extends HTMLElement {
     connectedCallback() {
         const resourceFolder = this.getAttribute('resource-folder') || this.getAttribute('folder') || 'resources';
         const imageCount = Number(this.getAttribute('image-count')) || 3;
 
         // import HTML as JS module
-        this.innerHTML = `
-            <header>
-                <h1>Revolution</h1>
-            </header>
-            <main>
-                <section id="stage"></section>
-                <nav></nav>
-                <section id="text"></section>
-            </main>`;
+        this.innerHTML = Template.render();
 
         this.renderImages(resourceFolder, imageCount);
         this.loadTexts(resourceFolder);
