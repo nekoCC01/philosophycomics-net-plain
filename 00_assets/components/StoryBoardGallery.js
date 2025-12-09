@@ -59,7 +59,7 @@ class StoryboardGallery extends HTMLElement {
                     textContainer.appendChild(document.createElement('hr'));
                 }
                 const section = document.createElement('section');
-                section.innerHTML = entry;
+                section.innerHTML = entry.text;
                 textContainer.appendChild(section);
             });
         } catch (error) {
