@@ -46,46 +46,23 @@ class StoryboardGallery extends HTMLElement {
                 throw new Error(`HTTP ${response.status}`);
             }
 
-            const rawText = await response.text();
-            const entries = this.parseTextArray(rawText);
+            const entries = await response.json();
 
             if (!Array.isArray(entries)) {
                 console.warn(`Konnte Texte aus ${url} nicht lesen.`);
                 return;
             }
 
-            entries.forEach((entry) => {
+            entries.forEach((entry, index) => {
+                if (index > 0) {
+                    textContainer.appendChild(document.createElement('hr'));
+                }
                 const section = document.createElement('section');
                 section.innerHTML = entry;
                 textContainer.appendChild(section);
             });
         } catch (error) {
             console.error(`Fehler beim Laden der Texte aus ${url}`, error);
-        }
-    }
-
-    // Parses valid JSON arrays first; falls back to single-quoted legacy arrays.
-    parseTextArray(rawText) {
-        if (!rawText) {
-            return null;
-        }
-
-        const trimmed = rawText.trim();
-
-        try {
-            const json = JSON.parse(trimmed);
-            return Array.isArray(json) ? json : null;
-        } catch (jsonError) {
-            // Fallback for non-JSON arrays that use single quotes and line breaks.
-            const matches = [];
-            const regex = /'([\s\S]*?)'/g;
-            let match;
-
-            while ((match = regex.exec(trimmed)) !== null) {
-                matches.push(match[1].trim());
-            }
-
-            return matches.length ? matches : null;
         }
     }
 }
