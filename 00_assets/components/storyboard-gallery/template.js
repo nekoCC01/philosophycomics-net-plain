@@ -4,6 +4,7 @@ export default {
                 ${this.html(props)}`;
     },
 
+    css(p) { return ``; },
     html(p) {
         return `<header>
                 <h1>Revolution</h1>
@@ -14,5 +15,10 @@ export default {
                     <section id="text"></section>
                 </main>`;
     },
-    css(p) { return ``; }
+    mapDOM(scope) {
+        return {
+            stage: scope.querySelector('#stage'),
+            textContainer: scope.querySelector('#text')
+        }
+    }
 }

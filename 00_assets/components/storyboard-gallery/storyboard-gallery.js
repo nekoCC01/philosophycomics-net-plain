@@ -8,31 +8,22 @@ class StoryboardGallery extends HTMLElement {
 
         // import HTML as JS module
         this.innerHTML = Template.render();
+        this.dom = Template.mapDOM(this);
 
         this.renderImages(resourceFolder, imageCount);
         this.loadTexts(resourceFolder);
     }
 
     renderImages(resourceFolder, imageCount) {
-        const stage = this.querySelector('#stage');
-        if (!stage) {
-            return;
-        }
-
         for (let i = 1; i <= imageCount; i += 1) {
             const img = document.createElement('img');
             img.src = `${resourceFolder}/${i}.jpg`;
             img.alt = `Storyboard frame ${i}`;
-            stage.appendChild(img);
+            this.dom.stage.appendChild(img);
         }
     }
 
     async loadTexts(resourceFolder) {
-        const textContainer = this.querySelector('#text');
-        if (!textContainer) {
-            return;
-        }
-
         const url = `${resourceFolder}/texts.json`;
 
         try {
@@ -50,11 +41,11 @@ class StoryboardGallery extends HTMLElement {
 
             entries.forEach((entry, index) => {
                 if (index > 0) {
-                    textContainer.appendChild(document.createElement('hr'));
+                    this.dom.textContainer.appendChild(document.createElement('hr'));
                 }
                 const section = document.createElement('section');
                 section.innerHTML = entry.text;
-                textContainer.appendChild(section);
+                this.dom.textContainer.appendChild(section);
             });
         } catch (error) {
             console.error(`Fehler beim Laden der Texte aus ${url}`, error);
