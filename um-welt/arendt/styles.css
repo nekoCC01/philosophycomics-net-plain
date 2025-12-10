@@ -28,7 +28,7 @@ html, body {
   /* 80vh: grob 80% des Viewports -> ca. 20% bleiben initial für den Text sichtbar */
 
   display: grid;
-  grid-template-rows: auto 1fr auto;  /* Header, Stage, Nav */
+  grid-template-rows: auto minmax(0, 1fr) auto;  /* Header, Stage, Nav */
 }
 
 /* Header */
@@ -54,22 +54,26 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .stage-inner {
   display: flex;
+  height: 100%;
   align-items: center;
   gap: 4vw;
   max-width: 80%;
 }
 
 .main-image {
-  max-height: 80%;
+  height: 100%;
   max-width: 30vw;
+  object-fit: contain;
 }
 
 .thumb {
-  max-height: 50%;
+  height: 70%; 
   max-width: 15vw;
   opacity: 0.7;
 }
