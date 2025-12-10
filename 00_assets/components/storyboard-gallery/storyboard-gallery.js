@@ -22,7 +22,7 @@ class StoryboardGallery extends HTMLElement {
         // Texte laden und im State speichern
         try {
             this.state.texts = await this.fetchTexts(this.state.resourceFolder);
-            
+
         } catch (error) {
             console.error(error);
         }
@@ -48,6 +48,10 @@ class StoryboardGallery extends HTMLElement {
     }
 
     registerListeners() {
+        this.dom.rightButton.addEventListener('click', () => {
+            this.state.currentIndex = 1;
+            this.innerHTML = Template.render(this.state);
+        })
         // Hier kannst du EventListener registrieren,
         // die auf this.state.texts zugreifen oder das aktuelle Element aktualisieren.
     }

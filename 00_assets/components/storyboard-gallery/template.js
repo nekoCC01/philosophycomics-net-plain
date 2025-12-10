@@ -139,7 +139,7 @@ nav {
     </section>
     <nav class="nav-dots" aria-label="Slide navigation">
       <button class="dot is-active" aria-label="Slide 1"></button>
-      <button class="dot" aria-label="Slide 2"></button>
+      <button class="dot" id="right" aria-label="Slide 2"></button>
       <button class="dot" aria-label="Slide 3"></button>
       <button class="dot" aria-label="Slide 4"></button>
     </nav>
@@ -147,7 +147,7 @@ nav {
 
   <!-- TEXT: darf beliebig lang sein und nach unten weitergehen -->
   <section id="text">
-    <h2># Antike Unsterblichkeit</h2>
+    <h2>${state.texts[state.currentIndex].title}</h2>
     ${state.texts[state.currentIndex].text}
   </section>
                 
