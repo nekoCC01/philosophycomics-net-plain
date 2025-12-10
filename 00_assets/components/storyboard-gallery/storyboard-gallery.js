@@ -2,20 +2,34 @@
 import Template from './template.js';
 
 class StoryboardGallery extends HTMLElement {
-    #state = { imageCount: 0, currentIndex: 0 };
+    constructor() {
+        super();
+        this.state = {
+            resourceFolder: '',
+            imageCount: 0,
+            currentIndex: 0,
+            texts: [],
+        };
+        this._initialized = false;
+    }
 
-    connectedCallback() {
-        const resourceFolder = this.getAttribute('resource-folder') || this.getAttribute('folder') || 'resources';
-        const imageCount = Number(this.getAttribute('image-count')) || 3;
+    async connectedCallback() {
+        if (this._initialized) return;
+        this._initialized = true;
+        this.state.resourceFolder = this.getAttribute('resource-folder') || 'resources';
+        this.state.imageCount = Number(this.getAttribute('image-count')) || 3;
 
-        this.#state.imageCount = imageCount;
-        this.#state.currentIndex = 0;
+        // Texte laden und im State speichern
+        try {
+            this.state.texts = await this.fetchTexts(this.state.resourceFolder);
+            
+        } catch (error) {
+            console.error(error);
+        }
 
-        this.innerHTML = Template.render();
+        this.innerHTML = Template.render(this.state);
         this.dom = Template.mapDOM(this);
-
-        this.renderImages(resourceFolder, imageCount);
-        this.loadTexts(resourceFolder);
+        this.registerListeners(); // nur einmal
     }
 
     renderImages(resourceFolder, imageCount) {
@@ -27,33 +41,15 @@ class StoryboardGallery extends HTMLElement {
         }
     }
 
-    async loadTexts(resourceFolder) {
-        const url = `${resourceFolder}/texts.json`;
+    async fetchTexts(folder) {
+        const res = await fetch(`${folder}/texts.json`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json(); // Dies gibt direkt das JSON-Array zurück
+    }
 
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-
-            const entries = await response.json();
-
-            if (!Array.isArray(entries)) {
-                console.warn(`Konnte Texte aus ${url} nicht lesen.`);
-                return;
-            }
-
-            entries.forEach((entry, index) => {
-                if (index > 0) {
-                    this.dom.textContainer.appendChild(document.createElement('hr'));
-                }
-                const section = document.createElement('section');
-                section.innerHTML = entry.text;
-                this.dom.textContainer.appendChild(section);
-            });
-        } catch (error) {
-            console.error(`Fehler beim Laden der Texte aus ${url}`, error);
-        }
+    registerListeners() {
+        // Hier kannst du EventListener registrieren,
+        // die auf this.state.texts zugreifen oder das aktuelle Element aktualisieren.
     }
 
     // Prepare: 

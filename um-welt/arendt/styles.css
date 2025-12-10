@@ -1,27 +1,10 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
 
-/* Layout-Wrapper: vertikale Stapelung von HERO + Text */
 
-.layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 
-/* HERO: Header + Stage + Nav teilen sich eine feste Höhe
-   – aber mit zusätzlicher max-height, falls der Viewport sehr hoch ist */
 
-.hero {
+
+#hero {
   --hero-max-height: 650px;      /* absolute Obergrenze (anpassen nach Geschmack) */
 
   height: min(80vh, var(--hero-max-height));
@@ -33,7 +16,7 @@ html, body {
 
 /* Header */
 
-.header {
+header {
   background: #aaa;
   color: #fff;
   display: flex;
@@ -42,7 +25,7 @@ html, body {
   letter-spacing: 0.15em;
 }
 
-.header h1 {
+header h1 {
   margin: 0;
   font-size: 1.8rem;
 }
@@ -56,6 +39,7 @@ html, body {
   justify-content: center;
   min-height: 0;
   overflow: hidden;
+  padding-block: 10px;
 }
 
 .stage-inner {
@@ -80,12 +64,13 @@ html, body {
 
 /* Nav-Dots */
 
-.nav-dots {
+nav {
   background: #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  padding-block: 10px;;
 }
 
 .dot {
