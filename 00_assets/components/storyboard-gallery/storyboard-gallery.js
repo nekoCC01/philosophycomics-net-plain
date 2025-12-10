@@ -32,15 +32,6 @@ class StoryboardGallery extends HTMLElement {
         this.registerListeners(); // nur einmal
     }
 
-    renderImages(resourceFolder, imageCount) {
-        for (let i = 1; i <= imageCount; i += 1) {
-            const img = document.createElement('img');
-            img.src = `${resourceFolder}/${i}.jpg`;
-            img.alt = `Storyboard frame ${i}`;
-            this.dom.stage.appendChild(img);
-        }
-    }
-
     async fetchTexts(folder) {
         const res = await fetch(`${folder}/texts.json`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
