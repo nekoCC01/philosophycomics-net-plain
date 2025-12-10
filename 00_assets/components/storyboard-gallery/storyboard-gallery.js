@@ -2,11 +2,15 @@
 import Template from './template.js';
 
 class StoryboardGallery extends HTMLElement {
+    #state = { imageCount: 0, currentIndex: 0 };
+
     connectedCallback() {
         const resourceFolder = this.getAttribute('resource-folder') || this.getAttribute('folder') || 'resources';
         const imageCount = Number(this.getAttribute('image-count')) || 3;
 
-        // import HTML as JS module
+        this.#state.imageCount = imageCount;
+        this.#state.currentIndex = 0;
+
         this.innerHTML = Template.render();
         this.dom = Template.mapDOM(this);
 
@@ -53,10 +57,10 @@ class StoryboardGallery extends HTMLElement {
     }
 
     // Prepare: 
-        // texts, imgs + nav (total, current)
+    // texts, imgs + nav (total, current)
 
     // Functions Prev Next
-        // addEventListener (<>) - img slide + showText(x)+Title + nav-mark (x of total)
+    // addEventListener (<>) - img slide + showText(x)+Title + nav-mark (x of total)
 
     // Track (State) - current focus (x of total) --> End/Start? (no more next (mute))
 
