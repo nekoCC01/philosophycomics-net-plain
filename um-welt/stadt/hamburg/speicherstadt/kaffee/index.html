@@ -30,6 +30,10 @@
             position: absolute;
             bottom: -30px;
         }
+
+        img.show {
+            display: none;
+        }
     </style>
 </head>
 
@@ -44,9 +48,9 @@
 
         <section>
             <div id="map" class="center">
-                <img id="img1" src="img/boerse.jpg" alt="" style="width: 300px;">
-                <img id="img2" src="img/plaza-bohne.jpg" alt="" style="width: 300px;">
-                <img id="img3" src="img/zentrum.jpg" alt="" style="width: 300px;">
+                <img class="show" id="img1" src="img/boerse.jpg" alt="" style="width: 300px;">
+                <img class="show" id="img2" src="img/plaza-bohne.jpg" alt="" style="width: 300px;">
+                <img class="show" id="img3" src="img/zentrum.jpg" alt="" style="width: 300px;">
 
                 <svg width="100%" height="100%" viewBox="0 0 2388 1668" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
@@ -181,11 +185,15 @@
 
 
                 <script>
+                    let allImg = document.querySelectorAll('img.show');
                     document.querySelectorAll('.testClick').forEach((elem) => {
                         console.log(elem)
                         elem.addEventListener('click', (event) => {
-                            console.log(event.target.dataset.img)
-                            console.log(document.getElementById(event.target.dataset.img))
+                            allImg.forEach((img) => {
+                                img.style.display = "none";
+                            });
+                            let curImg = document.getElementById(event.target.dataset.img);
+                            curImg.style.display = "block";
                         })
                     }) 
                 </script>
