@@ -189,13 +189,21 @@
                     document.querySelectorAll('.testClick').forEach((elem) => {
                         console.log(elem)
                         elem.addEventListener('click', (event) => {
+                            event.stopPropagation();
                             allImg.forEach((img) => {
                                 img.style.display = "none";
                             });
                             let curImg = document.getElementById(event.target.dataset.img);
                             curImg.style.display = "block";
                         })
-                    }) 
+                    })
+
+                    document.querySelector('body').addEventListener('click', () => {
+                        allImg.forEach((img) => {
+                            img.style.display = "none";
+                        });
+                    })
+
                 </script>
             </div>
 
