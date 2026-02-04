@@ -18,39 +18,66 @@
         #img1 {
 
             position: absolute;
-            right: 40px;
+            left: -50px;
+            top: -60px;
         }
 
         #img2 {
             position: absolute;
-            left: -40px;
+            left: -33px;
+            top: 39px;
         }
 
         #img3 {
             position: absolute;
-            bottom: -30px;
+            bottom: -116px;
+            right: -190px;
         }
 
-        img.show {
+        .reveal {
             display: none;
+            background-color: #BA8F3A;
+            padding: 10px;
+        }
+        ul#books {
+            list-style: none;
+        }
+        ul#books li {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;;
+        }
+        ul#books li img {
+            width: 70px;
         }
     </style>
 </head>
 
 <body>
-    <main>
-        <section class="center">
-            <img src="kaffeetasse.png" alt="" style="width: 250px;;">
-            Eine Tassee Kaffee ... so unscheinbar. Überall verfügbar. Auch in der Speicherstadt, HafenCity.... Etwas
-            versteckt - Kaffee Zentrum
-            bestehend aus drei Orten
-        </section>
-
-        <section>
-            <div id="map" class="center">
-                <img class="show" id="img1" src="img/boerse.jpg" alt="" style="width: 300px;">
-                <img class="show" id="img2" src="img/plaza-bohne.jpg" alt="" style="width: 300px;">
-                <img class="show" id="img3" src="img/zentrum.jpg" alt="" style="width: 300px;">
+    <main class="center stack">
+       <section id="intro">
+        <p>Paragraph</p>
+       </section>
+        <section id="map">
+                <div class="reveal" id="img1">
+                    <img src="img/plaza-bohne.jpg" alt="" style="width: 400px;">
+                    <h2>Heading</h2>
+                    <p>Paragraph</p>
+                </div>
+                <div class="reveal" id="img2">
+                      <img src="img/zentrum.jpg" alt="" style="width: 400px;">
+                      <h2>Heading</h2>
+                      <p>Paragraph</p>
+                </div>
+                
+                <div class="reveal" id="img3">
+                     <img src="img/boerse.jpg" alt="" style="width: 470px;">
+                     <h2>Heading</h2>
+                     <p>Paragraph</p>
+                </div>
+               
+              
+               
 
                 <svg width="100%" height="100%" viewBox="0 0 2027 1524" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
@@ -154,18 +181,18 @@
                             </g>
                         </g>
                         <g id="circles">
-                            <g>
+                            <g class="clickReveal" data-img="img1">
                                 <circle cx="1142.84" cy="785.983" r="60.434"
                                     style="fill:rgb(186,143,58);fill-opacity:0.5;" />
                                 <circle cx="1142.84" cy="785.983" r="24.34" style="fill:rgb(186,143,58);" />
                             </g>
-                            <g>
-                                <circle cx="1488.27" cy="612.376" r="60.434"
+                            <g class="clickReveal" data-img="img2">
+                                <circle  cx="1488.27" cy="612.376" r="60.434"
                                     style="fill:rgb(186,143,58);fill-opacity:0.5;" />
                                 <circle cx="1488.27" cy="612.376" r="24.34" style="fill:rgb(186,143,58);" />
                             </g>
-                            <g>
-                                <circle cx="1334.78" cy="588.057" r="60.434"
+                            <g class="clickReveal" data-img="img3">
+                                <circle  cx="1334.78" cy="588.057" r="60.434"
                                     style="fill:rgb(186,143,58);fill-opacity:0.5;" />
                                 <circle cx="1334.78" cy="588.057" r="24.34" style="fill:rgb(186,143,58);" />
                             </g>
@@ -179,15 +206,15 @@
 
 
                 <script>
-                    let allImg = document.querySelectorAll('img.show');
-                    document.querySelectorAll('.testClick').forEach((elem) => {
-                        console.log(elem)
+                    let allImg = document.querySelectorAll('.reveal');
+                    document.querySelectorAll('.clickReveal').forEach((elem) => {
                         elem.addEventListener('click', (event) => {
                             event.stopPropagation();
                             allImg.forEach((img) => {
                                 img.style.display = "none";
                             });
-                            let curImg = document.getElementById(event.target.dataset.img);
+                            console.log(event.currentTarget)
+                            let curImg = document.getElementById(event.currentTarget.dataset.img);
                             curImg.style.display = "block";
                         })
                     })
@@ -199,15 +226,14 @@
                     })
 
                 </script>
-            </div>
 
         </section>
 
         <section>
             Hintergrund... Bücher Weiterlesen
-            <ul>
-                <li><img src="kolonial-buch.jpg" alt="" style="width: 150px;"></li>
-                <li> <img src="buch-zucker.webp" alt="" width="150px"></li>
+            <ul id="books" class="stack">
+                <li><img src="kolonial-buch.jpg" alt=""><p>Paragraph</p></li>
+                <li> <img src="buch-zucker.webp" alt=""><p>Paragraph</p></li>
             </ul>
         </section>
     </main>
