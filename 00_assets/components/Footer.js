@@ -1,12 +1,12 @@
 const template = document.createElement('template');
 template.innerHTML = `
     <footer >
-    <style>
-    footer section { font-size: small; }
-    footer { margin: 30px; }
-    </style>
-        <section class="center">
+        <style>
+        footer section { font-size: small; }
+        footer { margin: 30px; }
+        </style>
         <hr>
+        <section class="center">
             ©Copyright Daniel Kasai / All Rights Reserved <br><br>
             <a href="https://philosophycomics.net/impressum.html">Impressum</a>
         </section>
