@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philosophycomics</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        #intro-grid {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+        }
+    </style>
 </head>
+
 <body>
 
-<header class="center" style="margin-block: var(--s1);">
-    <center-l>
-        <box-l>
-            <h1>Philosophycomics</h1>
-        </box-l>
-    </center-l>
-</header>
+    <header class="center" style="margin-block: var(--s1);">
+        <center-l>
+            <box-l>
+                <h1>Philosophycomics</h1>
+            </box-l>
+        </center-l>
+    </header>
 
-<main class="center">
-    <x-secret-index></x-secret-index>
-    <section class="grid">
-        <div>
+    <main class="center">
+        <x-secret-index></x-secret-index>
+        <section id="intro-grid">
             <a href="/metaphysik/spinoza">
-                 <img src="/metaphysik/spinoza/img/spinoza_0_titel.jpg" alt="Spinoza">
+                <img src="kachel.jpg" alt="Spinoza">
             </a>
-        
-        </div>
-        <div>
-            <a href="/meditation/watts">
-                <img src="/meditation/watts/img/alan-watts-alltag-mystik__portrait.jpg" alt="Watts">
-            </a>
-        
-        </div>
-    </section>
+            
 
-</main>
 
-<script src="00_assets/components/SecretIndex.js"></script>
-<script type="module" src="index.js"></script>
+        </section>
+
+    </main>
+
+    <script src="00_assets/components/SecretIndex.js"></script>
+    <script type="module" src="index.js"></script>
 </body>
+
 </html>
