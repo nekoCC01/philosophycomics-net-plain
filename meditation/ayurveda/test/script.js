@@ -18,6 +18,7 @@ const state = {
   questions: [],
   answers: new Map(),
   totals: { Vata: 0, Pitta: 0, Kapha: 0 },
+  downloadUrl: null,
 };
 
 const els = {
@@ -218,6 +219,7 @@ function recalcTotalsAndUI() {
   if (answered === totalQuestions && totalQuestions > 0) {
     renderResult();
   } else {
+    cleanupDownloadUrl();
     els.result.classList.add("hidden");
     els.result.innerHTML = "";
   }
@@ -235,6 +237,7 @@ function renderResult() {
   els.result.innerHTML = "";
   const frag = els.resultTemplate.content.cloneNode(true);
   const grid = frag.getElementById("resultGrid");
+  const downloadLink = frag.getElementById("downloadAnswersLink");
 
   const entries = [
     { dosha: "Vata", points: roundHalf(state.totals.Vata) },
@@ -268,6 +271,16 @@ function renderResult() {
     grid.appendChild(row);
   }
 
+  if (downloadLink) {
+    const exportText = buildAnswersExportText(entries);
+    cleanupDownloadUrl();
+    state.downloadUrl = URL.createObjectURL(new Blob([exportText], { type: "text/plain;charset=utf-8" }));
+
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadLink.href = state.downloadUrl;
+    downloadLink.download = `ayurveda-antworten-${stamp}.txt`;
+  }
+
   els.result.appendChild(frag);
   els.result.classList.remove("hidden");
 
@@ -290,6 +303,42 @@ function resetAll() {
 
   recalcTotalsAndUI();
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function buildAnswersExportText(sortedEntries) {
+  const lines = [];
+  lines.push("Ayurveda-Konstitution - Antwort-Export");
+  lines.push(`Exportiert am: ${new Date().toLocaleString("de-DE")}`);
+  lines.push("");
+  lines.push("Gesamtergebnis:");
+  for (const entry of sortedEntries) {
+    lines.push(`- ${entry.dosha}: ${formatPoints(entry.points)} Punkte`);
+  }
+  lines.push("");
+
+  for (const [index, question] of state.questions.entries()) {
+    const selected = state.answers.get(question.id) ?? new Set();
+    const selectedLetters = LETTERS.filter((letter) => selected.has(letter));
+    lines.push(`${String(index + 1).padStart(2, "0")}. ${question.title}`);
+
+    for (const letter of LETTERS) {
+      const text = question.choices?.[letter];
+      if (!text) continue;
+      const mark = selected.has(letter) ? "[x]" : "[ ]";
+      lines.push(`  ${mark} ${letter}: ${text}`);
+    }
+
+    lines.push(`  Ausgewaehlt: ${selectedLetters.length ? selectedLetters.join(", ") : "-"}`);
+    lines.push("");
+  }
+
+  return lines.join("\n");
+}
+
+function cleanupDownloadUrl() {
+  if (!state.downloadUrl) return;
+  URL.revokeObjectURL(state.downloadUrl);
+  state.downloadUrl = null;
 }
 
 function formatPoints(n) {

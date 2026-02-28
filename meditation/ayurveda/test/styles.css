@@ -293,6 +293,16 @@ h1{
   border-top: 1px solid rgba(255,255,255,0.10);
 }
 
+.result-download{
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.result-download:hover{
+  color: var(--text);
+}
+
 .fineprint{
   margin: 10px 0 0;
   color: var(--fine);
