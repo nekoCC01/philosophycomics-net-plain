@@ -7,6 +7,10 @@ const DOSHA_BY_LETTER = {
 
 const LETTERS = ["A", "B", "C"];
 const MAX_SELECTIONS_PER_QUESTION = 2;
+const QUESTION_SOURCES = {
+  de: "./questions.json",
+  jp: "./questions_jp.json",
+};
 
 /**
  * Zentraler State:
@@ -19,6 +23,7 @@ const state = {
   answers: new Map(),
   totals: { Vata: 0, Pitta: 0, Kapha: 0 },
   downloadUrl: null,
+  language: "de",
 };
 
 const els = {
@@ -27,12 +32,25 @@ const els = {
   progressText: document.getElementById("progressText"),
   progressBarFill: document.getElementById("progressBarFill"),
   resetBtn: document.getElementById("resetBtn"),
+  toggleLangBtn: document.getElementById("toggleLangBtn"),
   questionTemplate: document.getElementById("questionTemplate"),
   choiceTemplate: document.getElementById("choiceTemplate"),
   resultTemplate: document.getElementById("resultTemplate"),
 };
 
 init().catch((err) => {
+  renderLoadError(err);
+});
+
+async function init() {
+  els.resetBtn.addEventListener("click", resetAll);
+  els.toggleLangBtn?.addEventListener("click", onToggleLanguageClick);
+  updateLanguageButton();
+
+  await loadAndRenderQuestions(state.language);
+}
+
+function renderLoadError(err) {
   console.error(err);
   const details = err instanceof Error ? err.message : String(err);
   els.quiz.innerHTML = `<div class="card" style="padding:14px">
@@ -40,24 +58,45 @@ init().catch((err) => {
     <p class="fineprint">${details}</p>
     <p class="fineprint">Falls du die Datei per Doppelklick geoeffnet hast, starte sie ueber einen lokalen Server.</p>
   </div>`;
-});
-
-async function init() {
-  els.resetBtn.addEventListener("click", resetAll);
-
-  const data = await loadQuestions("./questions.json");
-  state.questions = data.questions ?? [];
-  // Initial State für Antworten anlegen
-  for (const q of state.questions) state.answers.set(q.id, new Set());
-
-  renderAllQuestions();
-  recalcTotalsAndUI();
 }
 
 async function loadQuestions(url) {
   const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load questions.json (${res.status})`);
+  if (!res.ok) throw new Error(`Failed to load ${url} (${res.status})`);
   return res.json();
+}
+
+async function loadAndRenderQuestions(language) {
+  const source = QUESTION_SOURCES[language];
+  if (!source) throw new Error(`Unknown language: ${language}`);
+
+  const data = await loadQuestions(source);
+  state.language = language;
+  state.questions = data.questions ?? [];
+  state.answers = new Map();
+  state.totals = { Vata: 0, Pitta: 0, Kapha: 0 };
+
+  for (const q of state.questions) state.answers.set(q.id, new Set());
+
+  cleanupDownloadUrl();
+  renderAllQuestions();
+  recalcTotalsAndUI();
+  updateLanguageButton();
+}
+
+async function onToggleLanguageClick() {
+  const nextLanguage = state.language === "de" ? "jp" : "de";
+  try {
+    await loadAndRenderQuestions(nextLanguage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    renderLoadError(err);
+  }
+}
+
+function updateLanguageButton() {
+  if (!els.toggleLangBtn) return;
+  els.toggleLangBtn.textContent = state.language === "de" ? "日本語" : "Deutsch";
 }
 
 function renderAllQuestions() {

@@ -49,6 +49,10 @@ body::before{
   gap: 14px;
 }
 
+.header-tools{
+  margin-bottom: 10px;
+}
+
 h1{
   margin: 0 0 6px;
   font-size: 1.5rem;
@@ -107,6 +111,11 @@ h1{
 
 .btn-ghost{
   background: transparent;
+}
+
+.btn-small{
+  padding: 6px 9px;
+  font-size: 0.85rem;
 }
 
 .quiz{
