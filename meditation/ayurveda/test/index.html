@@ -1,0 +1,93 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayurveda-Konstitution – Selbsttest (Vata / Pitta / Kapha)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <div>
+      <h1>Ayurveda-Konstitution – Selbsttest</h1>
+      <p class="subtitle">
+        Pro Frage wählst du <strong>eine</strong> passende Aussage (1 Punkt) oder <strong>zwei</strong> passende Aussagen (je 0,5 Punkte).
+        A = Vata, B = Pitta, C = Kapha.
+      </p>
+    </div>
+
+    <div class="status">
+      <div class="status-row">
+        <span id="progressText">0 / 24 beantwortet</span>
+        <button id="resetBtn" class="btn btn-ghost" type="button">Zurücksetzen</button>
+      </div>
+      <div class="progressbar" aria-hidden="true">
+        <div id="progressBarFill" class="progressbar-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="quiz" class="quiz" aria-live="polite">
+      <!-- Fragen werden hier gerendert -->
+    </section>
+
+    <section id="result" class="result hidden" aria-live="polite">
+      <!-- Ergebnis wird hier gerendert -->
+    </section>
+  </main>
+
+  <!-- Templates -->
+  <template id="questionTemplate">
+    <article class="card question" data-question-id="">
+      <header class="question-head">
+        <div class="q-index" aria-hidden="true"></div>
+        <h2 class="q-title"></h2>
+      </header>
+
+      <div class="choices">
+        <!-- choices injected -->
+      </div>
+
+      <footer class="question-foot">
+        <div class="hint">
+          <span class="badge" data-hint="remaining">Wähle 1 oder 2 Optionen</span>
+        </div>
+        <div class="q-score" aria-label="Punkte dieser Frage">
+          <span class="mini">Vata</span> <span class="mono" data-qscore-vata>0</span>
+          <span class="mini">Pitta</span> <span class="mono" data-qscore-pitta>0</span>
+          <span class="mini">Kapha</span> <span class="mono" data-qscore-kapha>0</span>
+        </div>
+      </footer>
+    </article>
+  </template>
+
+  <template id="choiceTemplate">
+    <label class="choice">
+      <input class="choice-input" type="checkbox" />
+      <span class="choice-letter"></span>
+      <span class="choice-text"></span>
+    </label>
+  </template>
+
+  <template id="resultTemplate">
+    <article class="card">
+      <header class="result-head">
+        <h2>Ergebnis</h2>
+        <p class="subtitle">Punktverteilung (absteigend):</p>
+      </header>
+
+      <div class="result-grid" id="resultGrid"></div>
+
+      <footer class="result-foot">
+        <p class="fineprint">
+          Hinweis: Das ist eine Selbsteinschätzung. In der Ayurveda-Praxis werden Konstitution und aktueller Zustand (Vikriti) oft differenziert betrachtet.
+        </p>
+      </footer>
+    </article>
+  </template>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

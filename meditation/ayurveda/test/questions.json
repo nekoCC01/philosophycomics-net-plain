@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "title": "Ayurveda-Konstitution – Selbsttest",
+    "version": 1
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Beschreiben Sie Ihren Körper.",
+      "choices": {
+        "A": "Ich habe einen schlanken, schmalen Körperbau mit zarten Knochen, schlanken Muskeln und gut definierten Adern und Sehnen.",
+        "B": "Ich habe einen mittleren Körperbau und definierte Muskeln.",
+        "C": "Ich habe einen robusten Körperbau mit großen, festen Knochen, baue leicht Muskeln auf und habe eine gute Fettschicht unter der Haut."
+      }
+    },
+    {
+      "id": "q2",
+      "title": "Beschreiben Sie Ihre Gelenke.",
+      "choices": {
+        "A": "Meine Gelenke sind klein. Gelegentlich knacken sie.",
+        "B": "Ich habe flexible Gelenke von durchschnittlicher Größe.",
+        "C": "Ich habe breite, feste Gelenke."
+      }
+    },
+    {
+      "id": "q3",
+      "title": "Beschreiben Sie Ihre Haut.",
+      "choices": {
+        "A": "Meine Haut ist trocken und dünn. Sie fühlt sich rau und trocken an.",
+        "B": "Meine Haut ist warm, weich und oft feucht.",
+        "C": "Meine Haut ist weich, feucht bis fettig, kühl und fest."
+      }
+    },
+    {
+      "id": "q4",
+      "title": "Beschreiben Sie Ihren Teint.",
+      "choices": {
+        "A": "Mein Teint ist unregelmäßig pigmentiert und bräunt schnell.",
+        "B": "Ich habe eine gesunde Rötung und Sommersprossen/Leberflecken.",
+        "C": "Mein Teint ist gleichmäßig."
+      }
+    },
+    {
+      "id": "q5",
+      "title": "Beschreiben Sie Ihr Haar.",
+      "choices": {
+        "A": "Mein Haar ist dünn und neigt zu Trockenheit.",
+        "B": "Mein Haar ist dünn und leicht fettig, eventuell mit Anzeichen frühen Ergrauens oder Kahlwerdens.",
+        "C": "Mein Haar ist voll, dick, dicht und leicht fettig."
+      }
+    },
+    {
+      "id": "q6",
+      "title": "Beschreiben Sie Ihre Nägel und Lippen.",
+      "choices": {
+        "A": "Meine Nägel sind trocken und spröde, sie brechen leicht. Meine Lippen sind trocken und eher schmal.",
+        "B": "Meine Nägel sind weich und biegsam. Meine Lippen sind rosa, weich und symmetrisch geformt.",
+        "C": "Meine Lippen sind blass, weich und voll. Meine Nägel sind fest, glatt und hart."
+      }
+    },
+    {
+      "id": "q7",
+      "title": "Beschreiben Sie Ihre Verdauung. Wie fühlen Sie sich nach dem Essen?",
+      "choices": {
+        "A": "Meine Verdauung ist unterschiedlich. Ich kann schnell satt sein, auch wenn ich vorher sehr hungrig war.",
+        "B": "Ich habe eine gute Verdauung. Nach einer vollen Mahlzeit kehrt mein Hunger oft bald zurück.",
+        "C": "Meine Verdauung braucht Zeit, es ist besser, wenn ich langsam esse. Nach dem Essen bin ich lange satt."
+      }
+    },
+    {
+      "id": "q8",
+      "title": "Wie oft haben Sie Stuhlgang? Welche Konsistenz hat Ihr Stuhl?",
+      "choices": {
+        "A": "Oft habe ich weniger als einmal täglich Stuhlgang. Mein Stuhl ist trocken und hart, oft habe ich Verstopfung und Blähungen.",
+        "B": "Oft habe ich mehr als einmal täglich Stuhlgang. Mein Stuhl ist weich und umfangreich, tendenziell locker oder flüssig.",
+        "C": "Mein Stuhlgang ist regelmäßig, der Stuhl ist gut geformt und von der Menge her moderat."
+      }
+    },
+    {
+      "id": "q9",
+      "title": "Beschreiben Sie Ihre Emotionen.",
+      "choices": {
+        "A": "Meine Laune kann schnell wechseln. Ich habe starke Zu- und Abneigungen.",
+        "B": "Ich lasse mich leicht provozieren, beruhige mich aber schnell wieder.",
+        "C": "Meine Stimmung ist stabil. Auf andere wirke ich vielleicht emotionslos. Bin ich aufgebracht, beruhige ich mich nur schwer wieder."
+      }
+    },
+    {
+      "id": "q10",
+      "title": "Wie reagieren Sie auf Stress?",
+      "choices": {
+        "A": "Ich werde nervös und ängstlich und fühle mich oft unsicher.",
+        "B": "Ich rege mich schnell auf, bin leicht gereizt oder ungeduldig.",
+        "C": "Meistens bleibe ich ruhig und besonnen. Es muss viel passieren, bevor ich den Kopf verliere."
+      }
+    },
+    {
+      "id": "q11",
+      "title": "Beschreiben Sie Ihre Auffassungsgabe.",
+      "choices": {
+        "A": "Ich lerne sehr schnell, wenn ich mich konzentriere.",
+        "B": "Ich habe einen scharfen Verstand und kann mich gut konzentrieren.",
+        "C": "Ich brauche Zeit zum Lernen."
+      }
+    },
+    {
+      "id": "q12",
+      "title": "Beschreiben Sie Ihr Gedächtnis.",
+      "choices": {
+        "A": "Ich habe ein gutes Kurzzeitgedächtnis. Mein Langzeitgedächtnis ist schlecht.",
+        "B": "Ich kann mir Dinge gut merken.",
+        "C": "Habe ich etwas gelernt, ist mein Gedächtnis ausgezeichnet, insbesondere das Langzeitgedächtnis."
+      }
+    },
+    {
+      "id": "q13",
+      "title": "Beschreiben Sie Ihre Gedanken.",
+      "choices": {
+        "A": "Ich denke schnell und habe viele Ideen. Meine Aufmerksamkeit wandert und ich habe Mühe, mich auf eine Sache zu konzentrieren.",
+        "B": "Meine Gedanken sind klar, ich denke analytisch und plane gerne.",
+        "C": "Meine Gedanken sind meist gründlich und methodisch. Ich entwickle nur langsam neue Ideen und bleibe gerne bei einem Thema."
+      }
+    },
+    {
+      "id": "q14",
+      "title": "Wie gut passen Sie sich an Veränderungen an?",
+      "choices": {
+        "A": "Ich kann mich gut an Veränderungen anpassen – es entspricht meiner Natur.",
+        "B": "Ich sehe Veränderungen als Herausforderung, die ich meistern kann.",
+        "C": "Ich mag keine Veränderungen und passe mich schwer an. Ich bevorzuge eine stetige Routine."
+      }
+    },
+    {
+      "id": "q15",
+      "title": "Wie stark sind Ihre Energie und Ihre Ausdauer?",
+      "choices": {
+        "A": "Meine Energie kommt leicht und in schnellen, kurzen Schüben.",
+        "B": "Ich verfüge über viel Energie und gehe gerne an meine Grenzen.",
+        "C": "Ich komme langsam in Gang, bin aber ausdauernd."
+      }
+    },
+    {
+      "id": "q16",
+      "title": "Schwitzen Sie leicht und wie stark ist Ihr Körpergeruch?",
+      "choices": {
+        "A": "Ich schwitze kaum.",
+        "B": "Ich schwitze schnell und viel. Mein Körpergeruch kann stark und unangenehm sein.",
+        "C": "Ich schwitze, bemerke aber kaum Körpergeruch."
+      }
+    },
+    {
+      "id": "q17",
+      "title": "Atmen Sie tief durch und fühlen Sie Ihren Puls am Handgelenk. (Im Sitzen, ohne Stress und Aufregung. Trinken Sie davor keinen Kaffee.)",
+      "choices": {
+        "A": "Mein Puls ist schnell und weich. Ein Rhythmus lässt sich schwer erspüren, er gleitet wie eine Schlange.",
+        "B": "Mein Puls ist kräftig und regelmäßig, weder schnell noch langsam, wie ein hüpfender Frosch.",
+        "C": "Mein Puls ist voll, regelmäßig und langsam, er bewegt sich wie ein Schwan."
+      }
+    },
+    {
+      "id": "q18",
+      "title": "Mögen Sie Bewegung und wie häufig haben Sie das Bedürfnis danach?",
+      "choices": {
+        "A": "Ich bin gerne aktiv und habe Mühe, still zu sitzen. Meine Bewegungen sind schnell und ich neige zum Zappeln.",
+        "B": "Ich mag zielgerichtete Sportarten mit genauen Bewegungen.",
+        "C": "Ich bin nicht immer motiviert, Sport zu machen, und genieße es, länger zu sitzen. Ich bewege mich lieber langsam."
+      }
+    },
+    {
+      "id": "q19",
+      "title": "Wie viel wiegen Sie und wie schnell nehmen Sie ab oder zu?",
+      "choices": {
+        "A": "Ich bin eher schlank, ich nehme leicht ab.",
+        "B": "Mein Gewicht ist durchschnittlich. Ich nehme problemlos zu und ab.",
+        "C": "Ich habe einen kräftigen Körperbau. Ich nehme leicht zu, aber nur schwer ab."
+      }
+    },
+    {
+      "id": "q20",
+      "title": "Mit welchem Klima kommen Sie am besten zurecht?",
+      "choices": {
+        "A": "Ich mag Hitze und bin sehr kälte- und windempfindlich.",
+        "B": "Hitze und direkte Sonne bereiten mir Probleme. Ich ziehe kühlere Temperaturen vor.",
+        "C": "Ich komme mit Hitze ebenso gut zurecht wie mit Kälte. Am besten sind warme Temperaturen. Feuchtigkeit und Kälte können unangenehm sein."
+      }
+    },
+    {
+      "id": "q21",
+      "title": "Beschreiben Sie Ihre Art zu sprechen.",
+      "choices": {
+        "A": "Ich bin gesprächig und rede eher schnell. Es passiert, dass ich nuschele oder sogar stottere.",
+        "B": "Ich kann eloquent sein und rede deutlich und selbstbewusst. Ich habe eine laute Stimme.",
+        "C": "Ich spreche wohlüberlegt, maßvoll und gleichmäßig. Man sagt, ich klinge beruhigend."
+      }
+    },
+    {
+      "id": "q22",
+      "title": "Beschreiben Sie Ihren Schlaf. Wann wachen Sie auf?",
+      "choices": {
+        "A": "Ich habe einen leichten Schlaf und schlafe eher zu wenig. Morgens wache ich früh auf.",
+        "B": "Ich schlafe gut und brauche etwa 6 bis 8 Stunden Schlaf.",
+        "C": "Mein Schlaf ist tief und erholsam. Ich schlafe gerne lang und werde langsam wach."
+      }
+    },
+    {
+      "id": "q23",
+      "title": "Wie ernähren Sie sich am liebsten?",
+      "choices": {
+        "A": "Ich bevorzuge Warmes und Suppen und esse gern salzig, sauer oder süß.",
+        "B": "Ich bevorzuge kaltes, süßes und bitteres Essen. Ich esse gerne Salate und Rohkost.",
+        "C": "Ich bevorzuge warmes Essen, das scharf, trocken und leicht ist."
+      }
+    },
+    {
+      "id": "q24",
+      "title": "Beschreiben Sie Ihren Hunger.",
+      "choices": {
+        "A": "Mein Hunger variiert von stark bis schwach. Wenn ich abgelenkt bin, vergesse ich ihn leicht und lasse Mahlzeiten aus.",
+        "B": "Mein Hunger ist stark, regelmäßig und häufig. Bei Hunger muss ich sofort etwas essen.",
+        "C": "Mein Hunger ist regelmäßig, aber meist schwach, besonders morgens. Zwei Mahlzeiten am Tag genügen mir."
+      }
+    }
+  ]
+}
