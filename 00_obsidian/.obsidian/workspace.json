@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "55479bdff7e38dd8",
+    "id": "daa3fc76ed6dd707",
     "type": "split",
     "children": [
       {
-        "id": "8f78e7ffeb202c09",
+        "id": "53d5a6323775d21e",
         "type": "tabs",
         "children": [
           {
-            "id": "1c85384bbe525996",
+            "id": "447632da781bc5ed",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -24,11 +24,11 @@
         ]
       },
       {
-        "id": "546c0a960f4c97b0",
+        "id": "bcab7767d63154bd",
         "type": "tabs",
         "children": [
           {
-            "id": "861d64bc4efef076",
+            "id": "67beb6c1984587da",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -43,15 +43,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "99e05541d01595f4",
+    "id": "193fac78eb3ea01f",
     "type": "split",
     "children": [
       {
-        "id": "6c3903ccd572e5fd",
+        "id": "818c7f84b94311aa",
         "type": "tabs",
         "children": [
           {
-            "id": "1c707135c3de429c",
+            "id": "4ff899ca1097e1da",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -64,7 +64,7 @@
             }
           },
           {
-            "id": "0b0d325abcc37539",
+            "id": "6e9c37df4465588f",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -81,7 +81,7 @@
             }
           },
           {
-            "id": "4b7c65869b244d73",
+            "id": "c95f5bb7eab3a17e",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -97,15 +97,15 @@
     "width": 300
   },
   "right": {
-    "id": "1ce6059a1cc70d3d",
+    "id": "f2db68be8cc4a65a",
     "type": "split",
     "children": [
       {
-        "id": "cb65cb2c36c514d4",
+        "id": "93b01bfcf2584dba",
         "type": "tabs",
         "children": [
           {
-            "id": "24dfb0b932be366a",
+            "id": "ebbde1fc044a9908",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -124,7 +124,7 @@
             }
           },
           {
-            "id": "ce35700b084869a9",
+            "id": "2e842765e3b346cb",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -138,7 +138,7 @@
             }
           },
           {
-            "id": "553dde6052ed6a78",
+            "id": "c4b9c43a79b4c7a2",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -153,7 +153,7 @@
             }
           },
           {
-            "id": "5d36a718e5975744",
+            "id": "f287a49970f730e1",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -167,7 +167,7 @@
             }
           },
           {
-            "id": "01a9c4648433c99d",
+            "id": "e96c38a7ade92e6d",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -199,7 +199,7 @@
       "bases:Neue Base erstellen": false
     }
   },
-  "active": "1c85384bbe525996",
+  "active": "447632da781bc5ed",
   "lastOpenFiles": [
     "Willkommen.md"
   ]
