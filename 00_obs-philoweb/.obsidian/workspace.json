@@ -11,10 +11,14 @@
             "id": "7ffb0e3ed3de6d99",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Esoterik für Philosophen (Buch)/Astrologie - Einstieg.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Neuer Tab"
+              "title": "Astrologie - Einstieg"
             }
           }
         ]
@@ -181,6 +185,7 @@
   },
   "active": "7ffb0e3ed3de6d99",
   "lastOpenFiles": [
+    "Esoterik für Philosophen (Buch)/Astrologie - Einstieg.md",
     "Esoterik für Philosophen (Buch)/00 BACKLOG.md",
     "Willkommen.md",
     "Neuer Link.md",
