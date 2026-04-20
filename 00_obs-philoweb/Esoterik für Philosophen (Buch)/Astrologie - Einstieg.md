@@ -18,3 +18,7 @@ Bleibt: interessantes psychologisches Klassikfikationssystem
 | Freud - Triebkräfte                             | Planeten<br>Elemente    |
 | Psychotizismus<br>Neurotizismus<br>Extraversion | Elemente<br>Impulslehre |
 
+## Was gewinnt man durch die Astrologie?
+- vertikale Dimension -> nicht reaktiv (gefangen in Kausalität), sondern "durchdringend"
+  (Bedeutung hinter Ereignissen - Horizont)
+
