@@ -8,8 +8,6 @@ Examples: dropdown menus, modals, banner img, navigation bars, information cards
 vast majority belongs here!
 nested layers might be useful
 
-Recommendation: Use BEM syntax!
-
 */
 
 .nav-menu {
@@ -106,28 +104,30 @@ Recommendation: Use BEM syntax!
 }
 
 
-.media {
-    display: flex;
-    gap: 1.5em;
-    padding: 1.5rem;
-    background-color: #eee;
-    border-radius: 5px;
-}
+@scope (.media) {
+    :scope {
+        display: flex;
+        gap: 1.5em;
+        padding: 1.5rem;
+        background-color: #eee;
+        border-radius: 5px;
+    }
 
-.media__image {
-    align-self: start;
-}
+    :scope.right {
+        flex-direction: row-reverse;
+    }
 
-.media__body {
-    overflow: auto;
-    margin-block-start: 0;
-}
+    img {
+        align-self: start;
+    }
 
-.media__body>h4 {
-    margin-block-start: 0;
-    color: #333;
-}
+    .body {
+        overflow: auto;
+        margin-block-start: 0;
+    }
 
-.media--right {
-    flex-direction: row-reverse;
+    h4 {
+        margin-block-start: 0;
+        color: #333;
+    }
 }
