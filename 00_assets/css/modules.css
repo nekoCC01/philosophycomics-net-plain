@@ -1,0 +1,47 @@
+/*
+https://livebook.manning.com/book/css-in-depth-second-edition/chapter-8#114
+modules = reusable units on the page (components, blocks, objects...)
+Examples: dropdown menus, modals, banner img, navigation bars, information cards...
+
+-> colors, spacing, typography
+
+vast majority belongs here!
+nested layers might be useful
+
+*/
+
+.nav-menu {
+    margin-block: unset;
+    padding-inline: unset;
+    border: 1px solid #ccc;
+    list-style: none;
+}
+
+.nav-menu>li+li {
+    border-top: 1px solid #ccc;
+}
+
+.nav-menu>li>a {
+    display: block;
+    padding: 0.8em 1em;
+    color: inherit;
+    font-weight: normal;
+}
+
+.nav-menu>li>a:hover {
+    color: var(--brand-color);
+    background-color: white;
+}
+
+.card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.card>h3 {
+    align-self: end;
+    margin-block: 0;
+    padding-block-end: 0.5rem;
+    border-block-end: 1px solid #eee;
+}

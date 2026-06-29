@@ -1,0 +1,33 @@
+/*
+https://livebook.manning.com/book/css-in-depth-second-edition/chapter-8#107
+
+high-level layout of the page
+(header, footer, sidebar...grid, columns...)
+
+different layouts for different pages - all defined here
+-> add layout-ID to body
+(can still be overridden by following layers)
+
+*/
+
+
+
+#homepage {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "main sidebar"
+        "footer footer";
+    grid-template-columns: 1fr 300px;
+    gap: 1rem;
+}
+
+#homepage>header,
+#homepage>footer {
+    grid-column: span 2;
+}
+
+#article>main {
+    max-inline-size: 1000px;
+    margin-inline: auto;
+}

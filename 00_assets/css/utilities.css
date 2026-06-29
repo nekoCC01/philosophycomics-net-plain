@@ -1,0 +1,20 @@
+/*
+classes to do one simple, very specific thing to an element
+(centering text, hiding elements...)
+
+laser focued - rarely more than one declaration
+
+*/
+
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.border-radius {
+    border-radius: 1rem;
+}

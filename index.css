@@ -1,7 +1,13 @@
-@import url("00_assets/css/reset.css");
-@import url("00_assets/css/modular.css");
-@import url("00_assets/css/variables.css");
-@import url("00_assets/css/global.css");
 
-@import url("00_assets/css/EveryLayout.css");
-/* @import url("./components/EveryLayout/all.css"); */
+@layer reset, theme, global, layout, every-layout, modules, utilities;
+
+@import url("00_assets/css/reset.css") layer(reset);
+@import url("00_assets/css/theme.css") layer(theme);
+@import url("00_assets/css/global.css") layer(global);
+@import url("00_assets/css/layout.css") layer(layout);
+
+@import url("00_assets/css/EveryLayout.css") layer(every-layout);
+
+@import url("00_assets/css/modules.css") layer(modules);
+@import url("00_assets/css/utilities.css") layer(utilities);
+

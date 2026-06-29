@@ -1,4 +1,51 @@
-body {
-    font-family: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
-    font-weight: normal;
+
+/*
+https://livebook.manning.com/book/css-in-depth-second-edition/chapter-8#100
+set all default values - applied througout website
+(default font, bg colors, font colors, headings, link styles...)
+
+mostly tag selectors
+
+make use of custom properties (theme.css)
+*/
+
+:root {
+    font-size: clamp(1rem, 0.4rem + 0.8svw, 1.2rem);
 }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--background-color-1);
+    color: var(--foreground-color-2);
+}
+
+a:any-link {
+    color: var(--brand-color);
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.125rem;
+}
+
+/* Responsive behavior */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+/* form inputs, labels */
+
+/* code blocks, blockquotes,  */
+
+/* link states */
+
