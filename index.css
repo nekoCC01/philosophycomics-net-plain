@@ -6,7 +6,7 @@
 @import url("00_assets/css/global.css") layer(global);
 @import url("00_assets/css/layout.css") layer(layout);
 
-@import url("00_assets/css/EveryLayout.css") layer(every-layout);
+/* @import url("00_assets/css/EveryLayout.css") layer(every-layout); */
 
 @import url("00_assets/css/modules.css") layer(modules);
 @import url("00_assets/css/utilities.css") layer(utilities);
