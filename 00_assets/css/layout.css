@@ -32,7 +32,75 @@ different layouts for different pages - all defined here
   gap: var(--grid-gap);
 }
 
-/* Define typical widths */
+/*
+Typical widths
+
+These short names are local to a grid. They describe the role of the content,
+not a particular page or component. On narrow viewports every item uses the
+full grid; the editorial layout starts when there is enough room for it.
+*/
+@scope (.grid) {
+  :scope > :where(
+    .full,
+    .bleed,
+    .content,
+    .heading,
+    .text,
+    .pullquote,
+    .sidenote,
+    .additional-info,
+    .image-left,
+    .image-right
+  ) {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 48rem) {
+    /* Main content, with a generous margin on the left. */
+    :scope > .content {
+      grid-column: 4 / 12;
+    }
+
+    /* Headings may be wider than their accompanying text. */
+    :scope > .heading {
+      grid-column: 3 / 11;
+    }
+
+    /* Comfortable measure for long-form reading. */
+    :scope > .text {
+      grid-column: 4 / 10;
+    }
+
+    /* Editorial interruption that extends beyond the text measure. */
+    :scope > .pullquote {
+      grid-column: 3 / 11;
+    }
+
+    /* Marginal content alongside the main text. */
+    :scope > .sidenote {
+      grid-column: 1 / 4;
+    }
+
+    :scope > .additional-info {
+      grid-column: 10 / 13;
+    }
+
+    /* Asymmetrical media positions; both remain deliberately wide. */
+    :scope > .image-left {
+      grid-column: 1 / 9;
+    }
+
+    :scope > .image-right {
+      grid-column: 5 / 13;
+    }
+  }
+}
+
+/* Unlike .full, .bleed breaks out of a centered container. */
+.bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
 
 
 
