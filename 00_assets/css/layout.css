@@ -11,7 +11,32 @@ different layouts for different pages - all defined here
 */
 
 
+/* Grid Layout Primitives */
+:root {
+  --content-max: 1200px;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --grid-gap: clamp(0.75rem, 1.5vw, 1.5rem);
+}
 
+.container {
+  width: min(
+    calc(100% - 2 * var(--page-gutter)),
+    var(--content-max)
+  );
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Define typical widths */
+
+
+
+/* example - individual page styling */
 #homepage {
     display: grid;
     grid-template-areas:
