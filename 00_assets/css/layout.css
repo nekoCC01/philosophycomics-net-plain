@@ -33,70 +33,88 @@ different layouts for different pages - all defined here
 }
 
 /*
-Typical widths
+Column placements
 
-These short names are local to a grid. They describe the role of the content,
-not a particular page or component. On narrow viewports every item uses the
-full grid; the editorial layout starts when there is enough room for it.
+Preset classes name their start and end grid lines, not their column count.
+Use .cols with --col-start and --col-end for a placement without a preset.
+On narrow viewports all column placements use the full grid.
 */
 @scope (.grid) {
   :scope > :where(
-    .full,
-    .bleed,
-    .content,
-    .heading,
-    .text,
-    .pullquote,
-    .sidenote,
-    .additional-info,
-    .image-left,
-    .image-right
+    .cols,
+    .col-full,
+    .col-1-4,
+    .col-1-9,
+    .col-3-11,
+    .col-4-10,
+    .col-4-12,
+    .col-5-13,
+    .col-10-13,
+    .bleed
   ) {
     grid-column: 1 / -1;
   }
 
   @media (min-width: 48rem) {
-    /* Main content, with a generous margin on the left. */
-    :scope > .content {
-      grid-column: 4 / 12;
+    :scope > :where(
+      .cols,
+      .col-full,
+      .col-1-4,
+      .col-1-9,
+      .col-3-11,
+      .col-4-10,
+      .col-4-12,
+      .col-5-13,
+      .col-10-13,
+      .bleed
+    ) {
+      grid-column: var(--col-start, 1) / var(--col-end, -1);
     }
+  }
 
-    /* Headings may be wider than their accompanying text. */
-    :scope > .heading {
-      grid-column: 3 / 11;
-    }
+  :scope > .col-full,
+  :scope > .bleed {
+    --col-start: 1;
+    --col-end: -1;
+  }
 
-    /* Comfortable measure for long-form reading. */
-    :scope > .text {
-      grid-column: 4 / 10;
-    }
+  :scope > .col-1-4 {
+    --col-start: 1;
+    --col-end: 4;
+  }
 
-    /* Editorial interruption that extends beyond the text measure. */
-    :scope > .pullquote {
-      grid-column: 3 / 11;
-    }
+  :scope > .col-1-9 {
+    --col-start: 1;
+    --col-end: 9;
+  }
 
-    /* Marginal content alongside the main text. */
-    :scope > .sidenote {
-      grid-column: 1 / 4;
-    }
+  :scope > .col-3-11 {
+    --col-start: 3;
+    --col-end: 11;
+  }
 
-    :scope > .additional-info {
-      grid-column: 10 / 13;
-    }
+  :scope > .col-4-10 {
+    --col-start: 4;
+    --col-end: 10;
+  }
 
-    /* Asymmetrical media positions; both remain deliberately wide. */
-    :scope > .image-left {
-      grid-column: 1 / 9;
-    }
+  :scope > .col-4-12 {
+    --col-start: 4;
+    --col-end: 12;
+  }
 
-    :scope > .image-right {
-      grid-column: 5 / 13;
-    }
+  :scope > .col-5-13 {
+    --col-start: 5;
+    --col-end: 13;
+  }
+
+  :scope > .col-10-13 {
+    --col-start: 10;
+    --col-end: 13;
   }
 }
 
-/* Unlike .full, .bleed breaks out of a centered container. */
+/* Unlike .col-full, .bleed breaks out of a centered container. */
 .bleed {
   width: 100vw;
   margin-inline: calc(50% - 50vw);
