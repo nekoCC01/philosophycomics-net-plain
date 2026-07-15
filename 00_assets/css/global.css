@@ -9,6 +9,90 @@ mostly tag selectors
 make use of custom properties (theme.css)
 */
 
+/*
+ * Blushes web fonts by Piñata, licensed through Fontspring.
+ * See ../fonts/blushes/LICENSE.txt for the full web font license.
+ */
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-thin-italic.woff2") format("woff2");
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-light-italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-regular-italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-bold-italic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Blushes";
+    src: url("../fonts/blushes/blushes-black-italic.woff2") format("woff2");
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     font-size: clamp(1rem, 0.4rem + 0.8svw, 1.2rem);
 }
@@ -48,4 +132,3 @@ h2 {
 /* code blocks, blockquotes,  */
 
 /* link states */
-
