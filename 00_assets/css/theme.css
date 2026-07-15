@@ -26,6 +26,44 @@ low priority, defined early -> will be referenced later, can be overridden
     --color-light: #fff;
     --color-dark: #000;
 
+    /*
+     * Spacing scale
+     *
+     * One step equals 0.25rem (nominally 4px at a 16px root font size).
+     * The selected steps provide a consistent rhythm without offering every
+     * possible multiple. Use these tokens for gap, margin and padding.
+     */
+    --space-unit: 0.25rem;
+    --space-0: 0;
+    --space-1: var(--space-unit);               /*  4px */
+    --space-2: calc(var(--space-unit) * 2);     /*  8px */
+    --space-3: calc(var(--space-unit) * 3);     /* 12px */
+    --space-4: calc(var(--space-unit) * 4);     /* 16px */
+    --space-6: calc(var(--space-unit) * 6);     /* 24px */
+    --space-8: calc(var(--space-unit) * 8);     /* 32px */
+    --space-12: calc(var(--space-unit) * 12);   /* 48px */
+    --space-16: calc(var(--space-unit) * 16);   /* 64px */
+    --space-24: calc(var(--space-unit) * 24);   /* 96px */
+
+    /*
+     * Semantic spacing
+     *
+     * Components should prefer these aliases over the numbered scale when a
+     * spacing value has one of the following recurring roles.
+     */
+    --gap-inline: var(--space-2);
+    --gap-stack-tight: var(--space-2);
+    --gap-stack: var(--space-4);
+    --gap-stack-loose: var(--space-6);
+    --gap-content: var(--space-6);
+    --gap-component: var(--space-8);
+
+    --heading-space-before: var(--space-12);
+    --heading-space-after: var(--space-4);
+
+    --section-space: var(--space-16);
+    --page-gutter: var(--space-4);
+
     /* former modular.css (modular scale) */
     --ratio: 1.5;
     --s-5: calc(var(--s-4) / var(--ratio));
