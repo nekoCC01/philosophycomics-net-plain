@@ -1,9 +1,9 @@
 const template = document.createElement('template');
 template.innerHTML = `
-    <footer >
+    <footer class="container">
         <style>
         footer section { font-size: small; }
-        footer { margin: 30px; }
+        footer { margin-block: 30px; }
         </style>
         <hr>
         <section class="center">
