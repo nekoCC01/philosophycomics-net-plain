@@ -103,14 +103,33 @@ a:any-link {
     color: var(--brand-color);
 }
 
+/* heading - values for size, line-height, margin - considerations:
+https://livebook.manning.com/book/design-for-developers/chapter-10#51 */
 h1 {
     font-family: var(--font-heading);
-    font-size: 2.2rem;
+    font-size: var(--space-12); /* 48px */
+    line-height: 1;
+    margin-top: var(--space-15);
 }
 
 h2 {
-    font-size: 1.125rem;
+    font-size: var(--space-9); /* 36px */
+    line-height: 1;
+    margin-top: var(--space-12);
 }
+
+h3 {
+    font-size: var(--space-7); /* 28px */
+    line-height: 1.25;
+    margin-top: var(--space-6);
+}
+
+p {
+    font-size: var(--space-4); /* 16px */
+    line-height: var(--space-5); /* 20px */
+    margin-top: var(--space-4); 
+}
+
 
 /* Responsive behavior */
 @media (min-width: 768px) {
