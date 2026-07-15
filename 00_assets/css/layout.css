@@ -19,10 +19,8 @@ different layouts for different pages - all defined here
 }
 
 .container {
-  width: min(
-    calc(100% - 2 * var(--page-gutter)),
-    var(--content-max)
-  );
+  width: min(calc(100% - 2 * var(--page-gutter)),
+      var(--content-max));
   margin-inline: auto;
 }
 
@@ -40,44 +38,37 @@ Use .cols with --col-start and --col-end for a placement without a preset.
 On narrow viewports all column placements use the full grid.
 */
 @scope (.grid) {
-  :scope > :where(
-    .cols,
+  :scope> :where(.cols,
     .col-full,
-    .col-1-4,
-    .col-1-9,
-    .col-3-11,
-    .col-4-10,
-    .col-4-12,
-    .col-5-13,
-    .col-10-13,
-    .bleed
-  ) {
+    .col-4--4,
+    .center-text,
+    .bleed) {
     grid-column: 1 / -1;
   }
 
   @media (min-width: 48rem) {
-    :scope > :where(
-      .cols,
+    :scope> :where(.cols,
       .col-full,
-      .col-1-4,
-      .col-1-9,
-      .col-3-11,
-      .col-4-10,
-      .col-4-12,
-      .col-5-13,
-      .col-10-13,
-      .bleed
-    ) {
+      .col-4--4,
+      .center-text,
+      .bleed) {
       grid-column: var(--col-start, 1) / var(--col-end, -1);
     }
   }
 
-  :scope > .col-full,
-  :scope > .bleed {
+  :scope>.col-full,
+  :scope>.bleed {
     --col-start: 1;
     --col-end: -1;
   }
 
+  :scope>.col-4--4,
+  :scope>.center-text {
+    --col-start: 4;
+    --col-end: -4;
+  }
+
+  /*
   :scope > .col-1-4 {
     --col-start: 1;
     --col-end: 4;
@@ -112,6 +103,8 @@ On narrow viewports all column placements use the full grid.
     --col-start: 10;
     --col-end: 13;
   }
+    */
+
 }
 
 /* Unlike .col-full, .bleed breaks out of a centered container. */
@@ -124,21 +117,21 @@ On narrow viewports all column placements use the full grid.
 
 /* example - individual page styling */
 #homepage {
-    display: grid;
-    grid-template-areas:
-        "header header"
-        "main sidebar"
-        "footer footer";
-    grid-template-columns: 1fr 300px;
-    gap: 1rem;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "main sidebar"
+    "footer footer";
+  grid-template-columns: 1fr 300px;
+  gap: 1rem;
 }
 
 #homepage>header,
 #homepage>footer {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
 #article>main {
-    max-inline-size: 1000px;
-    margin-inline: auto;
+  max-inline-size: 1000px;
+  margin-inline: auto;
 }
