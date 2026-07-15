@@ -4,7 +4,7 @@
  * A custom element for covering a block-level element horizontally,
  * with a max-width value representing the typographic measure
  * @property {string} centered=h1 A simple selector such an element or class selector, representing the centered (main) element in the cover
- * @property {string} space=var(--s1) The minimum space between and around all of the child elements
+ * @property {string} space=var(--space-6) The minimum space between and around all of the child elements
  * @property {string} minHeight=100vh The minimum height (block-size) for the **Cover**
  * @property {boolean} noPad=false Whether the spacing is also applied as padding to the container element
  */
@@ -53,7 +53,7 @@ export default class Cover extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s1)';
+    return this.getAttribute('space') || 'var(--space-6)';
   }
 
   set space(val) {

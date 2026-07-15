@@ -3,7 +3,7 @@
  * @description
  * A custom element for creating a responsive grid using the CSS Grid module
  * @property {string} itemWidth=auto The width of each item (child element) in the Reel
- * @property {string} space=var(--s0) The space between Reel items (child elements)
+ * @property {string} space=var(--space-4) The space between Reel items (child elements)
  * @property {string} height=auto The height of the Reel itself
  * @property {boolean} noBar=false Whether to display the scrollbar
  */
@@ -77,7 +77,7 @@ export default class Reel extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s0)';
+    return this.getAttribute('space') || 'var(--space-4)';
   }
 
   set space(val) {

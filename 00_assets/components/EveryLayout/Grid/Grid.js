@@ -3,7 +3,7 @@
  * @description
  * A custom element for creating a responsive grid using the CSS Grid module
  * @property {string} min=250px A CSS length value representing x in `minmax(min(x, 100%), 1fr)`
- * @property {string} space=var(--s1) The space between grid cells
+ * @property {string} space=var(--space-6) The space between grid cells
  */
 export default class Grid extends HTMLElement {
   constructor() {
@@ -39,7 +39,7 @@ export default class Grid extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s1)';
+    return this.getAttribute('space') || 'var(--space-6)';
   }
 
   set space(val) {

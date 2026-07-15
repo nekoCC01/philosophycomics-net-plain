@@ -3,7 +3,7 @@
  * @description
  * A custom element for injecting white space (margin) between flow 
  * (block) elements along a vertical axis.
- * @property {string} space=var(--s1) A CSS `margin` value
+ * @property {string} space=var(--space-6) A CSS `margin` value
  * @property {boolean} recursive=false Whether the spaces apply recursively (i.e. regardless of nesting level)
  * @property {number} splitAfter=null The element after which to _split_ the stack with an auto margin
  */
@@ -37,7 +37,7 @@ export default class Stack extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s1)';
+    return this.getAttribute('space') || 'var(--space-6)';
   }
 
   set space(val) {

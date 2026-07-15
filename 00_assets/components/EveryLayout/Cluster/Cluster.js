@@ -4,7 +4,7 @@
  * A custom element for grouping items, with control over the margin between them
  * @property {string} justify=flex-start A CSS `justify-content` value
  * @property {string} align=flex-start A CSS `align-items` value
- * @property {string} space=var(--s1) A CSS `gap` value. The minimum space between the clustered child elements.
+ * @property {string} space=var(--space-6) A CSS `gap` value. The minimum space between the clustered child elements.
  */
 export default class Cluster extends HTMLElement {
   constructor() {
@@ -44,7 +44,7 @@ export default class Cluster extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s1)';
+    return this.getAttribute('space') || 'var(--space-6)';
   }
 
   set space(val) {

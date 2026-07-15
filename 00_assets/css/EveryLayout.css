@@ -30,7 +30,7 @@
 * Box
 ***********************************************************************************************************************/
 .box {
-    padding: var(--s1);
+    padding: var(--space-6);
     border: var(--border-thin) solid;
     --color-light: #fff;
     --color-dark: #000;
@@ -77,7 +77,7 @@
 .with-sidebar {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--s1);
+    gap: var(--space-6);
 }
 
 .with-sidebar > :first-child {
@@ -97,7 +97,7 @@
 .switcher {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--s1);
+    gap: var(--space-6);
 }
 
 .switcher > * {
@@ -269,7 +269,6 @@
     container-name: myContainer;
     container-type: inline-size;
 }
-
 
 
 

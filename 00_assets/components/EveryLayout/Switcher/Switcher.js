@@ -2,7 +2,7 @@
  * @module switcher-l
  * @description Switch directly between horizontal and vertical layouts at a given (container width-based) breakpoint or 'threshold'
  * @property {string} threshold=var(--measure) A CSS `width` value (representing the 'container breakpoint')
- * @property {string} space=var(--s1) A CSS `margin` value
+ * @property {string} space=var(--space-6) A CSS `margin` value
  * @property {integer} limit=4 A number representing the maximum number of items permitted for a horizontal layout
  */
 export default class Switcher extends HTMLElement {
@@ -41,7 +41,7 @@ export default class Switcher extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--s1)';
+    return this.getAttribute('space') || 'var(--space-6)';
   }
 
   set space(val) {

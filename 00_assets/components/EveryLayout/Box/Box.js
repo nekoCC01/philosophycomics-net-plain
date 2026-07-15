@@ -2,7 +2,7 @@
  * @module box-l
  * @description
  * A custom element for generic boxes/containers
- * @property {string} padding=var(--s1) A CSS `padding` value
+ * @property {string} padding=var(--space-6) A CSS `padding` value
  * @property {string} borderWidth=var(--border-thin) A CSS `border-width` value
  * @property {boolean} invert=false Whether to apply an inverted theme. Only recommended for greyscale designs.
  */
@@ -35,7 +35,7 @@ export default class Box extends HTMLElement {
   }
 
   get padding() {
-    return this.getAttribute('padding') || 'var(--s1)';
+    return this.getAttribute('padding') || 'var(--space-6)';
   }
 
   set padding(val) {
