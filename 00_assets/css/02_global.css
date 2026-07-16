@@ -106,7 +106,6 @@ a:any-link {
 /* heading - values for size, line-height, margin - considerations:
 https://livebook.manning.com/book/design-for-developers/chapter-10#51 */
 h1 {
-    font-family: var(--font-heading);
     font-size: var(--space-12); /* 48px */
     line-height: 1;
     margin-top: var(--space-15);
@@ -122,6 +121,10 @@ h3 {
     font-size: var(--space-7); /* 28px */
     line-height: 1.25;
     margin-top: var(--space-6);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
 }
 
 p {

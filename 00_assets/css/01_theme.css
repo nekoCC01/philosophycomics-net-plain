@@ -14,7 +14,7 @@ low priority, defined early -> will be referenced later, can be overridden
     --foreground-color-1: #39434d;
     --foreground-color-2: #5a636d;
     --font-main: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
-    --font-heading: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+    --font-heading: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
 
     accent-color: var(--brand-color);
     color-scheme: light;
