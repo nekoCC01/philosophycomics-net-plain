@@ -40,6 +40,7 @@ On narrow viewports all column placements use the full grid.
 @scope (.grid) {
   :scope> :where(.cols,
     .col-full,
+    .col-2--2,
     .col-4--4,
     .center-text,
     .bleed) {
@@ -49,6 +50,7 @@ On narrow viewports all column placements use the full grid.
   @media (min-width: 48rem) {
     :scope> :where(.cols,
       .col-full,
+      .col-2--2,
       .col-4--4,
       .center-text,
       .bleed) {
@@ -60,6 +62,11 @@ On narrow viewports all column placements use the full grid.
   :scope>.bleed {
     --col-start: 1;
     --col-end: -1;
+  }
+
+  :scope>.col-2--2 {
+    --col-start: 2;
+    --col-end: -2;
   }
 
   :scope>.col-4--4,
@@ -105,6 +112,16 @@ On narrow viewports all column placements use the full grid.
   }
     */
 
+}
+
+.multi-column {
+  column-gap: var(--grid-gap);
+}
+
+@media (min-width: 48rem) {
+  .multi-column {
+    column-count: 2;
+  }
 }
 
 /* Unlike .col-full, .bleed breaks out of a centered container. */
