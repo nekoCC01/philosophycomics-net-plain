@@ -7,7 +7,7 @@ class StoryboardGallery extends HTMLElement {
         this.state = {
             resourceFolder: '',
             imageCount: 0,
-            currentIndex: 0,
+            currentIndex: 1,
             texts: [],
         };
         this._initialized = false;
@@ -35,7 +35,7 @@ class StoryboardGallery extends HTMLElement {
     async fetchTexts(folder) {
         const res = await fetch(`${folder}/texts.json`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json(); // Dies gibt direkt das JSON-Array zurück
+        return res.json(); // Objekt, dessen Schlüssel den Bildnamen entsprechen
     }
 
     registerListeners() {

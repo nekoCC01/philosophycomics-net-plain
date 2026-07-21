@@ -126,15 +126,18 @@ nav {
   }
 }`; },
     html(state) {
+        const currentKey = String(state.currentIndex).padStart(2, '0');
+        const nextKey = String(state.currentIndex + 1).padStart(2, '0');
+
         return `<div id="hero">
     <header>
-      <h1>${state.texts[state.currentIndex].title}</h1>
+      <h1>${state.texts[currentKey].title}</h1>
     </header>
     <section id="stage">
       <div class="stage-inner">
-        <img src="resources/1.jpg" alt="Linkes Bild" class="thumb">
-        <img alt="Zentrales Bild" src="${state.resourceFolder}/${state.currentIndex}.jpg" class="main-image">
-        <img src="${state.resourceFolder}/${state.currentIndex + 1}.jpg" alt="Rechtes Bild" class="thumb">
+        <img src="${state.resourceFolder}/01.jpg" alt="Linkes Bild" class="thumb">
+        <img alt="Zentrales Bild" src="${state.resourceFolder}/${currentKey}.jpg" class="main-image">
+        <img src="${state.resourceFolder}/${nextKey}.jpg" alt="Rechtes Bild" class="thumb">
       </div>
     </section>
     <nav class="nav-dots" aria-label="Slide navigation">
@@ -147,8 +150,8 @@ nav {
 
   <!-- TEXT: darf beliebig lang sein und nach unten weitergehen -->
   <section id="text">
-    <h2>${state.texts[state.currentIndex].title}</h2>
-    ${state.texts[state.currentIndex].text}
+    <h2>${state.texts[currentKey].title}</h2>
+    ${state.texts[currentKey].text}
   </section>
                 
                 `;
