@@ -52,6 +52,10 @@ low priority, defined early -> will be referenced later, can be overridden
     /* 32px */
     --space-9: calc(var(--space-unit) * 9);
     /* 36px */
+    --space-10: calc(var(--space-unit) * 10);
+    /* 40px */
+    --space-11: calc(var(--space-unit) * 11);
+    /* 44px */
     --space-12: calc(var(--space-unit) * 12);
     /* 48px */
     --space-15: calc(var(--space-unit) * 15);
