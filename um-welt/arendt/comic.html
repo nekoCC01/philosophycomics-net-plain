@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arendt Comic</title>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Arendt Comic</title>
      <link rel="stylesheet" href="../../index.css">
      <style>
-          body {
-               padding: 60px;
+          [aria-label="gallery"] ul {
+               display: flex;
+          }
+
+          [aria-label="gallery"] li {
+               list-style: none;
+               flex: 0 0 100%;
           }
      </style>
 </head>
+
 <body>
+
+     <!-- Start fresh - 30.9.26 -->
+
+     <div aria-label="gallery"><!-- inclusive comp -->
+          <div id="hero">
+               <header>
+                    <h1>${state.texts[currentKey].title}</h1>
+               </header>
+               <section id="stage">
+                    <div class="stage-inner">
+                         <img src="${state.resourceFolder}/01.jpg" alt="Linkes Bild" class="thumb">
+                         <img alt="Zentrales Bild" src="${state.resourceFolder}/${currentKey}.jpg" class="main-image">
+                         <img src="${state.resourceFolder}/${nextKey}.jpg" alt="Rechtes Bild" class="thumb">
+                    </div>
+               </section>
+               <nav class="nav-dots" aria-label="Slide navigation">
+                    <button class="dot is-active" aria-label="Slide 1"></button>
+                    <button class="dot" id="right" aria-label="Slide 2"></button>
+                    <button class="dot" aria-label="Slide 3"></button>
+                    <button class="dot" aria-label="Slide 4"></button>
+               </nav>
+          </div>
+
+          <!-- TEXT: darf beliebig lang sein und nach unten weitergehen -->
+          <section id="text">
+               <h2>${state.texts[currentKey].title}</h2>
+               ${state.texts[currentKey].text}
+          </section>
+
+     </div>
+
+
+     <!--
      <storyboard-gallery resource-folder="resources" image-count="6"></storyboard-gallery>
      <script type="module" src="../../00_assets/components/storyboard-gallery/storyboard-gallery.js"></script>
+     -->
+
 </body>
+
 </html>
