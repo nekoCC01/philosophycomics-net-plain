@@ -15,6 +15,12 @@
                list-style: none;
                flex: 0 0 100%;
           }
+
+          .stage-inner {
+               display: flex;
+               gap: 1em;
+               padding: 3em;
+          }
      </style>
 </head>
 
@@ -23,15 +29,18 @@
      <!-- Start fresh - 30.9.26 -->
 
      <div aria-label="gallery"><!-- inclusive comp -->
-          <div id="hero">
+          <section id="hero">
                <header>
                     <h1>${state.texts[currentKey].title}</h1>
                </header>
                <section id="stage">
                     <div class="stage-inner">
-                         <img src="${state.resourceFolder}/01.jpg" alt="Linkes Bild" class="thumb">
-                         <img alt="Zentrales Bild" src="${state.resourceFolder}/${currentKey}.jpg" class="main-image">
-                         <img src="${state.resourceFolder}/${nextKey}.jpg" alt="Rechtes Bild" class="thumb">
+                         <img src="resources/01.jpg" alt="Linkes Bild" class="thumb">
+                         <!-- src="${state.resourceFolder}/01.jpg" -->
+                         <img alt="Zentrales Bild" src="resources/02.jpg" class="main-image">
+                         <!--src="${state.resourceFolder}/${currentKey}.jpg"-->
+                         <img src="resources/03.jpg" alt="Rechtes Bild"
+                              class="thumb"><!--rc="${state.resourceFolder}/${nextKey}.jpg"-->
                     </div>
                </section>
                <nav class="nav-dots" aria-label="Slide navigation">
@@ -40,7 +49,7 @@
                     <button class="dot" aria-label="Slide 3"></button>
                     <button class="dot" aria-label="Slide 4"></button>
                </nav>
-          </div>
+          </section>
 
           <!-- TEXT: darf beliebig lang sein und nach unten weitergehen -->
           <section id="text">
