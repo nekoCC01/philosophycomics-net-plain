@@ -1,0 +1,108 @@
+<!-- Siehe https://plainvanillaweb.com/pages/sites.html -->
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        > erste ebene (Bsp: /meditation/page.html) -> ../index
+        > > zweite eben (Bsp: /meditation/topic/page.html) -> ../../index
+    -->
+    <link rel="stylesheet" href="../index.css">
+    <script type="module" src="../index.js" defer></script>
+    <style>
+        .stack>*+* {
+            border-top: solid black;
+            margin-block-start: var(--space-10);
+            padding-top: var(--space-10);
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
+    <header>
+
+    </header>
+    <main>
+
+        <div class="stack">
+            <section class="container grid">
+                <div class="cols" style="--col-start: 4;--col-end: -4;">
+                    <!-- hier greift das responsive Layout aus 00_assets/css/03_layout.css 
+                     -> bei kleinem Bildschirm: Ausweitung auf 1 / -1 -->
+                    <img src="https://picsum.photos/id/618/750/350" alt="">
+                    <h1>Vanish for good</h1>
+                    <p style="font-size: larger;">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                        dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                        sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                        justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                        ipsum dolor sit amet.
+                    </p>
+                </div>
+            </section>
+            <section class="container multi-column">
+                <img src="https://picsum.photos/id/618/750/350" alt="">
+                <h1>Vanish for good</h1>
+                <p style="font-size: larger;">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                    ipsum dolor sit amet.
+                </p>
+            </section>
+            <section class="container grid">
+                <img src="https://picsum.photos/500?random=1" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=2" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=3" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=4" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=5" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=6" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=7" alt="" style="grid-column: span 3;">
+                <img src="https://picsum.photos/500?random=8" alt="" style="grid-column: span 3;">
+            </section>
+
+            <section class="container grid">
+                <div style="grid-column: 2 / -2; column-count: 3;">
+                    <!-- diese Grid-Aufteilung bleibt auch bei kleinem Bildschirm erhalten -->
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+                    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
+                    sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+                    ipsum dolor sit amet.
+                    </p>
+                </div>
+            </section>
+
+
+        </div>
+
+
+
+
+
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
+</html>
