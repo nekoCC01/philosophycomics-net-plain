@@ -8,11 +8,11 @@ low priority, defined early -> will be referenced later, can be overridden
 */
 
 :root {
-    --brand-color: #0063cc;
-    --background-color-1: #edf3fa;
-    --background-color-2: #c6cdd5;
-    --foreground-color-1: #39434d;
-    --foreground-color-2: #5a636d;
+    --brand-color: #FFD274;
+    --background-color-1: #FFF0D9;
+    --background-color-2: #EACE8B;
+    --foreground-color-1: #C9A86B;
+    --foreground-color-2: #614A23;
     --font-main: Avenir, Montserrat, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
     --font-heading: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
 
