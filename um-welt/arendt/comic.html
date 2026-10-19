@@ -21,15 +21,16 @@
                     <h1>Hannah Arendt in sechs Bildern</h1>
                </header>
                <section id="stage" class="container grid" style="align-items: center;">
-                    <button style="grid-column: 2;">Prev</button>
+                    <button id="prev" style="grid-column: 2;">Prev</button>
                     <img src="resources/01.jpg" alt="Linkes Bild" class="thumb" style="grid-column: 3 / 5;">
                     <!-- src="${state.resourceFolder}/01.jpg" -->
                     <img alt="Zentrales Bild" src="resources/02.jpg" class="main-image" style="grid-column: 5 / 9;">
                     <!--src="${state.resourceFolder}/${currentKey}.jpg"-->
                     <img src="resources/03.jpg" alt="Rechtes Bild" class="thumb"
                          style="grid-column: 9 / 11;"><!--rc="${state.resourceFolder}/${nextKey}.jpg"-->
-                         <button style="grid-column: 11;">Next</button>
-                    <nav class="nav-dots" aria-label="Slide navigation" style="grid-row: 2; grid-column: 5 / 9; justify-self: center;">
+                    <button id="next" style="grid-column: 11;">Next</button>
+                    <nav class="nav-dots" aria-label="Slide navigation"
+                         style="grid-row: 2; grid-column: 5 / 9; justify-self: center;">
                          <button class="dot is-active" aria-label="Slide 1"></button>
                          <button class="dot" aria-label="Slide 2"></button>
                          <button class="dot" aria-label="Slide 3"></button>
@@ -115,6 +116,16 @@
 
 
           */
+
+          let button = document.getElementById("next");
+          let imgs = document.querySelectorAll("img");
+          button.addEventListener("click", () => {
+               [imgs[0].src, imgs[1].src, imgs[2].src] = [
+                         "resources/02.jpg",
+                         "resources/03.jpg",
+                         "resources/04.jpg"
+                    ];
+          })
 
 
      </script>
