@@ -131,6 +131,30 @@
      </script>
 
 
+<script type="module"">
+        import { createApp, defineComponent, h, hString } from 'https://nekocc01.github.io/dk-fwk/packages/runtime/dist/fe-fwk.js'
+
+        const Counter = defineComponent({
+            state: () => ({ count: 0 }),
+
+            add(amount) {
+                this.updateState({ count: this.state.count + amount })
+            },
+
+            render() {
+                return h(
+                    'button',
+                    { on: { click: () => this.add(1) } },
+                    [hString(this.state.count)]
+                )
+            },
+        })
+
+        createApp(Counter).mount(document.body)
+</script>
+
+
+
 </body>
 
 </html>
