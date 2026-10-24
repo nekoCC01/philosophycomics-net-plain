@@ -77,6 +77,9 @@
           </section>
 
      </div>
+     <div id="test-fwk" style="background-color: white; padding: 40px;">
+
+     </div>
 
 
 
@@ -134,6 +137,7 @@
 <script type="module"">
         import { createApp, defineComponent, h, hString } from 'https://nekocc01.github.io/dk-fwk/packages/runtime/dist/fe-fwk.js'
 
+        const mountPoint = document.getElementById("test-fwk");
         const Counter = defineComponent({
             state: () => ({ count: 0 }),
 
@@ -150,7 +154,7 @@
             },
         })
 
-        createApp(Counter).mount(document.body)
+        createApp(Counter).mount(mountPoint)
 </script>
 
 
