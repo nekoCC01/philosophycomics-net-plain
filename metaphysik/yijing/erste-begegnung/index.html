@@ -7,8 +7,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../../index.css">
     <style>
+        #comic {
+            grid-template-rows: 100px 300px;
+        }
+
         #comic img {
             grid-column: span 3;
+            width: 100%;
+            border: 1px solid black;
+            box-shadow: 10px 10px;
+        }
+
+        #comic p {
+            background-color: white;
+            border: 1px solid black;
+            box-shadow: 10px 10px;
         }
     </style>
 </head>
@@ -19,22 +32,28 @@
     <div class="container stack" style="margin-top: 2rem">
 
         <section id="comic" class="grid">
-            <img src="img/slices-yijing-befragung/Slice1.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice2.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice3.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice4.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice5.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice6.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice7.jpg" alt="">
-            <img src="img/slices-yijing-befragung/Slice8.jpg" alt="">
+            <img src="img/slices-yijing-befragung/Slice1.jpg" alt="" style="grid-column: 2 / 5; grid-row: 1;">
+            <p style="grid-column: 2; grid-row: 1; left: -20px;">Test Text</p>
+            <img src="img/slices-yijing-befragung/Slice2.jpg" alt="" style="grid-column: 5 / 9; grid-row: 2;">
+            <img src="img/slices-yijing-befragung/Slice4.jpg" alt="" style="grid-column: 8 / 11; grid-row: 3;">
+
         </section>
-        <section class="grid">
-            <img src="img/bergsee-refined-v1.jpg" alt="" style="grid-column: 4 / 10">
-        </section>
+
+
+
 
     </div>
 
+    <img src="img/slices-yijing-befragung/Slice3.jpg" alt="">
+    <img src="img/slices-yijing-befragung/Slice4.jpg" alt="">
+    <img src="img/slices-yijing-befragung/Slice5.jpg" alt="">
+    <img src="img/slices-yijing-befragung/Slice6.jpg" alt="">
+    <img src="img/slices-yijing-befragung/Slice7.jpg" alt="">
+    <img src="img/slices-yijing-befragung/Slice8.jpg" alt="">
 
+    <section class="grid">
+        <img src="img/bergsee-refined-v1.jpg" alt="" style="grid-column: 4 / 10">
+    </section>
 
 </body>
 
