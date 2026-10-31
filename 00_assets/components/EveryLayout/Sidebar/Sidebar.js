@@ -5,7 +5,7 @@
  * @property {string} side=left Which element to treat as the sidebar (all values but "left" are considered "right")
  * @property {string} sideWidth Represents the width of the sidebar _when_ adjacent. If not set (`null`) it defaults to the sidebar's content width
  * @property {string} contentMin=50% A CSS **percentage** value. The minimum width of the content element in the horizontal configuration
- * @property {string} space=var(--space-6) A CSS margin value representing the space between the two elements
+ * @property {string} space=1.5rem A CSS margin value representing the space between the two elements
  * @property {boolean} noStretch=false Make the adjacent elements adopt their natural height
  */
 export default class Sidebar extends HTMLElement {
@@ -66,7 +66,7 @@ export default class Sidebar extends HTMLElement {
   }
 
   get space() {
-    return this.getAttribute('space') || 'var(--space-6)';
+    return this.getAttribute('space') || '1.5rem';
   }
 
   set space(val) {

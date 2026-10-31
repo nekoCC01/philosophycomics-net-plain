@@ -103,47 +103,14 @@ a:any-link {
     color: var(--brand-color);
 }
 
-/* heading - values for size, line-height, margin - considerations:
-https://livebook.manning.com/book/design-for-developers/chapter-10#51 */
-h1 {
-    font-size: var(--space-12); /* 48px */
-    line-height: 1;
-    margin-top: var(--space-15);
-    margin-bottom: var(--space-6);
-}
-
-h2 {
-    font-size: var(--space-9); /* 36px */
-    line-height: 1;
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-4);
-}
-
-h3 {
-    font-size: var(--space-7); /* 28px */
-    line-height: 1.25;
-    margin-top: var(--space-6);
-    margin-bottom: var(--space-3);
-}
-
+/* Neutral heading defaults also serve navigation and custom compositions.
+ * Reading sizes and all text rhythm are opt-in: see .prose in 04_modules.css.
+ */
 h1, h2, h3 {
     font-family: var(--font-heading);
+    line-height: 1.2;
 }
 
-p {
-    font-size: var(--space-4); /* 16px */
-    line-height: var(--space-5); /* 20px */
-    margin-top: var(--space-4); 
-}
-
-
-/* Responsive behavior */
-@media (min-width: 768px) {
-    
-}
-
-/* form inputs, labels */
-
-/* code blocks, blockquotes,  */
-
-/* link states */
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.75rem; }

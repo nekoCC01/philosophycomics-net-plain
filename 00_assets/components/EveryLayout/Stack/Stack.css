@@ -5,5 +5,5 @@ stack-l {
 }
 
 stack-l > * + * {
-  margin-block-start: var(--space-6);
+  margin-block-start: 1.5rem;
 }

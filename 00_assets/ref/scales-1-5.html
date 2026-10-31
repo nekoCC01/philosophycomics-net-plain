@@ -61,13 +61,12 @@
     import '../components/EveryLayout/import_all.js';
 </script>
 <script>
-    const rootStyles = getComputedStyle(document.documentElement);
     const stackBoxes = document.querySelector('stack-l#boxes');
-    const spacingSteps = [0, 1, 2, 3, 4, 6, 8, 12, 16, 24];
+    // Preferred literal rem values; no global spacing tokens required.
+    const spacingSteps = [0.5, 1, 1.5, 2, 3, 4];
 
     for (const step of spacingSteps) {
-        const property = '--space-' + step;
-        const scale = rootStyles.getPropertyValue(property);
+        const scale = step + 'rem';
 
         // Balken mit Breite
         let container = document.createElement('div');
@@ -76,7 +75,7 @@
         bar.classList.add('bar');
         let info = document.createElement('div');
         info.classList.add('info');
-        info.innerText = property + ' (' + scale.trim() + ')';
+        info.innerText = scale;
         bar.style.width = scale;
         container.append(bar);
         container.append(info);

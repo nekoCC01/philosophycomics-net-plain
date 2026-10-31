@@ -27,7 +27,7 @@ different layouts for different pages - all defined here
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--space-3);
+  gap: 0.75rem;
 }
 
 /*
@@ -168,5 +168,5 @@ On narrow viewports all column placements use the full grid.
 }
 
 .stack > * + * {
-    margin-block-start: var(--gap-stack, 1.5rem);
+    margin-block-start: var(--stack-gap, 1rem);
 }

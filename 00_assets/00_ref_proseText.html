@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Referenz: Prose-Typografie</title>
+    <link rel="stylesheet" href="../index.css">
+    <style>
+        /* This page owns placement and outer spacing. .prose owns only text. */
+        main { padding-block: 3rem 4rem; }
+    </style>
+</head>
+<body>
+    <main class="container grid">
+        <article class="cols prose" style="--col-start: 3; --col-end: -3;" aria-labelledby="title">
+            <h1 id="title">Gute Gedanken brauchen Raum</h1>
+            <p>Diese Referenz zeigt die gemeinsame Typografie für Artikel und längere Texte:
+                Überschriften, Absätze, Listen und kleine Auszeichnungen. Die Textspalte wird
+                durch das zwölfspaltige Grid dieser Seite festgelegt. Das Prose-Modul selbst
+                definiert keine Breite.</p>
+            <p>Ein zweiter Absatz führt den Gedanken fort. Sein Abstand ist kleiner als die
+                Unterbrechung vor einem neuen Abschnitt. So entstehen erkennbare Beziehungen,
+                ohne dass jede Textzeile an einem festen Grundlinienraster ausgerichtet wird.
+                Auch auf schmalen Bildschirmen bleibt die Schrift gleich groß; die Spalte
+                nimmt dort die verfügbare Breite ein.</p>
+
+            <h2>Ein neuer Gedankengang</h2>
+            <p>Vor einer Zwischenüberschrift liegt mehr Raum als zwischen zwei Absätzen.
+                Die Überschrift gehört dadurch sichtbar zum folgenden Text. <strong>Eine wichtige
+                Aussage</strong> lässt sich hervorheben; <em>eine Betonung</em> kann leiser ausfallen.
+                Ein <a href="#listen">Link zum Abschnitt über Listen</a> bleibt im Lesetext gut erkennbar.</p>
+            <p>Ein längerer Absatz hilft dabei, Zeilenhöhe und Lesefluss zu beurteilen. Wer
+                einen philosophischen Text liest, folgt häufig mehreren Schritten: einer Frage,
+                einer Unterscheidung und schließlich einem Einwand. Die Gestaltung soll diesen
+                Weg unterstützen. Sie gibt dem Text Ruhe und lässt zugleich genug Raum für
+                unterschiedliche Inhalte und eine eigene visuelle Komposition.</p>
+
+            <h3>Eine nähere Unterscheidung</h3>
+            <p>Die dritte Überschriftenebene gliedert innerhalb eines Abschnitts. Sie ist
+                etwas größer und kräftiger als der Lesetext, bleibt ihm aber näher als die
+                zweite Ebene. Ein manueller Zeilenumbruch kann sinnvoll sein:<br>
+                etwa wenn zwei kurze Zeilen inhaltlich zusammengehören.</p>
+            <p>Dieser kurze Absatz zeigt den normalen Anschluss nach dem Unterabschnitt.</p>
+
+            <h2>Eine längere Zwischenüberschrift, die auch über mehrere Zeilen lesbar bleiben soll</h2>
+            <h3>Direkt aufeinanderfolgende Überschriften</h3>
+            <p>Wenn kein Absatz zwischen zwei Überschriften steht, bleibt ihr Abstand kompakt.
+                Der größere Abschnittsabstand wird dadurch nicht zweimal hintereinander eingesetzt.</p>
+
+            <h2 id="listen">Gedanken als Liste ordnen</h2>
+            <p>Eine ungeordnete Liste sammelt zusammengehörige Gesichtspunkte:</p>
+            <ul>
+                <li>Eine kurze Beobachtung.</li>
+                <li>Ein ausführlicherer Punkt, der über mehrere Zeilen laufen kann und zeigt,
+                    wie sich die Einrückung zum Zeilenabstand des übrigen Textes verhält.</li>
+                <li>Ein Gedanke mit Unterpunkten:
+                    <ul>
+                        <li>Eine erste Präzisierung.</li>
+                        <li>Eine zweite Präzisierung, die den Zusammenhang ergänzt.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Nach der Liste setzt der Text mit dem normalen Absatzabstand wieder ein.
+                Für eine Abfolge eignet sich eine geordnete Liste:</p>
+            <ol>
+                <li>Die Ausgangsfrage formulieren.</li>
+                <li>
+                    <p>Eine mögliche Antwort untersuchen.</p>
+                    <p>Dieser Listenpunkt enthält einen zweiten Absatz. Innerhalb des Punktes
+                        ist der Abstand kleiner als zwischen eigenständigen Absätzen.</p>
+                </li>
+                <li>Den Einwand prüfen und die Frage neu stellen.</li>
+            </ol>
+
+            <h3>Begriffe und Erläuterungen</h3>
+            <dl>
+                <dt>Rhythmus</dt>
+                <dd>Die Wiederkehr vertrauter Abstände und typografischer Rollen.</dd>
+                <dt>Kontext</dt>
+                <dd>Der Zusammenhang, in dem ein Text oder Gestaltungselement seine Aufgabe erfüllt.</dd>
+            </dl>
+
+            <h2>Kleine Auszeichnungen im Text</h2>
+            <p>Auch technische Begriffe wie <code>class="prose"</code> können im Lesetext stehen.
+                Eine Tastenkombination wie <kbd>Cmd</kbd> + <kbd>+</kbd>, eine Abkürzung wie
+                <abbr title="zum Beispiel">z. B.</abbr> oder eine Formel wie x<sup>2</sup>
+                brauchen keine eigene Abstandsskala.</p>
+            <pre><code>&lt;main class="container grid"&gt;
+    &lt;section class="cols prose"
+        style="--col-start: 3; --col-end: -3;"&gt;
+        &lt;h1&gt;Ein Titel&lt;/h1&gt;
+        &lt;p&gt;Ein Absatz.&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            <p>Codeblöcke können bei Bedarf horizontal scrollen. Der folgende Trenner
+                markiert eine stärkere gedankliche Unterbrechung.</p>
+            <hr>
+            <p>Hier beginnt ein neuer Gedanke ohne zusätzliche Überschrift. Die Referenz
+                endet mit einem normalen Absatz; das äußere Seitenpadding gehört zum Layout.</p>
+        </article>
+    </main>
+</body>
+</html>
