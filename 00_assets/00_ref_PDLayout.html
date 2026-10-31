@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+
+    <title>Warum gute Fragen Zeit brauchen</title>
+
+    <style>
+        /* ==========================================================
+   1. Grundwerte
+
+   Die zentralen Größen stammen aus dem untersuchten PD-CSS.
+   Die Schriftfamilien sind lokale Systemschriften.
+   ========================================================== */
+
+        :root {
+            --font-heading:
+                system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+
+            --font-reading:
+                Georgia, "Times New Roman", serif;
+
+            --color-text: #424242;
+            --color-muted: #696969;
+            --color-accent: #ff5f5f;
+            --color-link: #00d370;
+            --color-box: #f6f6f6;
+            --color-background: #fff;
+
+            --reading-width: 660px;
+
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-6: 48px;
+            --space-8: 64px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--color-text);
+            background: var(--color-background);
+            font-family: var(--font-reading);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        img,
+        svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 2px solid var(--color-link);
+            text-underline-offset: 4px;
+        }
+
+        a:hover {
+            border-bottom-color: var(--color-accent);
+        }
+
+        a:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 5px;
+        }
+
+        ::selection {
+            color: #1e1e1e;
+            background: #b9f5d7;
+        }
+
+
+        /* ==========================================================
+   2. Seitennavigation – bewusst schlicht gehalten
+   ========================================================== */
+
+        .site-header {
+            min-height: 80px;
+            padding: 16px 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+
+            border-bottom: 1px solid #ededed;
+            font-family: var(--font-heading);
+        }
+
+        .site-brand {
+            border: 0;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 750;
+            letter-spacing: -1px;
+        }
+
+        .site-brand span {
+            color: var(--color-accent);
+        }
+
+        .site-description {
+            color: var(--color-muted);
+            font-size: 13px;
+            line-height: 23px;
+        }
+
+
+        /* ==========================================================
+   3. Großes Titelbild
+
+   Volle Seitenbreite, Seitenverhältnis 16:9.
+   Es liegt außerhalb des begrenzten Textcontainers.
+   ========================================================== */
+
+        .hero {
+            margin: 0;
+        }
+
+        .hero>svg,
+        .hero>img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .hero figcaption {
+            padding: 8px 16px 0;
+            color: var(--color-muted);
+            text-align: right;
+            font-family: var(--font-heading);
+            font-size: 13px;
+            line-height: 23px;
+        }
+
+
+        /* ==========================================================
+   4. Artikelkopf
+
+   PD-Grundmaße:
+   - maximal 660 px
+   - Titel 30/50 px, Gewicht 600
+   - Einleitung 17/30 px
+   - Metadaten 15/27 px
+   ========================================================== */
+
+        .article-header {
+            max-width: var(--reading-width);
+            margin: 0 auto;
+            padding-top: 48px;
+        }
+
+        .article-category {
+            margin: 0;
+            font-size: 15px;
+            line-height: 27px;
+            font-style: italic;
+        }
+
+        .article-header h1 {
+            margin: 0 0 48px;
+            font-family: var(--font-heading);
+            font-size: 30px;
+            line-height: 50px;
+            font-weight: 600;
+            overflow-wrap: break-word;
+        }
+
+        .article-intro {
+            margin: 0 0 48px;
+            font-family: var(--font-heading);
+            font-size: 17px;
+            line-height: 30px;
+            font-weight: 500;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0 8px;
+
+            margin: 0 0 32px;
+            font-size: 15px;
+            line-height: 27px;
+            font-style: italic;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            margin-bottom: 48px;
+            font-family: var(--font-heading);
+            font-size: 13px;
+            line-height: 23px;
+            font-weight: 500;
+        }
+
+        .author-avatar {
+            display: grid;
+            place-items: center;
+            flex: 0 0 64px;
+
+            width: 64px;
+            height: 80px;
+
+            background: #7abdf2;
+            color: #243e50;
+            font-size: 30px;
+
+            /* Schräg angeschnittener Bildrahmen wie beim Autorenporträt */
+            clip-path: polygon(0 9%, 100% 0, 100% 100%, 0 91%);
+        }
+
+
+        /* ==========================================================
+   5. Lesespalte und Textrhythmus
+
+   660 px / 17 px ergibt eine relativ schmale Lesespalte.
+   display: flow-root schließt enthaltene Floats ein.
+   ========================================================== */
+
+        .article-body {
+            display: flow-root;
+            width: min(var(--reading-width), 100%);
+            margin: 0 auto;
+            padding: 64px 0 48px;
+
+            font-size: 17px;
+            line-height: 30px;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .article-body p {
+            margin: 0 0 24px;
+        }
+
+        .article-body h2 {
+            /*
+    Ein neuer Abschnitt beginnt unter vorherigen Floats,
+    auch wenn dessen Text einmal besonders kurz ausfällt.
+  */
+            clear: both;
+            margin: 64px 0 32px;
+
+            font-family: var(--font-heading);
+            font-size: 20px;
+            line-height: 30px;
+            font-weight: 600;
+            hyphens: none;
+        }
+
+        .article-body h3 {
+            margin: 0 0 16px;
+            font-family: var(--font-heading);
+            font-size: 17px;
+            line-height: 27px;
+            font-weight: 600;
+        }
+
+        .article-body ol,
+        .article-body ul {
+            margin: 0 0 32px;
+            padding-left: 24px;
+        }
+
+        .article-body li {
+            margin-bottom: 16px;
+            padding-left: 8px;
+        }
+
+        .article-body li::marker {
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+
+        /* ==========================================================
+   6. Versetzte Infobox
+
+   Das Original nutzt u. a. negative linke Außenabstände.
+   Hier: bis zu 360 px breit, um 128 px nach links versetzt.
+   Der nachfolgende Text umfließt die Box rechts.
+   ========================================================== */
+
+        .info-box {
+            float: left;
+            width: 35vw;
+            max-width: 360px;
+
+            margin: 8px 32px 32px -128px;
+            padding: 32px;
+
+            background: var(--color-box);
+        }
+
+        .info-box .box-label {
+            margin: 0 0 8px;
+
+            color: var(--color-muted);
+            font-family: var(--font-heading);
+            font-size: 11px;
+            line-height: 18px;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .info-box p {
+            margin: 0 0 16px;
+
+            font-size: 13px;
+            line-height: 22px;
+            font-style: italic;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* ==========================================================
+   7. Zwei Formen herausgestellter Zitate
+   ========================================================== */
+
+        /* Großes Zitat innerhalb der Lesespalte */
+        .block-quote {
+            clear: both;
+            margin: 32px 64px 32px 32px;
+            padding-left: 32px;
+
+            border-left: 2px solid currentColor;
+            color: var(--color-accent);
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .block-quote p {
+            margin: 0 0 16px;
+        }
+
+        .block-quote p::before {
+            content: "»";
+        }
+
+        .block-quote p::after {
+            content: "«";
+        }
+
+        .block-quote cite {
+            display: block;
+            font-size: 13px;
+            line-height: 23px;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        /* Schmaler, links überstehender Textauszug */
+        .pull-quote {
+            float: left;
+            width: 224px;
+
+            margin: 0 64px 24px -64px;
+            padding: 4px 0 16px;
+
+            color: var(--color-accent);
+            font-size: 17px;
+            line-height: 30px;
+            font-weight: 700;
+        }
+
+        .pull-quote::before {
+            content: "“";
+            display: block;
+
+            height: 40px;
+            margin-bottom: 8px;
+
+            font-size: 64px;
+            line-height: 64px;
+        }
+
+
+        /* ==========================================================
+   8. Bilder im Artikel
+
+   Standard: Breite der Textspalte.
+   Wide: auf Desktop links und rechts jeweils 64 px Überstand.
+   ========================================================== */
+
+        .article-image {
+            clear: both;
+            margin: 64px 0;
+        }
+
+        .article-image>svg,
+        .article-image>img {
+            width: 100%;
+        }
+
+        .article-image--wide {
+            margin-left: -64px;
+            margin-right: -64px;
+        }
+
+        .article-image figcaption {
+            max-width: 660px;
+            margin: 18px auto 0;
+
+            color: var(--color-muted);
+            font-family: var(--font-heading);
+            font-size: 13px;
+            line-height: 23px;
+        }
+
+
+        /* ==========================================================
+   9. Artikelabschluss
+   ========================================================== */
+
+        .article-end {
+            clear: both;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 2px solid #ededed;
+        }
+
+        .article-end .end-label {
+            margin-bottom: 16px;
+
+            font-family: var(--font-heading);
+            font-size: 13px;
+            line-height: 23px;
+            font-weight: 600;
+        }
+
+        .article-end small {
+            display: block;
+            color: var(--color-muted);
+            font-family: var(--font-heading);
+            font-size: 13px;
+            line-height: 23px;
+        }
+
+
+        /* ==========================================================
+   10. Mittlere Bildschirme
+
+   Seitliche Überstände werden reduziert, bevor sie
+   den verfügbaren Seitenrand überschreiten.
+   ========================================================== */
+
+        @media (max-width: 1100px) {
+            .info-box {
+                width: 300px;
+                margin-left: -64px;
+            }
+
+            .pull-quote {
+                margin-left: 0;
+                margin-right: 32px;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .article-header,
+            .article-body {
+                width: auto;
+                max-width: 788px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 64px;
+                padding-right: 64px;
+            }
+
+            .info-box {
+                float: none;
+                width: auto;
+                max-width: none;
+                margin: 32px -32px;
+            }
+
+            .article-image--wide {
+                margin-left: -32px;
+                margin-right: -32px;
+            }
+        }
+
+
+        /* ==========================================================
+   11. Mobile Ansicht
+
+   PD-nahe Mobilwerte:
+   - Fließtext 14/25 px
+   - Titel 20/30 px
+   - Zwischenüberschriften 17/27 px
+   - kompaktere Außenabstände
+   ========================================================== */
+
+        @media (max-width: 600px) {
+            .site-header {
+                min-height: 64px;
+                padding: 16px;
+            }
+
+            .site-brand {
+                font-size: 20px;
+                line-height: 30px;
+            }
+
+            .site-description {
+                display: none;
+            }
+
+            .article-header {
+                padding: 32px 16px 0;
+            }
+
+            .article-header h1 {
+                margin-bottom: 32px;
+                font-size: 20px;
+                line-height: 30px;
+            }
+
+            .article-intro {
+                margin-bottom: 32px;
+                font-size: 15px;
+                line-height: 28px;
+            }
+
+            .article-meta {
+                font-size: 13px;
+                line-height: 23px;
+            }
+
+            .author {
+                margin-bottom: 32px;
+            }
+
+            .author-avatar {
+                display: none;
+            }
+
+            .article-body {
+                padding: 0 16px 32px;
+                font-size: 14px;
+                line-height: 25px;
+            }
+
+            .article-body h2 {
+                margin: 48px 0 32px;
+                font-size: 17px;
+                line-height: 27px;
+            }
+
+            .info-box {
+                margin: 32px -16px;
+                padding: 32px 24px;
+            }
+
+            .block-quote {
+                margin: 32px 0;
+                padding-left: 24px;
+            }
+
+            .pull-quote {
+                float: none;
+                width: auto;
+                margin: 0;
+                padding: 24px 0 32px;
+
+                font-size: 15px;
+                line-height: 27px;
+            }
+
+            .article-image,
+            .article-image--wide {
+                margin: 32px -16px;
+            }
+
+            .article-image figcaption {
+                padding: 0 16px;
+                font-size: 11px;
+                line-height: 18px;
+            }
+
+            .hero figcaption {
+                font-size: 11px;
+                line-height: 18px;
+            }
+
+            .article-end {
+                margin-top: 48px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="site-brand" href="#" aria-label="Zur Startseite">
+            Perspektiven<span aria-hidden="true">.</span>
+        </a>
+
+        <span class="site-description">Ein Beispiel für ruhiges Lesen</span>
+    </header>
+
+    <main>
+        <article aria-labelledby="article-title">
+
+            <!--
+        Das Titelbild liegt außerhalb der schmalen Textspalte.
+        Die Illustration ist eingebettet: keine externe Bildquelle.
+      -->
+            <figure class="hero">
+                <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hero-title">
+                    <title id="hero-title">
+                        Zwei Menschen betrachten gemeinsam ein großes Fragezeichen
+                    </title>
+
+                    <rect width="1600" height="900" fill="#258565" />
+                    <circle cx="1190" cy="240" r="220" fill="#36a47f" />
+                    <circle cx="260" cy="780" r="350" fill="#1d7257" />
+
+                    <path d="M700 310
+               C700 160 990 160 990 320
+               C990 425 850 420 850 530" fill="none" stroke="#f5e8bd" stroke-width="76" stroke-linecap="round" />
+
+                    <circle cx="850" cy="660" r="43" fill="#f5e8bd" />
+
+                    <circle cx="430" cy="510" r="48" fill="#ffd1ae" />
+                    <path d="M340 790 L365 610 Q430 550 495 610 L535 790 Z" fill="#ff7770" />
+
+                    <circle cx="1170" cy="530" r="48" fill="#eab38f" />
+                    <path d="M1060 790 L1100 630 Q1170 570 1240 630 L1280 790 Z" fill="#b5d8f2" />
+
+                    <path d="M280 790 H1330" stroke="#f5e8bd" stroke-width="8" stroke-linecap="round" />
+                </svg>
+
+                <figcaption>Illustration: eigenständige Beispielgrafik</figcaption>
+            </figure>
+
+            <header class="article-header">
+                <p class="article-category">Gedankenexperiment</p>
+
+                <h1 id="article-title">
+                    Vielleicht beginnt Verstehen mit einer guten Frage
+                </h1>
+
+                <p class="article-intro">
+                    Wir müssen nicht auf alles sofort eine Antwort haben.
+                    Manchmal hilft es, einen Gedanken länger offen zu halten.
+                </p>
+
+                <p class="article-meta">
+                    <time datetime="2026-10-31">31. Oktober 2026</time>
+                    <span aria-hidden="true">·</span>
+                    <span>Beispielartikel · ca. 4 Minuten</span>
+                </p>
+
+                <div class="author">
+                    <span class="author-avatar" aria-hidden="true">R</span>
+                    <span>Von der <a href="#article-end">Redaktion</a></span>
+                </div>
+            </header>
+
+            <div class="article-body">
+
+                <p>
+                    Im Gespräch entsteht manchmal eine kleine Pause. Jemand stellt
+                    eine Frage, die sich nicht mit einem einzigen Satz beantworten
+                    lässt. Für einen Augenblick ist unklar, wie es weitergeht.
+                    Dann sagt jemand: „Das weiß ich gerade nicht.“
+                </p>
+
+                <p>
+                    Dieser Satz kann sich wie eine Unterbrechung anfühlen.
+                    Er kann aber auch ein Anfang sein. Denn wer eine Frage offen
+                    lässt, schafft Platz für etwas, das vorher noch nicht im
+                    Gespräch war: eine andere Erfahrung, einen überraschenden
+                    Einwand oder eine genauere Beschreibung des Problems.
+                </p>
+
+                <h2>Warum eine schnelle Antwort nicht immer weiterhilft</h2>
+
+                <p>
+                    Stell dir vor, ein Team möchte seine Website verbessern.
+                    Schon nach wenigen Minuten liegen Vorschläge auf dem Tisch:
+                    eine neue Navigation, größere Bilder, weniger Text.
+                    Alle sprechen über Lösungen. Noch hat aber niemand gefragt,
+                    an welcher Stelle die Besucher eigentlich Schwierigkeiten haben.
+                </p>
+
+                <!--
+          Desktop: links aus der Textspalte herausgeschoben,
+          Text fließt rechts daran vorbei.
+          Mobil: normaler Block im Lesefluss.
+        -->
+                <aside class="info-box" aria-labelledby="info-title">
+                    <p class="box-label">Kurz erklärt</p>
+
+                    <h3 id="info-title">Eine Frage hinter der Frage</h3>
+
+                    <p>
+                        „Wie machen wir die Navigation besser?“ setzt bereits voraus,
+                        dass die Navigation das Problem ist.
+                    </p>
+
+                    <p>
+                        „Wobei finden sich unsere Besucher nicht zurecht?“
+                        lässt die Ursache zunächst offen.
+                    </p>
+                </aside>
+
+                <p>
+                    Eine gute Frage verschiebt die Aufmerksamkeit. Sie führt
+                    vom vertrauten Werkzeug zurück zur konkreten Situation.
+                    Vielleicht ist die Navigation tatsächlich unübersichtlich.
+                    Vielleicht heißen die Inhalte aber anders, als die Besucher
+                    es erwarten. Oder eine wichtige Information fehlt vollständig.
+                </p>
+
+                <p>
+                    Solange diese Möglichkeiten nebeneinanderstehen dürfen,
+                    wird das Gespräch genauer. Die Beteiligten müssen ihre erste
+                    Idee nicht sofort verteidigen. Sie können gemeinsam prüfen,
+                    welche Beobachtung für welche Erklärung spricht.
+                </p>
+
+                <p>
+                    Das braucht etwas Geduld. Vor allem dann, wenn eine schnelle
+                    Entscheidung erwartet wird. Eine offene Frage ist schließlich
+                    noch kein fertiges Ergebnis. Sie kann jedoch verhindern,
+                    dass viel Arbeit in eine Antwort fließt, die am eigentlichen
+                    Problem vorbeigeht.
+                </p>
+
+                <h2>Eine Pause kann Teil des Denkens sein</h2>
+
+                <!-- Große, eingerückte Zitatvariante mit linker Linie -->
+                <blockquote class="block-quote">
+                    <p>
+                        Wir müssen die Lücke nicht sofort schließen.
+                        Wir können zuerst genauer hinsehen.
+                    </p>
+                    <cite>Leitgedanke dieses Beispielartikels</cite>
+                </blockquote>
+
+                <p>
+                    Im Alltag erscheint Nachdenken oft unsichtbar. Sichtbar sind
+                    die Wortmeldung, die Präsentation und die Entscheidung.
+                    Weniger sichtbar ist der Moment davor: das Vergleichen,
+                    das Zögern und das Verwerfen einer zunächst plausiblen Idee.
+                </p>
+
+                <p>
+                    Deshalb lohnt es sich, solche Momente ausdrücklich zuzulassen.
+                    Zum Beispiel mit dem Satz: „Bevor wir entscheiden, möchte ich
+                    verstehen, warum wir das unterschiedlich sehen.“
+                    Damit bekommt die Pause eine Aufgabe.
+                </p>
+
+                <!--
+          Breites Bild: ragt links und rechts über die Textspalte.
+          Das Seitenverhältnis bleibt auch ohne geladene Datei stabil.
+        -->
+                <figure class="article-image article-image--wide">
+                    <svg viewBox="0 0 1000 625" xmlns="http://www.w3.org/2000/svg" role="img"
+                        aria-labelledby="image-title">
+                        <title id="image-title">
+                            Ein Notizbuch mit verschiedenen möglichen Wegen
+                        </title>
+
+                        <rect width="1000" height="625" fill="#e7eee8" />
+
+                        <rect x="220" y="80" width="560" height="470" rx="8" fill="#fffdf5" />
+
+                        <path d="M500 80 V550" stroke="#ddd8c9" stroke-width="3" />
+
+                        <g fill="none" stroke="#258565" stroke-width="12" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M320 450 V330 L390 260 V170" />
+                            <path d="M320 330 L280 260" />
+                            <path d="M580 440 L650 360 L610 280 L690 190" />
+                            <path d="M650 360 L720 350" />
+                        </g>
+
+                        <g fill="#ff7770">
+                            <circle cx="390" cy="170" r="17" />
+                            <circle cx="280" cy="260" r="17" />
+                            <circle cx="690" cy="190" r="17" />
+                            <circle cx="720" cy="350" r="17" />
+                        </g>
+                    </svg>
+
+                    <figcaption>
+                        Verschiedene Wege bleiben zunächst möglich:
+                        Erst die nächste Beobachtung zeigt, welcher weiterführt.
+                    </figcaption>
+                </figure>
+
+                <h2>Neugier lässt sich im Kleinen üben</h2>
+
+                <!--
+          Schmale Zitatvariante: 224 px breit,
+          links um 64 px versetzt.
+        -->
+                <aside class="pull-quote" aria-label="Hervorgehobener Gedanke">
+                    Eine gute Frage verändert, worauf wir achten.
+                </aside>
+
+                <p>
+                    Dafür braucht es kein besonderes Gesprächsformat.
+                    Eine Nachfrage reicht manchmal aus: „Was meinst du damit
+                    genau?“ Oder: „Welche Erfahrung hat dich zu dieser
+                    Einschätzung gebracht?“ Entscheidend ist, dass die Antwort
+                    tatsächlich noch etwas verändern darf.
+                </p>
+
+                <p>
+                    Auch beim Lesen lässt sich diese Haltung ausprobieren.
+                    Statt sofort zu entscheiden, ob ein Text überzeugt,
+                    können wir nach seiner Ausgangsfrage suchen.
+                    Welches Problem möchte die Autorin verständlich machen?
+                    Und welche Annahme trägt ihre Erklärung?
+                </p>
+
+                <p>
+                    So wird aus Zustimmung oder Widerspruch ein genaueres
+                    Verhältnis zum Gedanken. Wir können einen Teil nachvollziehen,
+                    einen anderen bezweifeln und eine dritte Frage mitnehmen.
+                    Das Gespräch muss deshalb nicht unentschieden bleiben.
+                    Es bekommt lediglich eine bessere Grundlage.
+                </p>
+
+                <h2>Drei Fragen für das nächste Gespräch</h2>
+
+                <ol>
+                    <li>Was wissen wir bereits – und worauf stützt sich das?</li>
+                    <li>Welche andere Erklärung wäre ebenfalls möglich?</li>
+                    <li>Was müssten wir beobachten, um weiterzukommen?</li>
+                </ol>
+
+                <p>
+                    Vielleicht führt eine dieser Fragen zu einer klaren Antwort.
+                    Vielleicht zeigt sie zunächst nur, was noch fehlt.
+                    Auch das ist ein Ergebnis: Die Unklarheit hat eine Form
+                    bekommen, mit der sich weiterarbeiten lässt.
+                </p>
+
+                <footer class="article-end" id="article-end">
+                    <p class="end-label">Zum Mitnehmen</p>
+                    <p>
+                        Nicht jede offene Frage muss sofort beantwortet werden.
+                        Aber jede kann ein Anlass sein, genauer hinzusehen.
+                    </p>
+                    <small>
+                        Frei erfundener Beispieltext zum Studieren des Layouts.
+                    </small>
+                </footer>
+
+            </div>
+        </article>
+    </main>
+</body>
+
+</html>
