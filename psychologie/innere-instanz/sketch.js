@@ -33,19 +33,12 @@ var NORTH = 0;
 var EAST = 1;
 var SOUTH = 2;
 var WEST = 3;
-var direction = SOUTH;
+var agents = [];
 
 var stepSize = 3;
 var minLength = 10;
 var diameter = 1;
 var angleCount = 7;
-var angle;
-var reachedBorder = false;
-
-var posX;
-var posY;
-var posXcross;
-var posYcross;
 
 var startBild;
 var vorlage;
@@ -70,65 +63,76 @@ function setup() {
   image(vorlage, 0, 0);
 
 
-  angle = getRandomAngle(direction);
-  posX = floor(random(width));
-  posY = 5;
-  posXcross = posX;
-  posYcross = posY;
+  // Jede Linie besitzt ihre eigene Position, Richtung und letzten Eckpunkt.
+  agents = [
+    createAgent(width - 6, 6, SOUTH), // oben rechts
+    createAgent(6, height - 6, NORTH) // unten links
+  ];
+}
+
+function createAgent(x, y, direction) {
+  return {
+    posX: x,
+    posY: y,
+    posXcross: x,
+    posYcross: y,
+    direction: direction,
+    angle: getRandomAngle(direction)
+  };
 }
 
 function draw() {
   var speed = int(map(mouseX, 0, width, 0, 20));
   for (var i = 0; i <= speed; i++) {
+    for (var agent of agents) {
+      moveAgent(agent);
+    }
+  }
+}
 
-    // ------ draw dot at current position ------
-    strokeWeight(1);
-    stroke(180, 0, 0);
-    point(posX, posY);
+function moveAgent(agent) {
+  strokeWeight(1);
+  stroke(180, 0, 0);
+  point(agent.posX, agent.posY);
 
-    // ------ make step ------
-    posX += cos(radians(angle)) * stepSize;
-    posY += sin(radians(angle)) * stepSize;
+  agent.posX += cos(radians(agent.angle)) * stepSize;
+  agent.posY += sin(radians(agent.angle)) * stepSize;
 
-    // ------ check if agent is near one of the display borders ------
-    reachedBorder = false;
+  var reachedBorder = false;
 
-    if (posY <= 5) {
-      direction = SOUTH;
-      reachedBorder = true;
-    } else if (posX >= width - 5) {
-      direction = WEST;
-      reachedBorder = true;
-    } else if (posY >= height - 5) {
-      direction = NORTH;
-      reachedBorder = true;
-    } else if (posX <= 5) {
-      direction = EAST;
-      reachedBorder = true;
+  if (agent.posY <= 5) {
+    agent.direction = SOUTH;
+    reachedBorder = true;
+  } else if (agent.posX >= width - 5) {
+    agent.direction = WEST;
+    reachedBorder = true;
+  } else if (agent.posY >= height - 5) {
+    agent.direction = NORTH;
+    reachedBorder = true;
+  } else if (agent.posX <= 5) {
+    agent.direction = EAST;
+    reachedBorder = true;
+  }
+
+  // Nur die Vorlage abfragen: Beide Linien bewegen sich unabhängig voneinander.
+  var currentPixel = vorlage.get(floor(agent.posX), floor(agent.posY));
+  var hitVorlage =
+    currentPixel[0] < 240 ||
+    currentPixel[1] < 240 ||
+    currentPixel[2] < 240;
+
+  if (reachedBorder || hitVorlage) {
+    agent.angle = getRandomAngle(agent.direction);
+
+    var distance = dist(agent.posX, agent.posY, agent.posXcross, agent.posYcross);
+    if (distance >= minLength) {
+      strokeWeight(3);
+      stroke(0, 0, 0);
+      line(agent.posX, agent.posY, agent.posXcross, agent.posYcross);
     }
 
-    // ------ if agent is crossing his path or border was reached ------
-    loadPixels();
-    // Nur die Vorlage abfragen: eigene Linien lösen keine Kollision aus.
-    var currentPixel = vorlage.get(floor(posX), floor(posY));
-    var hitVorlage =
-      currentPixel[0] < 240 ||
-      currentPixel[1] < 240 ||
-      currentPixel[2] < 240;
-
-    if (reachedBorder || hitVorlage) {
-      angle = getRandomAngle(direction);
-
-      var distance = dist(posX, posY, posXcross, posYcross);
-      if (distance >= minLength) {
-        strokeWeight(3);
-        stroke(0, 0, 0);
-        line(posX, posY, posXcross, posYcross);
-      }
-
-      posXcross = posX;
-      posYcross = posY;
-    }
+    agent.posXcross = agent.posX;
+    agent.posYcross = agent.posY;
   }
 }
 
