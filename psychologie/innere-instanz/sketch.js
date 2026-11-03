@@ -65,24 +65,25 @@ function setup() {
 
   // Jede Linie besitzt ihre eigene Position, Richtung und letzten Eckpunkt.
   agents = [
-    createAgent(width - 6, 6, SOUTH), // oben rechts
-    createAgent(6, height - 6, NORTH) // unten links
+    createAgent(width - 6, 6, SOUTH, '#b83b42'), // oben rechts: dunkleres Rot
+    createAgent(6, height - 6, NORTH, '#cc5050') // unten links: helleres Rot
   ];
 }
 
-function createAgent(x, y, direction) {
+function createAgent(x, y, direction, lineColor) {
   return {
     posX: x,
     posY: y,
     posXcross: x,
     posYcross: y,
     direction: direction,
+    lineColor: lineColor,
     angle: getRandomAngle(direction)
   };
 }
 
 function draw() {
-  var speed = int(map(mouseX, 0, width, 0, 20));
+  var speed = 5;
   for (var i = 0; i <= speed; i++) {
     for (var agent of agents) {
       moveAgent(agent);
@@ -92,7 +93,7 @@ function draw() {
 
 function moveAgent(agent) {
   strokeWeight(1);
-  stroke(180, 0, 0);
+  stroke(agent.lineColor);
   point(agent.posX, agent.posY);
 
   agent.posX += cos(radians(agent.angle)) * stepSize;
@@ -127,7 +128,7 @@ function moveAgent(agent) {
     var distance = dist(agent.posX, agent.posY, agent.posXcross, agent.posYcross);
     if (distance >= minLength) {
       strokeWeight(3);
-      stroke(0, 0, 0);
+      stroke(agent.lineColor);
       line(agent.posX, agent.posY, agent.posXcross, agent.posYcross);
     }
 
