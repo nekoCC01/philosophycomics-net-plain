@@ -1,0 +1,133 @@
+<!-- Siehe https://plainvanillaweb.com/pages/sites.html -->
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>p5 – mehrere Canvas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        > erste ebene (Bsp: /meditation/page.html) -> ../index
+        > > zweite eben (Bsp: /meditation/topic/page.html) -> ../../index
+    -->
+    <link rel="stylesheet" href="../../index.css">
+    <script type="module" src="../../index.js" defer></script>
+    <script src="../../00_assets/lib/p5.min.js"></script>
+    <style>
+        .canvas-example {
+            grid-column: 1 / -1;
+            min-width: 0;
+        }
+
+        .canvas-example canvas {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        @media (min-width: 48rem) {
+            /* Die Endlinie liegt jeweils hinter der letzten belegten Spalte. */
+            .canvas-example:nth-child(1) {
+                grid-row: 1;
+                grid-column: 2 / 7; /* Spalten 2–6: 5 Spalten breit */
+            }
+
+            .canvas-example:nth-child(2) {
+                grid-row: 2;
+                grid-column: 8 / 12; /* Spalten 8–11: 4 Spalten breit */
+            }
+
+            .canvas-example:nth-child(3) {
+                grid-row: 3;
+                grid-column: 3 / 12; /* Spalten 3–11: 9 Spalten breit */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><strong>Please enable JavaScript to view this page correctly.</strong></noscript>
+    <header>
+
+    </header>
+    <main class="container grid" style="padding-block: 3rem;">
+        <section class="canvas-example">
+            <h2>Kreise – Reihe 1, Spalten 2–6</h2>
+            <div id="canvas-kreise"></div>
+        </section>
+        <section class="canvas-example">
+            <h2>Linien – Reihe 2, Spalten 8–11</h2>
+            <div id="canvas-linien"></div>
+        </section>
+        <section class="canvas-example">
+            <h2>Landschaft – Reihe 3, Spalten 3–11</h2>
+            <div id="canvas-landschaft"></div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        // Instance Mode: Jede Instanz besitzt ihr eigenes setup und Canvas.
+        // Das Präfix p. ordnet die p5-Funktionen der jeweiligen Instanz zu.
+        new p5((p) => {
+            p.setup = () => {
+                p.createCanvas(500, 350);
+                p.background('#f3e9dc');
+                p.noStroke();
+
+                for (let i = 0; i < 7; i++) {
+                    p.fill(i % 2 === 0 ? '#d66845' : '#28666e');
+                    p.circle(70 + i * 60, 175 + p.sin(i) * 65, 85);
+                }
+
+                p.noLoop();
+            };
+        }, 'canvas-kreise');
+
+        new p5((p) => {
+            p.setup = () => {
+                p.createCanvas(500, 350);
+                p.background('#183642');
+                p.strokeWeight(2);
+
+                for (let x = 25; x < p.width; x += 15) {
+                    p.stroke('#a8dadc');
+                    p.line(x, 25, p.width - x, p.height - 25);
+                }
+
+                p.noLoop();
+            };
+        }, 'canvas-linien');
+
+        new p5((p) => {
+            p.setup = () => {
+                p.createCanvas(1000, 350);
+                p.background('#f4d6ad');
+                p.noStroke();
+                p.fill('#e89963');
+                p.circle(740, 100, 110);
+
+                for (let layer = 0; layer < 3; layer++) {
+                    p.fill(['#8da99b', '#52796f', '#284b46'][layer]);
+                    p.beginShape();
+                    p.vertex(0, p.height);
+
+                    for (let x = 0; x <= p.width; x += 5) {
+                        const y = 170 + layer * 55
+                            + p.sin(x * 0.009 + layer * 2) * 35
+                            + p.cos(x * 0.018) * 15;
+                        p.vertex(x, y);
+                    }
+
+                    p.vertex(p.width, p.height);
+                    p.endShape(p.CLOSE);
+                }
+
+                p.noLoop();
+            };
+        }, 'canvas-landschaft');
+    </script>
+</body>
+
+</html>

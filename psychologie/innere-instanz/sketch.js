@@ -48,6 +48,7 @@ var posXcross;
 var posYcross;
 
 var startBild;
+var vorlage;
 
 function preload() {
   startBild = loadImage('img/mensch-umriss.png');
@@ -62,7 +63,12 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   background(360);
 
-  image(startBild, 0, 0, width, height);
+  // Die Vorlage bleibt unverändert, während der Agent auf dem Canvas zeichnet.
+  vorlage = createGraphics(width, height);
+  vorlage.background(255);
+  vorlage.image(startBild, 0, 0, width, height);
+  image(vorlage, 0, 0);
+
 
   angle = getRandomAngle(direction);
   posX = floor(random(width));
@@ -103,11 +109,14 @@ function draw() {
 
     // ------ if agent is crossing his path or border was reached ------
     loadPixels();
-    var currentPixel = get(floor(posX), floor(posY));
-    if (
-      reachedBorder ||
-      (currentPixel[0] != 255 && currentPixel[1] != 255 && currentPixel[2] != 255)
-    ) {
+    // Nur die Vorlage abfragen: eigene Linien lösen keine Kollision aus.
+    var currentPixel = vorlage.get(floor(posX), floor(posY));
+    var hitVorlage =
+      currentPixel[0] < 240 ||
+      currentPixel[1] < 240 ||
+      currentPixel[2] < 240;
+
+    if (reachedBorder || hitVorlage) {
       angle = getRandomAngle(direction);
 
       var distance = dist(posX, posY, posXcross, posYcross);
@@ -125,7 +134,10 @@ function draw() {
 
 function keyReleased() {
   if (key == 's' || key == 'S') saveCanvas(gd.timestamp(), 'png');
-  if (keyCode == DELETE || keyCode == BACKSPACE) background(360);
+  if (keyCode == DELETE || keyCode == BACKSPACE) {
+    background(360);
+    image(vorlage, 0, 0);
+  }
 }
 
 function getRandomAngle(currentDirection) {
