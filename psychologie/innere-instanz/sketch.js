@@ -47,10 +47,22 @@ var posY;
 var posXcross;
 var posYcross;
 
+var startBild;
+
+function preload() {
+  startBild = loadImage('img/mensch-umriss.png');
+}
+
 function setup() {
-  createCanvas(600, 600);
+  var canvas = createCanvas(600, 600);
+  canvas.parent('canvas-container');
+  canvas.style('width', '100%');
+  canvas.style('height', 'auto');
+  canvas.style('display', 'block');
   colorMode(HSB, 360, 100, 100, 100);
   background(360);
+
+  image(startBild, 0, 0, width, height);
 
   angle = getRandomAngle(direction);
   posX = floor(random(width));
